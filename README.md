@@ -28,6 +28,3 @@ Kotlin + Jetpack Compose 实现的四人锄大地棋牌游戏，支持人机对�
 - 发布测试：`docs/release_testing.md`
 - UML：`docs/uml/`
 
-## 注意
-
-Release 升级必须使用同一签名证书。仓库不会上传 `keystore.properties` 和 `.jks` 私钥文件，请在本机妥善备份。
