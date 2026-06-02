@@ -1,0 +1,71 @@
+@startuml
+start
+:进入大厅;
+if (选择哪种对局?) then (人机对局)
+  :选择难度;
+  :按已保存南北玩法创建 1 人 + 3 人机牌局;
+else (好友蓝牙对局)
+  if (创建房间?) then (房主)
+    :开启蓝牙主机监听;
+    :显示四个座位;
+    while (四座位未满或未准备?) is (是)
+      :等待好友加入或添加人机;
+      :广播 ROOM 座位快照;
+    endwhile (否)
+    :生成 seed 并广播 START;
+  else (加入)
+    :搜索已配对和附近设备;
+    :连接房主并发送 HELLO;
+    :接收 ROOM 座位快照;
+    :准备并等待 START;
+  endif
+endif
+
+:发牌并确定持有首出牌的先手;
+while (没有胜者?) is (是)
+  :显示当前回合和倒计时;
+  if (当前玩家是本地人机?) then (是)
+    :按难度策略延迟思考;
+    :选择合法 Move;
+  elseif (当前玩家是蓝牙远端?) then (是)
+    :等待远端 MOVE_REQUEST 或 STATE_SNAPSHOT;
+  else (本地玩家)
+    :选择手牌或点击提示;
+    if (没有可压过上一手的牌?) then (是)
+      :提示“手上没有可以大过人家的牌”;
+      :只允许不出;
+    endif
+  endif
+
+  if (出牌?) then (是)
+    :识别牌型;
+    if (合法且可压制上一手?) then (是)
+      :播放飞牌到桌面动画;
+      :更新手牌、桌面牌、回合;
+    else (否)
+      :保留选择并显示规则提示;
+    endif
+  else (不出)
+    :累计不出次数;
+  endif
+
+  if (蓝牙房主?) then (是)
+    :校验行动并广播 MOVE_ACCEPTED/STATE_SNAPSHOT;
+  endif
+
+  if (三家连续不出?) then (是)
+    :清空上一手，上一手玩家获得新先手;
+  endif
+endwhile (否)
+:显示胜负结算;
+if (再来一局?) then (是)
+  if (好友蓝牙对局?) then (是)
+    :回到原房间;
+  else (否)
+    :直接重新发牌;
+  endif
+else (否)
+  :返回大厅;
+endif
+stop
+@enduml

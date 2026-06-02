@@ -1,0 +1,35 @@
+@startuml
+node "Android 手机 A\n房主" as Host {
+  artifact "锄大地 APK" as HostApk
+  component "ChudadiApp"
+  component "BluetoothHostTransport"
+  component "GameController"
+  component "AiController\n仅房主驱动房间 AI"
+  database "SharedPreferences\n规则/设置/金币/战绩"
+}
+
+node "Android 手机 B/C/D\n加入者" as Client {
+  artifact "锄大地 APK" as ClientApk
+  component "ChudadiApp "
+  component "BluetoothClientTransport"
+  component "GameController "
+  database "SharedPreferences "
+}
+
+node "单机测试环境" as Local {
+  artifact "单台设备 APK"
+  component "人机对局"
+  component "LocalRoomTransport / Fake Transport"
+  component "JUnit 模拟测试"
+}
+
+cloud "Android Bluetooth Stack" as BT
+
+HostApk --> BT : listenUsingRfcommWithServiceRecord
+ClientApk --> BT : createRfcommSocketToServiceRecord
+BT -- Host : RFCOMM socket
+BT -- Client : RFCOMM socket
+Host --> Client : ROOM / START / MOVE_ACCEPTED / STATE_SNAPSHOT
+Client --> Host : HELLO / ROOM_READY / MOVE_REQUEST / SYNC_REQUEST
+Local --> Host : 相同消息协议的本地模拟
+@enduml

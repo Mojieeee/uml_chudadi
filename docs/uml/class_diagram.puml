@@ -1,0 +1,246 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+
+package "model" {
+  enum Suit
+  enum Rank
+  enum PlayerKind {
+    Human
+    LocalAi
+    Remote
+  }
+  enum HandCategory {
+    Single
+    Pair
+    Triple
+    Straight
+    Flush
+    FullHouse
+    FourWithOne
+    StraightFlush
+  }
+  enum BombMode {
+    None
+    Enhanced
+  }
+  enum Difficulty {
+    Easy
+    Normal
+    Hard
+  }
+
+  class Card {
+    suit: Suit
+    rank: Rank
+    code: String
+  }
+  object Deck
+  class Player {
+    id: Int
+    name: String
+    kind: PlayerKind
+    hand: List<Card>
+    connected: Boolean
+  }
+  class GameState {
+    players: List<Player>
+    ruleSet: RuleSet
+    currentPlayerId: Int
+    lastPlayedHand: PlayedHand?
+    passCount: Int
+    firstTurn: Boolean
+    winnerId: Int?
+    message: String
+  }
+  class HandType {
+    category: HandCategory
+    cards: List<Card>
+    primaryRank: Rank
+    highCard: Card
+  }
+  class PlayedHand {
+    playerId: Int
+    type: HandType
+  }
+  abstract class Move <<sealed>>
+  class "Move.Play" as MovePlay
+  class "Move.Pass" as MovePass
+  class RuleProfile {
+    id: String
+    title: String
+    firstCard: Card
+    bombMode: BombMode
+    fiveCardRanking: Boolean
+    sameSizeOnly: Boolean
+  }
+  interface RuleSet {
+    profile: RuleProfile
+    classify(cards): HandType?
+    canLead(cards, isFirstTurn): Boolean
+    canBeat(previous, next): Boolean
+  }
+  object NorthRuleSet
+  object SouthRuleSet
+  object HandClassifier
+}
+
+package "controller" {
+  class GameController {
+    newGame(...)
+    play(state, playerId, cards): GameState
+    pass(state, playerId): GameState
+    legalPlays(state, playerId): List<List<Card>>
+  }
+  interface AiStrategy {
+    name: String
+    chooseMove(state, playerId): Move
+  }
+  class AiController
+  class GreedyAiStrategy
+  class HeuristicAiStrategy
+  class MonteCarloRolloutAiStrategy
+  object PlayerActionPolicy
+  class LocalActionAvailability
+  class RoomController
+}
+
+package "transport" {
+  abstract class TransportRole <<sealed>>
+  class "TransportRole.Host" as TransportHost
+  class "TransportRole.Client" as TransportClient
+  class "TransportRole.Local" as TransportLocal
+  interface GameTransport {
+    start(role)
+    send(message)
+    observe(listener)
+    close()
+  }
+  abstract class SocketGameTransport
+  class BluetoothHostTransport
+  class BluetoothClientTransport
+  class LocalRoomTransport
+  enum RoomSeatKind {
+    Empty
+    Host
+    Human
+    Ai
+  }
+  class RoomSeat {
+    index: Int
+    name: String
+    kind: RoomSeatKind
+    difficulty: Difficulty?
+    ready: Boolean
+    connected: Boolean
+  }
+  abstract class GameMessage <<sealed>>
+  class "GameMessage.Hello" as MsgHello
+  class "GameMessage.Room" as MsgRoom
+  class "GameMessage.Start" as MsgStart
+  class "GameMessage.RoomReady" as MsgReady
+  class "GameMessage.MoveRequest" as MsgMoveRequest
+  class "GameMessage.MoveAccepted" as MsgMoveAccepted
+  class "GameMessage.StateSnapshot" as MsgSnapshot
+  class "GameMessage.SyncRequest" as MsgSync
+  class "GameMessage.Leave" as MsgLeave
+  class "GameMessage.Kick" as MsgKick
+  class "GameMessage.Error" as MsgError
+  object GameMessageCodec
+  class SnapshotPlayer
+  class GameSnapshot
+  object NetworkMoveGuard
+}
+
+package "view/audio" {
+  class MainActivity
+  class ChudadiApp
+  enum Screen {
+    Lobby
+    DifficultySelect
+    Rules
+    Settings
+    Tutorial
+    Nearby
+    Game
+    Result
+  }
+  enum GameMode {
+    HumanVsAi
+    BluetoothRoom
+  }
+  enum BluetoothEntryMode {
+    Choose
+    HostRoom
+    JoinRoom
+  }
+  class CardRoomMusicPlayer
+  enum MusicScene {
+    Lobby
+    Game
+  }
+}
+
+Move <|-- MovePlay
+Move <|-- MovePass
+RuleSet <|.. NorthRuleSet
+RuleSet <|.. SouthRuleSet
+AiStrategy <|.. GreedyAiStrategy
+AiStrategy <|.. HeuristicAiStrategy
+AiStrategy <|.. MonteCarloRolloutAiStrategy
+GameTransport <|.. LocalRoomTransport
+GameTransport <|.. SocketGameTransport
+SocketGameTransport <|-- BluetoothHostTransport
+SocketGameTransport <|-- BluetoothClientTransport
+TransportRole <|-- TransportHost
+TransportRole <|-- TransportClient
+TransportRole <|-- TransportLocal
+
+GameState "1" o-- "4" Player
+GameState --> RuleSet
+GameState --> PlayedHand
+Player "1" o-- "*" Card
+HandType "1" o-- "*" Card
+PlayedHand --> HandType
+RuleSet --> RuleProfile
+RuleSet --> HandClassifier
+RuleProfile --> Card
+GameController --> GameState
+GameController --> RuleSet
+GameController --> Move
+AiController --> AiStrategy
+AiController --> GameController
+AiStrategy --> GameState
+PlayerActionPolicy --> GameState
+
+RoomSeat --> RoomSeatKind
+RoomSeat --> Difficulty
+GameSnapshot "1" o-- "4" SnapshotPlayer
+SnapshotPlayer "1" o-- "*" Card
+GameMessage <|-- MsgHello
+GameMessage <|-- MsgRoom
+GameMessage <|-- MsgStart
+GameMessage <|-- MsgReady
+GameMessage <|-- MsgMoveRequest
+GameMessage <|-- MsgMoveAccepted
+GameMessage <|-- MsgSnapshot
+GameMessage <|-- MsgSync
+GameMessage <|-- MsgLeave
+GameMessage <|-- MsgKick
+GameMessage <|-- MsgError
+MsgRoom --> RoomSeat
+MsgStart --> RoomSeat
+MsgMoveRequest --> Card
+MsgMoveAccepted --> Card
+MsgSnapshot --> GameSnapshot
+GameMessageCodec --> GameMessage
+NetworkMoveGuard --> GameMessage
+NetworkMoveGuard --> GameState
+ChudadiApp --> GameController
+ChudadiApp --> AiController
+ChudadiApp --> GameTransport
+ChudadiApp --> GameMessageCodec
+ChudadiApp --> RoomSeat
+ChudadiApp --> CardRoomMusicPlayer
+MainActivity --> ChudadiApp
+@enduml

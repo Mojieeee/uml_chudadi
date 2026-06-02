@@ -1,0 +1,51 @@
+@startuml
+skinparam componentStyle rectangle
+
+package "Android App" {
+  [MainActivity]
+  [Compose 发布版界面]
+  [页面状态 Screen]
+  [音乐与反馈]
+  [游戏控制器]
+  [AI 控制器]
+  [玩家操作策略]
+  [房间控制器]
+  [规则与模型]
+  [消息编解码]
+  [主机权威同步]
+  [蓝牙传输]
+  [本地模拟传输]
+  [SharedPreferences]
+}
+
+cloud "Android 系统能力" {
+  [Classic Bluetooth RFCOMM]
+  [Bluetooth Permissions]
+  [MediaPlayer / AudioTrack]
+  [Vibrator]
+}
+
+[MainActivity] --> [Compose 发布版界面]
+[Compose 发布版界面] --> [页面状态 Screen]
+[Compose 发布版界面] --> [游戏控制器]
+[Compose 发布版界面] --> [AI 控制器]
+[Compose 发布版界面] --> [玩家操作策略]
+[Compose 发布版界面] --> [房间控制器]
+[Compose 发布版界面] --> [消息编解码]
+[Compose 发布版界面] --> [音乐与反馈]
+[Compose 发布版界面] --> [SharedPreferences]
+
+[游戏控制器] --> [规则与模型]
+[AI 控制器] --> [游戏控制器]
+[玩家操作策略] --> [游戏控制器]
+[房间控制器] --> [消息编解码]
+[房间控制器] --> [蓝牙传输]
+[消息编解码] --> [规则与模型]
+[主机权威同步] --> [游戏控制器]
+[主机权威同步] --> [消息编解码]
+[蓝牙传输] --> [Classic Bluetooth RFCOMM]
+[蓝牙传输] --> [Bluetooth Permissions]
+[本地模拟传输] --> [消息编解码]
+[音乐与反馈] --> [MediaPlayer / AudioTrack]
+[音乐与反馈] --> [Vibrator]
+@enduml

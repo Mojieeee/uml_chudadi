@@ -1,0 +1,47 @@
+@startuml
+actor "本地玩家" as Player
+participant "ChudadiApp / GameScreen" as View
+participant "PlayerActionPolicy" as Policy
+participant "GameController" as Controller
+participant "RuleSet" as Rule
+participant "HandClassifier" as Classifier
+participant "GameTransport" as Transport
+participant "房主端 ChudadiApp" as Host
+participant "NetworkMoveGuard" as Guard
+
+Player -> View: 选择手牌并点击出牌
+View -> Policy: evaluate(state, localPlayerId, inputLocked, animating)
+Policy --> View: canAct / hasLegalPlay / notice
+View -> Controller: legalPlays(state, playerId)
+Controller -> Rule: classify(cards)
+Rule -> Classifier: classify(cards)
+Classifier --> Rule: HandType?
+Rule --> Controller: HandType?
+Controller -> Rule: canLead 或 canBeat
+Rule --> Controller: 是否可出
+
+alt 人机或本地人机对局
+  View -> Controller: play(state, playerId, cards)
+  Controller -> Rule: classify + canBeat
+  Controller --> View: new GameState
+  View -> View: 播放飞牌/落桌动画
+else 蓝牙加入者出牌
+  View -> Transport: MOVE_REQUEST(playerId, cards, pass=false)
+  View -> View: 锁定按钮，等待房主确认
+  Transport -> Host: MOVE_REQUEST
+  Host -> Guard: canHostAcceptMove(state, request)
+  Guard --> Host: 当前回合且玩家为 Remote
+  Host -> Controller: play(state, playerId, cards)
+  Host -> Guard: wasMoveApplied(previous, next, ...)
+  Guard --> Host: 是否真的改变牌局
+  Host -> Transport: MOVE_ACCEPTED(sequence, playerId, cards, false)
+  Host -> Transport: STATE_SNAPSHOT(snapshot)
+  Transport --> View: MOVE_ACCEPTED / STATE_SNAPSHOT
+  View -> Controller: apply accepted move 或恢复 snapshot
+  View -> View: 解锁按钮并播放落桌动画
+else 蓝牙房主处理非法/重复请求
+  Host -> Guard: canHostAcceptMove(...)
+  Guard --> Host: false
+  Host -> Transport: STATE_SNAPSHOT(current)
+end
+@enduml

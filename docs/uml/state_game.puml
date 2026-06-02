@@ -1,0 +1,46 @@
+@startuml
+skinparam state {
+  BackgroundColor #F8F3E8
+  BorderColor #2F5D50
+}
+
+[*] --> Lobby
+
+Lobby --> DifficultySelect : 人机对局
+DifficultySelect --> Dealing : 选择简单/普通/困难
+Lobby --> Rules : 规则设置
+Rules --> Lobby : 保存玩法
+Lobby --> Settings : 设置
+Settings --> Lobby : 返回
+Lobby --> Tutorial : 教程
+Tutorial --> Lobby : 返回
+
+Lobby --> NearbyChoose : 好友蓝牙对局
+NearbyChoose --> HostRoom : 创建房间
+NearbyChoose --> JoinSearch : 加入对局
+JoinSearch --> JoinRoom : 连接房主成功
+JoinSearch --> NearbyChoose : 连接失败/返回
+
+HostRoom --> HostRoom : 添加人机/移除人机/踢出好友/同步 ROOM
+JoinRoom --> JoinRoom : 准备/等待房主/接收 ROOM
+HostRoom --> Dealing : 满四座并开始
+JoinRoom --> Dealing : 接收 START
+
+Dealing --> Playing : 发牌并确定先手
+Playing --> Paused : 打开设置菜单
+Paused --> Playing : 继续游戏
+Paused --> Dealing : 重新开始人机局
+Paused --> Lobby : 返回大厅
+Paused --> NearbyChoose : 好友局返回房间
+
+Playing --> Playing : 合法出牌/不出/AI 行动
+Playing --> LeadReset : 三家连续不出
+LeadReset --> Playing : 上一手玩家获得新先手
+Playing --> Result : 有玩家手牌为空
+
+Result --> Dealing : 人机再来一局
+Result --> HostRoom : 房主好友局再来一局
+Result --> JoinRoom : 加入者回原房间等待
+Result --> Lobby : 返回大厅
+
+@enduml

@@ -1,0 +1,55 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "玩家" as Player
+actor "房主" as Host
+actor "加入者" as Client
+actor "本地人机" as Ai
+
+rectangle "锄大地游戏" {
+  usecase "进入大厅" as UC_Lobby
+  usecase "保存南北玩法" as UC_Rules
+  usecase "选择人机难度" as UC_Difficulty
+  usecase "开始人机对局" as UC_HumanGame
+  usecase "创建好友房间" as UC_CreateRoom
+  usecase "加入好友对局" as UC_JoinRoom
+  usecase "寻找附近设备" as UC_Search
+  usecase "管理四个座位" as UC_Seats
+  usecase "添加/移除人机" as UC_AiSeat
+  usecase "准备并满座开局" as UC_StartRoom
+  usecase "出牌/不出/提示/重选" as UC_Play
+  usecase "查看无可压牌提示" as UC_NoBeat
+  usecase "打开设置菜单暂停" as UC_Pause
+  usecase "查看结算" as UC_Result
+  usecase "再来一局" as UC_Rematch
+  usecase "查看教程和设置" as UC_Help
+}
+
+Player --> UC_Lobby
+Player --> UC_Rules
+Player --> UC_Difficulty
+Player --> UC_HumanGame
+Player --> UC_Play
+Player --> UC_NoBeat
+Player --> UC_Pause
+Player --> UC_Result
+Player --> UC_Rematch
+Player --> UC_Help
+
+Host --> UC_CreateRoom
+Host --> UC_Seats
+Host --> UC_AiSeat
+Host --> UC_StartRoom
+Client --> UC_JoinRoom
+Client --> UC_Search
+Client --> UC_StartRoom
+Ai --> UC_Play
+
+UC_HumanGame ..> UC_Difficulty : <<include>>
+UC_CreateRoom ..> UC_Seats : <<include>>
+UC_JoinRoom ..> UC_Search : <<include>>
+UC_StartRoom ..> UC_Seats : <<include>>
+UC_Play ..> UC_NoBeat : <<extend>>
+UC_Result ..> UC_Rematch : <<extend>>
+@enduml
