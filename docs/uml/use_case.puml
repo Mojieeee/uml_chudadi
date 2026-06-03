@@ -8,9 +8,13 @@ actor "加入者" as Client
 actor "本地人机" as Ai
 
 rectangle "锄大地游戏" {
+  usecase "查看开屏并开始" as UC_Splash
   usecase "进入大厅" as UC_Lobby
+  usecase "查看玩家中心" as UC_Profile
+  usecase "改名/头像/每日奖励/战绩管理" as UC_ProfileManage
   usecase "保存南北玩法" as UC_Rules
   usecase "选择人机难度" as UC_Difficulty
+  usecase "点击开始游戏并观看发牌" as UC_StartHuman
   usecase "开始人机对局" as UC_HumanGame
   usecase "创建好友房间" as UC_CreateRoom
   usecase "加入好友对局" as UC_JoinRoom
@@ -26,9 +30,13 @@ rectangle "锄大地游戏" {
   usecase "查看教程和设置" as UC_Help
 }
 
+Player --> UC_Splash
 Player --> UC_Lobby
+Player --> UC_Profile
+Player --> UC_ProfileManage
 Player --> UC_Rules
 Player --> UC_Difficulty
+Player --> UC_StartHuman
 Player --> UC_HumanGame
 Player --> UC_Play
 Player --> UC_NoBeat
@@ -47,6 +55,8 @@ Client --> UC_StartRoom
 Ai --> UC_Play
 
 UC_HumanGame ..> UC_Difficulty : <<include>>
+UC_HumanGame ..> UC_StartHuman : <<include>>
+UC_Profile ..> UC_ProfileManage : <<include>>
 UC_CreateRoom ..> UC_Seats : <<include>>
 UC_JoinRoom ..> UC_Search : <<include>>
 UC_StartRoom ..> UC_Seats : <<include>>

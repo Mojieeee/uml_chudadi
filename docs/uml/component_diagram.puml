@@ -10,12 +10,16 @@ package "Android App" {
   [AI 控制器]
   [玩家操作策略]
   [房间控制器]
+  [玩家成长控制器]
+  [玩家档案仓储]
   [规则与模型]
   [消息编解码]
   [主机权威同步]
   [蓝牙传输]
   [本地模拟传输]
   [SharedPreferences]
+  [Release 签名配置]
+  [锄大地 APK]
 }
 
 cloud "Android 系统能力" {
@@ -31,6 +35,8 @@ cloud "Android 系统能力" {
 [Compose 发布版界面] --> [AI 控制器]
 [Compose 发布版界面] --> [玩家操作策略]
 [Compose 发布版界面] --> [房间控制器]
+[Compose 发布版界面] --> [玩家成长控制器]
+[Compose 发布版界面] --> [玩家档案仓储]
 [Compose 发布版界面] --> [消息编解码]
 [Compose 发布版界面] --> [音乐与反馈]
 [Compose 发布版界面] --> [SharedPreferences]
@@ -40,6 +46,8 @@ cloud "Android 系统能力" {
 [玩家操作策略] --> [游戏控制器]
 [房间控制器] --> [消息编解码]
 [房间控制器] --> [蓝牙传输]
+[玩家成长控制器] --> [玩家档案仓储]
+[玩家档案仓储] --> [SharedPreferences]
 [消息编解码] --> [规则与模型]
 [主机权威同步] --> [游戏控制器]
 [主机权威同步] --> [消息编解码]
@@ -48,4 +56,5 @@ cloud "Android 系统能力" {
 [本地模拟传输] --> [消息编解码]
 [音乐与反馈] --> [MediaPlayer / AudioTrack]
 [音乐与反馈] --> [Vibrator]
+[Release 签名配置] ..> [锄大地 APK] : assembleRelease
 @enduml

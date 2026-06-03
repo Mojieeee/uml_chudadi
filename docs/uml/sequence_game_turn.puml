@@ -1,6 +1,7 @@
 @startuml
 actor "本地玩家" as Player
 participant "ChudadiApp / GameScreen" as View
+participant "GameStartPhase" as Phase
 participant "PlayerActionPolicy" as Policy
 participant "GameController" as Controller
 participant "RuleSet" as Rule
@@ -9,6 +10,12 @@ participant "GameTransport" as Transport
 participant "房主端 ChudadiApp" as Host
 participant "NetworkMoveGuard" as Guard
 
+Player -> View: 选择难度并进入牌桌
+View -> Phase: ReadyToStart
+Player -> View: 点击开始游戏
+View -> Phase: Dealing
+View -> View: 播放发牌动画
+View -> Phase: Playing
 Player -> View: 选择手牌并点击出牌
 View -> Policy: evaluate(state, localPlayerId, inputLocked, animating)
 Policy --> View: canAct / hasLegalPlay / notice

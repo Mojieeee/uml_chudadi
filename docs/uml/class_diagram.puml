@@ -105,6 +105,53 @@ package "controller" {
   class RoomController
 }
 
+package "profile" {
+  enum GameModeLabel {
+    HumanVsAi
+    Bluetooth
+  }
+  enum AvatarRarity {
+    Free
+    Common
+    Rare
+    Legendary
+  }
+  class PlayerProfile {
+    nickname: String
+    coins: Int
+    xp: Int
+    avatar: AvatarProfile
+    stats: ProfileStats
+    history: List<MatchRecord>
+    unlockedAvatars: Set<String>
+    customAvatarUnlocked: Boolean
+  }
+  class ProfileStats {
+    totalGames: Int
+    wins: Int
+    bluetoothGames: Int
+    hardWins: Int
+    winStreak: Int
+  }
+  class MatchRecord
+  class MatchSettlement
+  class ProfileChange
+  class BuiltInAvatar
+  class AvatarProfile
+  class AchievementDefinition
+  object AvatarCatalog
+  object AchievementCatalog
+  object ProfileProgress
+  object ProfileController {
+    settleMatch(...)
+    renameWithCost(...)
+    unlockAvatar(...)
+    unlockCustomAvatar(...)
+    resetStats(...)
+  }
+  class ProfileStore
+}
+
 package "transport" {
   abstract class TransportRole <<sealed>>
   class "TransportRole.Host" as TransportHost
@@ -145,6 +192,10 @@ package "transport" {
   class "GameMessage.SyncRequest" as MsgSync
   class "GameMessage.Leave" as MsgLeave
   class "GameMessage.Kick" as MsgKick
+  class "GameMessage.State" as MsgState
+  class "GameMessage.Play" as MsgPlay
+  class "GameMessage.Pass" as MsgPass
+  class "GameMessage.Result" as MsgResult
   class "GameMessage.Error" as MsgError
   object GameMessageCodec
   class SnapshotPlayer
@@ -156,7 +207,9 @@ package "view/audio" {
   class MainActivity
   class ChudadiApp
   enum Screen {
+    Splash
     Lobby
+    Profile
     DifficultySelect
     Rules
     Settings
@@ -173,6 +226,11 @@ package "view/audio" {
     Choose
     HostRoom
     JoinRoom
+  }
+  enum GameStartPhase {
+    ReadyToStart
+    Dealing
+    Playing
   }
   class CardRoomMusicPlayer
   enum MusicScene {
@@ -212,6 +270,16 @@ AiController --> AiStrategy
 AiController --> GameController
 AiStrategy --> GameState
 PlayerActionPolicy --> GameState
+ProfileController --> PlayerProfile
+ProfileController --> MatchSettlement
+ProfileController --> ProfileChange
+ProfileController --> AchievementCatalog
+ProfileStore --> PlayerProfile
+PlayerProfile --> ProfileStats
+PlayerProfile --> AvatarProfile
+PlayerProfile --> MatchRecord
+PlayerProfile --> AchievementDefinition
+BuiltInAvatar --> AvatarRarity
 
 RoomSeat --> RoomSeatKind
 RoomSeat --> Difficulty
@@ -227,11 +295,16 @@ GameMessage <|-- MsgSnapshot
 GameMessage <|-- MsgSync
 GameMessage <|-- MsgLeave
 GameMessage <|-- MsgKick
+GameMessage <|-- MsgState
+GameMessage <|-- MsgPlay
+GameMessage <|-- MsgPass
+GameMessage <|-- MsgResult
 GameMessage <|-- MsgError
 MsgRoom --> RoomSeat
 MsgStart --> RoomSeat
 MsgMoveRequest --> Card
 MsgMoveAccepted --> Card
+MsgPlay --> Card
 MsgSnapshot --> GameSnapshot
 GameMessageCodec --> GameMessage
 NetworkMoveGuard --> GameMessage
@@ -241,6 +314,9 @@ ChudadiApp --> AiController
 ChudadiApp --> GameTransport
 ChudadiApp --> GameMessageCodec
 ChudadiApp --> RoomSeat
+ChudadiApp --> PlayerProfile
+ChudadiApp --> ProfileController
+ChudadiApp --> ProfileStore
 ChudadiApp --> CardRoomMusicPlayer
 MainActivity --> ChudadiApp
 @enduml

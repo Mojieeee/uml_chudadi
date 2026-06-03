@@ -23,6 +23,18 @@ node "单机测试环境" as Local {
   component "JUnit 模拟测试"
 }
 
+node "开发与发布环境\nMac + Android Studio" as Dev {
+  artifact "源码仓库"
+  artifact "release/chudadi-v1.3-release.apk"
+  artifact "release/chudadi-v1.3-release.aab"
+  artifact "keystore/chudadi-release.jks\n本机备份，不上传"
+  component "Gradle runRelease"
+}
+
+cloud "GitHub HTTPS 仓库" as GitHub {
+  artifact "Mojieeee/uml_chudadi"
+}
+
 cloud "Android Bluetooth Stack" as BT
 
 HostApk --> BT : listenUsingRfcommWithServiceRecord
@@ -32,4 +44,6 @@ BT -- Client : RFCOMM socket
 Host --> Client : ROOM / START / MOVE_ACCEPTED / STATE_SNAPSHOT
 Client --> Host : HELLO / ROOM_READY / MOVE_REQUEST / SYNC_REQUEST
 Local --> Host : 相同消息协议的本地模拟
+Dev --> GitHub : HTTPS push\n不含私钥/本地配置
+Dev --> Host : runRelease 安装
 @enduml

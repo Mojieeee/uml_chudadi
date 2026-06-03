@@ -21,6 +21,8 @@
 | 签名证书 | `keystore/chudadi-release.jks` |
 | 签名配置 | `keystore.properties` |
 | Android Studio 一键配置 | `.idea/runConfigurations/runRelease.xml` |
+| Git HTTPS 远程 | `https://github.com/Mojieeee/uml_chudadi.git` |
+| 开源许可 | 当前未添加根目录 `LICENSE`；如需公开开源建议补充 MIT 或 Apache-2.0 |
 
 常用命令：
 
@@ -45,6 +47,7 @@
 | Release 签名 | `apksigner verify --verbose --print-certs app/build/outputs/apk/release/app-release.apk` | APK 通过 v2 签名校验 |
 | UML 语法 | PlantUML `--check-syntax docs/uml/*.puml` | 7 张图无语法错误 |
 | 玩家文案 | `rg` 检查 `app/src/main` | App 内不出现课程/工程说明词 |
+| 敏感文件 | `git ls-files` 检查 | 不包含 `.jks`、`keystore.properties`、`local.properties` |
 
 ## 真机蓝牙验收表
 

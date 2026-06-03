@@ -1,6 +1,8 @@
 # UML 建模说明
 
-本项目正式交付以 ProcessOn UML 图为准。`docs/uml` 中的 `.puml` 文件用于版本管理和快速语法检查，`.png` 文件用于报告引用；最终报告可按同样结构在 ProcessOn 中绘制或导入后导出。
+本项目正式交付以 ProcessOn UML 图为准。开发者先用 PlantUML 代码描述 7 类 UML 图，再将 PlantUML 图内容导入或参照迁移到 ProcessOn UML 中整理为正式图。`docs/uml` 中的 `.puml` 文件用于版本管理和快速语法检查，`.png` 文件用于报告引用和对照。
+
+当前 `.puml` 已按最新代码同步：包含开屏页、玩家中心、人机预备/发牌阶段、三档 AI、蓝牙四座位、房主权威同步、玩家成长系统、release 签名和 GitHub HTTPS 上传注意事项。
 
 ## 七大图对应关系
 
@@ -17,6 +19,8 @@
 ## ProcessOn 使用建议
 
 1. 在 ProcessOn 中创建 UML 图，按上述 7 类图分别命名。
-2. 参考 `.puml` 中的类名、参与者、状态和组件关系绘制图形。
-3. 导出 PNG 放回本目录，保持文件名与表格一致。
-4. 最终报告中注明“UML 图使用 ProcessOn 绘制，项目内保留 PlantUML 文本备份用于版本管理”。
+2. 将 `.puml` 的图结构导入 ProcessOn，或参照 `.puml` 中的类名、参与者、状态、组件和消息关系手动绘制。
+3. 在 ProcessOn 中调整布局，使图形适合报告展示。
+4. 导出 PNG 放回本目录，保持文件名与表格一致。
+5. 最终报告中注明“UML 图由 PlantUML 代码导入/参照迁移到 ProcessOn UML 绘制，项目内保留 PlantUML 文本作为版本管理备份”。
+6. 如果 ProcessOn 图已手动调整，请以本目录 `.puml` 的类名、状态名和消息名为准做最后核对。

@@ -14,6 +14,7 @@
 - 蓝牙房间：支持创建房间、加入对局、四座位房间、人机补位、房主权威同步、结算后回原房间再开局。
 - 玩家成长：支持金币、经验、等级、称号、战绩、成就、每日奖励、头像商店、自定义头像、改名消费、战绩重置。
 - 动画与音效：包含开屏光效、大厅漂浮扑克牌、主视觉光效、按钮按压、牌桌发牌、手牌选中、出牌飞牌、结算动画、背景音乐、出牌音效与震动。
+- 发布与仓库：项目已配置 HTTPS 远程仓库、release 签名、`runRelease` 运行配置和敏感文件忽略规则；签名私钥只保存在本机，不上传 GitHub。
 
 开屏背景素材来自 Wikimedia Commons 的 `The Cloisters Playing Cards` 图片，页面标注为 CC0，可自由复制、修改和分发。项目内对原图右上空位做了补牌修复，保留原素材质感，同时避免竖屏开屏出现右上角缺牌观感：
 
@@ -23,6 +24,477 @@
 
 - <https://freeicons.co/v/cards-410396/>
 - `docs/assets/freeicons_cards_cc0.svg`
+
+### 1.1 实训 8 项要求逐项技术实现说明
+
+本节按实训启动纲要中的 8 个要求逐项说明当前项目如何实现。说明颗粒度细化到技术选型、代码落点、具体实现流程和验证方式，便于按评分标准检查。
+
+#### 要求 1：掌握 ProcessOn UML 工具进行 UML 7 大图建模
+
+技术选型：
+
+- UML 图结构先使用 PlantUML 代码描述，原因是 PlantUML 文本便于版本管理、代码审查和随代码迭代同步。
+- 正式图使用 ProcessOn UML。开发者将 PlantUML 图内容导入或参照迁移到 ProcessOn UML 中，再手动调整布局，作为最终报告中的正式 UML 图。
+- Android Studio 中已安装 PlantUML 插件，项目内 `.puml` 可在 IDE 中预览；`docs/uml/*.png` 为导出图，用于报告引用和检查。
+
+具体实现：
+
+- 用例图：`docs/uml/use_case.puml` / `docs/uml/use_case.png`
+  - 描述玩家、房主、加入者、本地人机四类参与者。
+  - 覆盖开屏、进入大厅、规则设置、人机对局、蓝牙房间、添加人机、出牌、不出、结算、玩家中心等用例。
+- 类图：`docs/uml/class_diagram.puml` / `docs/uml/class_diagram.png`
+  - 按 `model`、`controller`、`profile`、`transport`、`view/audio` 分包展示。
+  - 覆盖 `GameController`、`AiStrategy`、`RuleSet`、`GameMessageCodec`、`PlayerProfile`、`ProfileController` 等核心类。
+- 顺序图：`docs/uml/sequence_game_turn.puml` / `docs/uml/sequence_game_turn.png`
+  - 描述一次本地出牌和蓝牙出牌的调用顺序。
+  - 展示 `PlayerActionPolicy`、`GameController`、`RuleSet`、`GameTransport`、`NetworkMoveGuard` 的交互。
+- 状态图：`docs/uml/state_game.puml` / `docs/uml/state_game.png`
+  - 描述 `Splash`、`Lobby`、`Profile`、`ReadyToStart`、`Dealing`、`Playing`、`Paused`、`Result` 等状态。
+- 活动图：`docs/uml/activity_play.puml` / `docs/uml/activity_play.png`
+  - 描述从启动、选择对局、创建/加入蓝牙房间、发牌、出牌、结算、再来一局的完整业务流程。
+- 组件图：`docs/uml/component_diagram.puml` / `docs/uml/component_diagram.png`
+  - 描述 Compose UI、控制器、规则模型、消息编解码、蓝牙传输、玩家成长、音乐反馈和 SharedPreferences 的依赖关系。
+- 部署图：`docs/uml/deployment_diagram.puml` / `docs/uml/deployment_diagram.png`
+  - 描述房主手机、加入者手机、本地测试环境、Android Bluetooth Stack、开发发布环境和 GitHub HTTPS 仓库。
+
+验证方式：
+
+- 检查 `docs/uml` 下 7 个 `.puml` 和 7 个 `.png` 是否同时存在。
+- 使用 Android Studio PlantUML 插件预览 `.puml`，确认图能打开。
+- 将 PlantUML 内容导入或参照迁移到 ProcessOn UML 后，核对类名、状态名、消息名和流程是否与当前代码一致。
+
+#### 要求 2：进行需求分析和面向对象设计，并进行分析建模和设计建模
+
+技术选型：
+
+- 需求分析采用 Markdown 文档记录，便于与源码一起提交、审查和更新。
+- 面向对象设计采用 MVC 思想：领域对象放在 Model，业务控制放在 Controller，Compose 页面放在 View。
+- 分析建模通过用例图、活动图、状态图描述“系统要做什么”；设计建模通过类图、顺序图、组件图、部署图描述“系统如何实现”。
+
+具体实现：
+
+- 需求分析文档：`docs/requirements.md`
+  - 把功能需求拆成开屏、大厅、人机、蓝牙、规则、玩家成长、音乐反馈、发布包等模块。
+  - 把非功能需求拆成 MVC 分层、策略模式、蓝牙抽象、UML、测试覆盖和敏感文件保护。
+  - 用评分点映射表说明每个评分点对应的代码和文档。
+- 设计说明文档：`docs/design.md`
+  - 说明 Model、Controller、View 的边界。
+  - 说明 AI 策略模式、传输接口隔离、主机权威同步、状态快照、仓储模式、状态模式等设计。
+- 完整说明文档：`docs/complete_project_documentation.md`
+  - 从代码结构、规则实现、蓝牙实现、玩家成长、UML、测试、发布完整说明项目。
+
+面向对象落点：
+
+- `model/Card.kt`
+  - `Suit`、`Rank`、`Card`、`Deck` 表示扑克牌和发牌。
+- `model/HandType.kt` 与 `model/HandClassifier.kt`
+  - 把牌型识别独立为模型层能力，供规则、控制器、AI 和测试复用。
+- `model/RuleSet.kt`
+  - 用 `RuleProfile`、`NorthRuleSet`、`SouthRuleSet` 表示不同规则配置。
+- `model/GameState.kt` 与 `model/Player.kt`
+  - 表示四名玩家、当前回合、上一手、过牌次数、胜者和提示消息。
+- `controller/GameController.kt`
+  - 实现出牌、过牌、合法动作枚举和胜负推进。
+- `transport/GameMessage.kt`、`transport/GameSnapshot.kt`、`transport/RoomSeat.kt`
+  - 表示联机消息、同步快照和四座位房间模型。
+- `profile/ProfileModels.kt`
+  - 表示玩家档案、战绩、成就、头像和成长数据。
+
+验证方式：
+
+- 用 `docs/uml/use_case.puml`、`activity_play.puml`、`state_game.puml` 验证分析建模。
+- 用 `docs/uml/class_diagram.puml`、`sequence_game_turn.puml`、`component_diagram.puml`、`deployment_diagram.puml` 验证设计建模。
+- 用 `./gradlew test --no-daemon` 验证规则、控制器、消息、蓝牙模拟和玩家成长逻辑。
+
+#### 要求 3：详细设计时引入必要的设计模式，优化设计
+
+技术选型：
+
+- 只使用 Kotlin、Android SDK、Jetpack Compose 和 JUnit，不新增第三方运行依赖。
+- 设计模式优先服务真实复杂度，不为了文档堆砌模式。
+- 每个模式都对应明确代码点和实际问题。
+
+具体设计模式：
+
+1. 策略模式
+   - 代码位置：`controller/AiStrategy.kt`
+   - 抽象接口：`AiStrategy`
+   - 实现类：`GreedyAiStrategy`、`HeuristicAiStrategy`、`MonteCarloRolloutAiStrategy`
+   - 解决问题：同一套牌局控制器可以适配不同 AI 算法，不需要在 `GameController` 内写大量难度分支。
+   - UI 对应：人机对局选择简单、普通、困难；蓝牙房间中房主给 AI 座位选择难度。
+
+2. MVC 模式
+   - Model：`model/`、`profile/ProfileModels.kt`、`transport/GameSnapshot.kt`
+   - Controller：`controller/`、`profile/ProfileController.kt`、`transport/NetworkMoveGuard.kt`
+   - View：`view/ChudadiApp.kt`
+   - 解决问题：规则、AI、蓝牙和 UI 分离，降低 Compose 页面直接写业务规则导致的维护成本。
+
+3. 接口隔离 / 适配器思想
+   - 代码位置：`transport/GameTransport.kt`
+   - 接口：`GameTransport`
+   - 实现：`BluetoothHostTransport`、`BluetoothClientTransport`、`LocalRoomTransport`
+   - 解决问题：UI 和房间逻辑不直接依赖 BluetoothSocket；测试可以使用本地模拟传输。
+
+4. 主机权威同步模式
+   - 代码位置：`transport/NetworkMoveGuard.kt`、`transport/GameSnapshot.kt`、`transport/GameMessage.kt`
+   - 解决问题：蓝牙多端联机时，只有房主校验出牌和推进状态，加入者以房主快照为准，避免多台手机各自计算导致状态分裂。
+
+5. 状态模式
+   - 代码位置：`view/ChudadiApp.kt`
+   - 状态类型：`Screen`、`BluetoothEntryMode`、`GameStartPhase`
+   - 解决问题：页面切换、蓝牙入口和人机开局阶段有明确状态，不用多个布尔值互相组合。
+
+6. 命令对象思想
+   - 代码位置：`model/GameState.kt` 中的 `Move`，`transport/GameMessage.kt` 中的 `MoveRequest`
+   - 解决问题：玩家、AI、蓝牙远端都统一用 `Move.Play` / `Move.Pass` 表达动作，便于控制器和测试复用。
+
+7. 编码器 / 解码器模式
+   - 代码位置：`transport/GameMessage.kt` 中的 `GameMessageCodec`
+   - 解决问题：蓝牙传输只处理字符串帧，模型对象和协议转换集中管理，避免 UI 或蓝牙线程手写解析。
+
+8. 仓储模式
+   - 代码位置：`profile/ProfileStore.kt`
+   - 解决问题：玩家昵称、金币、头像、战绩、成就、每日奖励和设置统一持久化，UI 不直接处理序列化细节。
+
+验证方式：
+
+- `AiStrategy` 通过 `GameControllerTest` 和 AI 相关断言验证返回合法动作。
+- `GameTransport` 和主机权威同步通过 `GameMessageCodecTest`、`NetworkMoveGuardTest`、`SimulatedBluetoothHubTest` 验证。
+- 玩家成长仓储和控制逻辑通过 `ProfileControllerTest` 验证。
+- 页面状态通过手动验收和 `TableAnimationKeysTest` 辅助验证。
+
+#### 要求 4：完成 UI 界面设计，实现不同页面切换
+
+技术选型：
+
+- UI 使用 Jetpack Compose，实现声明式界面和状态驱动重组。
+- 页面切换不引入 Navigation 依赖，而是使用项目内 `Screen` 枚举和 `AnimatedScreenHost` 管理。
+- 动画使用 Compose 内置 API，如 `AnimatedVisibility`、`animateFloatAsState`、`rememberInfiniteTransition`、`Canvas`、`graphicsLayer`。
+- 视觉风格使用深绿牌桌、金色按钮、暗色玻璃面板、扑克牌元素和轻量光效，定位为发布版棋牌游戏界面。
+
+页面实现：
+
+- `SplashScreen`
+  - 开屏页，必须点击 `开始游戏` 才进入大厅。
+  - 使用 `drawable-nodpi/splash_cards.jpg` 作为背景。
+  - 包含标题、光效和开始按钮。
+- `LobbyScreen`
+  - 游戏大厅。
+  - 顶部 `PlayerBar` 显示玩家头像、昵称、等级、经验进度和金币。
+  - 中部提供人机对局和好友蓝牙对局两个主要入口。
+  - 底部提供规则、设置、教程快捷入口。
+- `DifficultySelectScreen`
+  - 人机对局前选择简单、普通、困难。
+  - 选择后进入牌桌预备页，不立即发牌。
+- `RulesScreen`
+  - 北方规则和南方规则选择。
+  - 保存后写入 `SharedPreferences`，后续所有对局使用已保存规则。
+  - 页面内展示当前规则详细说明。
+- `SettingsScreen`
+  - 背景音乐、音效、震动、默认难度、退出游戏等设置。
+  - 退出游戏必须二次确认。
+- `TutorialScreen`
+  - 展示牌型、首出、五张牌等级、南北差异和蓝牙连接提示。
+- `ProfileScreen`
+  - 玩家中心，包含资料卡、昵称修改、头像商店、自定义头像、每日奖励、成就、历史战绩和战绩管理。
+  - 消耗金币的操作通过弹窗确认。
+- `NearbyScreen`
+  - 好友蓝牙入口、创建房间、加入对局、搜索设备、四座位房间管理。
+- `GameScreen`
+  - 牌桌页，包含三名对手座位、中央出牌区、底部手牌、倒计时、设置菜单、出牌/不出/提示/重选按钮。
+  - 支持人机预备阶段、发牌动画、AI 思考、无可压牌提示和出牌飞牌动画。
+- `ResultScreen`
+  - 结算页，展示胜负、排名、金币/经验变化、升级、成就、再来一局和返回大厅。
+
+页面切换实现：
+
+- `Screen` 枚举位于 `view/ChudadiApp.kt`，包含 `Splash`、`Lobby`、`Profile`、`DifficultySelect`、`Rules`、`Settings`、`Tutorial`、`Nearby`、`Game`、`Result`。
+- `screen` 使用 `remember { mutableStateOf(...) }` 保存当前页面。
+- 用户点击按钮时修改 `screen`，`AnimatedScreenHost` 根据状态切换页面。
+- 由于不使用 Navigation 依赖，项目依赖更少，Gradle 风险更低，也更适合实训项目展示。
+
+验证方式：
+
+- 手动从开屏进入大厅，再依次进入人机、规则、设置、教程、玩家中心、蓝牙、牌桌、结算。
+- 检查按钮文字不截断、页面可滚动、弹窗不遮挡关键内容。
+- `TableAnimationKeysTest` 验证出牌动画 key 稳定性，避免重复播放或漏播。
+
+#### 要求 5：实现多人的蓝牙连接，提供多名玩家联机对战功能
+
+技术选型：
+
+- 使用 Android Classic Bluetooth RFCOMM，不新增 Google Play services 或 Nearby Connections 依赖。
+- 房主端使用 `BluetoothServerSocket` 监听连接。
+- 加入端使用 `BluetoothSocket` 连接房主设备。
+- 联机拓扑采用房主权威 C/S 模式，不采用所有客户端互相连接的网状拓扑。
+- 设备发现遵循 Android 官方建议：优先展示已配对设备，再搜索附近设备；连接前取消旧 discovery，连接后关闭 discovery。
+
+具体实现：
+
+- 抽象接口：`transport/GameTransport.kt`
+  - `start(role)`：启动主机或客户端。
+  - `send(message)`：发送协议文本。
+  - `observe(listener)`：监听收到的消息。
+  - `close()`：关闭连接和线程。
+- 真实蓝牙：`transport/BluetoothTransports.kt`
+  - `BluetoothHostTransport`：房主端监听 socket，接收多个客户端连接。
+  - `BluetoothClientTransport`：加入端根据设备地址连接房主。
+  - 内部使用读写线程处理 socket 输入输出，异常时通过消息反馈给 UI。
+- 房间模型：`transport/RoomSeat.kt`
+  - 固定四个座位：`Host`、`Human`、`Ai`、`Empty`。
+  - 房主固定在 1 号位。
+  - 空位可以添加 AI，AI 可选择简单、普通、困难。
+  - `canStartRoom()` 要求四个座位都 occupied、ready、connected 才允许开始。
+- 消息协议：`transport/GameMessage.kt`
+  - `HELLO`：加入者向房主报到。
+  - `ROOM`：房主广播完整座位快照。
+  - `ROOM_READY`：加入者准备状态。
+  - `START`：房主广播 seed、规则、座位列表。
+  - `MOVE_REQUEST`：加入者请求出牌或不出。
+  - `MOVE_ACCEPTED`：房主确认行动。
+  - `STATE_SNAPSHOT`：房主广播权威状态快照。
+  - `SYNC_REQUEST`、`LEAVE`、`KICK`、`ERROR`：同步、离开、踢出和错误恢复。
+- 主机权威：`transport/NetworkMoveGuard.kt`
+  - 房主只接受当前回合远端玩家的请求。
+  - 重复、过期、非当前玩家请求不会推进牌局，只回发快照。
+  - 蓝牙房间中的 AI 只由房主运行，加入者把 AI 当作远端同步状态。
+
+玩家可见流程：
+
+1. 大厅点击 `好友蓝牙对局`。
+2. 选择 `创建房间` 或 `加入对局`。
+3. 房主创建房间后显示四个座位。
+4. 加入者搜索已配对设备和附近设备，选择房主设备连接。
+5. 房主可添加 AI 补满四座，或等待好友加入。
+6. 四座位全部有人或 AI 且准备后，房主点击开始。
+7. 房主广播 `START`，各端进入同一对局。
+8. 加入者出牌时发送 `MOVE_REQUEST`，等待房主确认。
+9. 房主广播 `MOVE_ACCEPTED` 和 `STATE_SNAPSHOT`，所有端同步刷新。
+
+验证方式：
+
+- `SimulatedBluetoothHubTest` 模拟 1 房主 + 3 客户端同时加入、房满拒绝、广播和移动请求。
+- `RoomSeatTest` 验证添加 AI、准备、断线和再开局重置。
+- `GameMessageCodecTest` 验证中文名、分隔符、座位、START 和 SNAPSHOT 编解码。
+- `NetworkMoveGuardTest` 验证房主只接受当前远端玩家请求。
+- 真机验收需要至少两台手机，测试创建房间、加入、添加 AI、满座开局、出牌同步、结算再来一局。
+
+#### 要求 6：适配玩家自由选择南北规则的不同玩法
+
+技术选型：
+
+- 使用规则接口 `RuleSet` 抽象规则差异。
+- 使用 `RuleProfile` 保存规则元数据，便于 UI 展示和蓝牙同步。
+- 使用 `SharedPreferences` 保存玩家选择，保证重启 App 后仍然保留。
+- 蓝牙房间规则由房主决定，`START` 消息同步给加入者，避免各端规则不一致。
+
+具体实现：
+
+- 代码位置：`model/RuleSet.kt`
+- 规则抽象：
+  - `RuleSet.profile`
+  - `RuleSet.classify(cards)`
+  - `RuleSet.canLead(cards, isFirstTurn)`
+  - `RuleSet.canBeat(previous, next)`
+- 北方规则：`NorthRuleSet`
+  - `firstCard = Card(Suit.Spades, Rank.Three)`
+  - 黑桃 3 首出。
+  - `bombMode = BombMode.Enhanced`
+  - 四带一和同花顺作为增强强牌，可以跨牌型压制普通牌。
+  - `sameSizeOnly = false`
+- 南方规则：`SouthRuleSet`
+  - `firstCard = Card(Suit.Diamonds, Rank.Three)`
+  - 方块 3 首出。
+  - `bombMode = BombMode.None`
+  - `sameSizeOnly = true`
+  - 同张数压制，五张牌之间按顺子、同花、葫芦、四带一、同花顺等级比较。
+- 规则选择：
+  - `RulesScreen` 中选择北方/南方玩法。
+  - 点击保存后写入 `SharedPreferences`。
+  - 人机和蓝牙开局都读取 `selectedRule`。
+- 联机同步：
+  - 房主开局时通过 `GameMessage.Start(seed, ruleName, seats)` 发送规则名。
+  - 客户端收到 `START` 后用 `ruleSetByIdOrName(ruleName)` 转换为本地规则对象。
+
+规则比较流程：
+
+1. 玩家选择牌后，`GameController.play()` 先判断是否轮到该玩家。
+2. 调用 `state.ruleSet.classify(cards)` 识别牌型。
+3. 首出时调用 `state.ruleSet.canLead(cards, state.firstTurn)`，检查是否包含首牌。
+4. 跟牌时调用 `state.ruleSet.canBeat(previous, next)`，根据南北规则判断能否压制。
+5. 合法则更新 `GameState`；不合法则保留选择并显示提示。
+
+验证方式：
+
+- `HandClassifierTest` 覆盖单张、对子、三张、顺子、同花、葫芦、四带一、同花顺。
+- 规则测试覆盖黑桃 3 / 方块 3 首出差异。
+- 测试北方炸弹增强和南方同张数压制差异。
+- 手动在规则设置页切换规则，保存后进入人机和蓝牙房间确认生效。
+
+#### 要求 7：对扑克牌博弈 AI 模块提供不同 AI 算法实现策略，至少 2 种 AI 算法策略，需要使用策略模式
+
+技术选型：
+
+- 使用策略模式抽象 AI 算法：`AiStrategy`。
+- 当前实现 3 种 AI，超过“至少 2 种”的要求。
+- AI 算法不引入外部模型或第三方库，全部用 Kotlin 实现，保证 Android 端性能和构建稳定。
+- AI 设计参考了公开扑克/博弈 AI 项目的算法思想，但没有直接复制开源代码，也没有在 Android 端加载神经网络模型。
+
+参考来源：
+
+- RLCard：一个面向纸牌游戏的强化学习工具包，支持 Blackjack、Leduc Hold'em、Texas Hold'em、UNO、Dou Dizhu、Mahjong 等环境，项目参考其“游戏环境 + Agent 策略接口 + 合法动作集合”的组织方式。
+  - <https://github.com/datamllab/rlcard>
+  - <https://arxiv.org/abs/1910.04376>
+- OpenSpiel：DeepMind 开源的多智能体博弈研究框架，支持完美/不完美信息、回合制/同步行动、搜索和强化学习算法。项目参考其“游戏状态、合法动作、策略/Agent 解耦”的通用博弈建模方式。
+  - <https://github.com/google-deepmind/open_spiel>
+- ISMCTS：Cowling、Powley、Whitehouse 的 Information Set Monte Carlo Tree Search 论文，核心思想是把 Monte Carlo 搜索用于隐藏信息和不确定性游戏。项目困难 AI 没有完整实现树搜索，而是参考“对候选动作进行有限随机模拟和期望评分”的 rollout 思路。
+  - <https://pure.york.ac.uk/portal/en/publications/information-set-monte-carlo-tree-search/>
+- DouZero：快手开源的斗地主 AI，使用自博弈深度强化学习解决斗地主。项目没有使用 DouZero 的神经网络和训练模型，只参考其对斗地主这类出牌游戏的动作候选、残局压力和多玩家不完美信息问题的处理方向。
+  - <https://github.com/kwai/DouZero>
+  - <https://arxiv.org/abs/2106.06135>
+
+代码实现：
+
+- 代码位置：`controller/AiStrategy.kt`
+- 策略接口：
+  - `val name: String`
+  - `fun chooseMove(state: GameState, playerId: Int): Move`
+- AI 控制器：
+  - `AiController.playTurnIfNeeded(state)`
+  - 判断当前玩家是否 `PlayerKind.LocalAi`。
+  - 调用当前策略生成 `Move`。
+  - 交给 `GameController.applyMove()` 执行。
+
+三种策略：
+
+1. 简单难度：`GreedyAiStrategy`
+   - 参考来源：
+     - 参考 RLCard 和 OpenSpiel 中常见的 baseline agent 设计思路：先由环境给出合法动作集合，再由 Agent 选择一个动作。
+     - 简单 AI 没有使用搜索或学习模型，而是实现最基础的规则型贪心策略，用作低难度基线。
+   - 算法思想：
+     - “先合法，再最小”。
+     - AI 不预测后续局面，只在当前 `GameState` 中枚举合法出牌。
+     - 在所有能出的牌里选择消耗最小、牌力较低的牌，模拟新手玩家的保守出牌。
+   - 实现方式：
+     - 调用 `gameController.legalPlays(state, playerId)` 获取所有合法候选。
+     - 按牌张数、牌型强度、最大牌大小排序。
+     - 选择最小候选。
+     - 如果没有合法候选，返回 `Move.Pass(playerId)`。
+   - 代码细节：
+     - `legalPlays` 只枚举 1、2、3、5 张组合，保证候选牌已经经过 `RuleSet.classify()` 和 `RuleSet.canBeat()` 过滤。
+     - `minWithOrNull(compareBy<List<Card>> { it.size }...)` 控制它优先选择“小动作”。
+   - 适用场景：新手练习，出牌速度较快，强度低。
+
+2. 普通难度：`HeuristicAiStrategy`
+   - 参考来源：
+     - 参考 RLCard/OpenSpiel 的“策略只依赖当前状态和合法动作”结构，不把规则判断写进 UI。
+     - 参考 DouZero 对斗地主动作空间的处理方向：出牌游戏的 AI 不应随意拆坏组合，候选动作需要考虑剩余牌结构和对手压力。
+     - 该策略是项目内为锄大地重写的启发式评分策略，不是某个开源项目的原样算法。
+   - 算法思想：
+     - 在“尽快减少手牌”和“保留组合/强牌”之间做权衡。
+     - 当对手剩余牌少时，提高主动出牌和减少手牌数量的权重。
+     - 当候选动作会拆对子、三张、炸弹或同花顺时增加惩罚，避免不必要地破坏手牌结构。
+   - 评分因素：
+     - 打出的牌越多，得分越高。
+     - 对手最少手牌越少，压力越高，AI 更倾向于主动出更多牌。
+     - 拆对子、三张等结构会扣分。
+     - 非必要时打出四带一或同花顺会扣分，避免过早浪费强牌。
+     - 牌型强度会加分，但高牌消耗会适度扣分。
+   - 代码细节：
+     - `pressure = state.players.filterNot { it.id == playerId }.minOf { it.hand.size }` 计算对手压力。
+     - `breakPenalty(hand, cards)` 统计候选牌是否拆掉同点数组合。
+     - 四带一和同花顺会被额外扣分，除非确实有必要。
+     - `legal.firstOrNull { it.size == hand.size }` 保证如果能一手走完，普通 AI 也会优先获胜。
+   - 适用场景：中等难度，能体现保留组合和强牌的策略。
+
+3. 困难难度：`MonteCarloRolloutAiStrategy`
+   - 参考来源：
+     - 主要参考 ISMCTS 论文中“隐藏信息游戏使用 Monte Carlo 模拟评估候选行动”的思想。
+     - 参考 OpenSpiel 对搜索/规划和博弈状态建模的通用结构，即策略根据状态和合法动作进行评估。
+     - 参考 DouZero 对斗地主这种不完美信息出牌游戏的启发：残局压力、动作编码、并行候选评估和一手走完优先很重要。
+     - 项目没有完整实现 ISMCTS 树结构，也没有使用 DouZero 深度强化学习模型；Android 端采用固定预算 rollout，是为了在手机性能、依赖风险和实训可解释性之间折中。
+   - 算法思想：
+     - 对每个合法候选动作做若干次轻量模拟。
+     - 模拟后评估剩余手牌数量、剩余结构、牌型强度、拆牌损失和强牌消耗。
+     - 选择平均评分最高的动作。
+   - 实现方式：
+     - 获取所有合法候选。
+     - 如果存在一手出完，直接选择获胜动作。
+     - 对每个候选动作调用 `rolloutScore()`。
+     - `rolloutScore()` 结合剩余手牌数量、牌型强度、拆牌损失、炸弹消耗、剩余结构价值和模拟收官能力评分。
+     - 使用固定 seed 的 `Random`，避免每次重组造成不可预测抖动。
+   - 代码细节：
+     - 默认 `rollouts = 24`，避免 Android 端计算量过大。
+     - `gameController.play(state, playerId, cards)` 先模拟当前候选动作执行后的局面。
+     - `remainingStructureValue(remaining)` 给对子、三张、炸弹、高牌等剩余结构加分。
+     - `bombSpendPenalty(state, cards, remaining)` 惩罚非必要消耗四带一或同花顺。
+     - `simulatedFinishScore(state, remaining, random)` 在有限轮数内模拟继续出牌，估计收官能力。
+     - `playableGroups(state, simulated)` 复用 `RuleSet.classify()`，保证模拟过程仍遵守锄大地牌型。
+   - 适用场景：更强人机，对残局和保留强牌更敏感。
+
+UI 与房间适配：
+
+- 人机对局前进入 `DifficultySelectScreen` 选择难度。
+- 蓝牙房间中，房主给每个 AI 座位选择简单、普通或困难。
+- 蓝牙对局中只有房主运行 AI，避免多端各自运行 AI 导致状态不同步。
+- AI 出牌延迟根据难度不同设置：简单较快，普通中等，困难更慢，模拟思考时间。
+
+验证方式：
+
+- `GameControllerTest` 验证 AI 返回合法动作。
+- 困难策略在可一手走完时优先获胜动作。
+- 固定 seed 随机多局测试不死循环、不崩溃。
+- 手动分别选择三档难度，观察出牌倾向差异。
+
+#### 要求 8：关键软件工程阶段尽量使用大语言模型和 AI 工具支持，并详细说明使用情况和效果评价
+
+技术选型：
+
+- 使用 OpenAI Codex / GPT-5 作为主要 AI 辅助工具。
+- 使用 Android Studio 作为编码、构建、真机运行和 GitHub HTTPS 上传工具。
+- 使用 PlantUML 和 ProcessOn UML 完成建模工具链。
+- 使用 Gradle、JUnit、Android Instrumented Test 做验证。
+
+开发者实际使用方式：
+
+- 需求阶段：
+  - 使用 AI 辅助阅读实训要求，拆分 8 个评分点。
+  - 形成 `docs/requirements.md` 中的需求和评分点映射。
+- 设计阶段：
+  - 使用 AI 辅助比较 MVC、策略模式、蓝牙 C/S 房间、房主权威同步、SharedPreferences 本地持久化等方案。
+  - 最终由开发者确定技术选型并落地到代码。
+- UML 阶段：
+  - 使用 AI 辅助生成 PlantUML 初稿。
+  - 开发者根据当前代码调整 `.puml`。
+  - 再将 PlantUML 内容导入或参照迁移到 ProcessOn UML，整理正式图。
+- 编码阶段：
+  - 使用 AI 辅助生成 Kotlin/Compose 页面、规则模型、AI 策略、蓝牙协议和测试结构。
+  - 开发者在 Android Studio 中运行、修改和确认。
+- 测试阶段：
+  - 使用 AI 辅助补充规则、AI、蓝牙模拟、玩家成长、消息协议和动画 key 测试用例。
+  - 使用 `./gradlew test --no-daemon` 运行本地单元测试。
+- 文档阶段：
+  - 使用 AI 辅助检查文档是否跟当前代码一致。
+  - 开发者按实训评分点补充完整说明、测试报告、发布说明和最终检查表。
+- 发布阶段：
+  - 使用 AI 辅助检查 debug/release 区别、签名证书、GitHub 敏感文件排除和 HTTPS remote。
+  - release 签名私钥由开发者本机保管，不上传仓库。
+
+效果评价：
+
+- 效率提升：
+  - AI 能快速把评分点转化为模块清单、测试清单和文档结构。
+  - 对蓝牙消息协议、AI 策略、UML 类关系梳理帮助明显。
+- 质量提升：
+  - AI 辅助发现了旧文档和当前代码不一致的问题。
+  - AI 辅助补齐了蓝牙模拟测试、玩家成长测试、无可压牌提示和金币消费确认说明。
+- 局限性：
+  - AI 不能替代真实蓝牙多机测试。
+  - AI 生成的规则说明必须由开发者按老师要求确认。
+  - AI 生成的 UML 和文档必须跟最终代码逐项核对。
+- 最终确认：
+  - 当前项目的代码、测试、UML、release 包和文档均由开发者在本机项目中检查。
+  - AI 是辅助工具，不是项目运行结果和答辩材料的最终责任主体。
 
 ## 2. 目录结构
 
@@ -352,6 +824,8 @@ View 层在 `view/ChudadiApp.kt` 中实现，主要职责是展示状态、播�
 - `resetStats`：消耗 2500 金币清空战绩与历史，保留金币、经验、等级、头像、成就。
 - `normalizedUnlockedAvatars`：兼容旧数据，确保免费头像和当前头像始终可用。
 
+UI 中的改名、头像解锁、自定义头像和战绩重置不会直接扣费，而是先进入 `ConfirmProfileSpendDialog` 二次确认；确认后才调用 `ProfileController`，结果通过 `ProfileActionResultDialog` 弹窗反馈，用户名下方不再显示临时操作提示。
+
 ### 5.3 本地存储
 
 `ProfileStore.kt`：
@@ -468,7 +942,7 @@ Kotlin `object` 用于无状态工具和目录：
 
 ## 8. UML 图对应说明
 
-UML 文件位于 `docs/uml/`，PlantUML 源文件和导出的 PNG 同时保留，另外有 ProcessOn UML 画板截图用于展示建模过程。
+UML 文件位于 `docs/uml/`。开发者先用 PlantUML 代码描述 7 类图，再将 PlantUML 图内容导入或参照迁移到 ProcessOn UML 中完成正式绘制；项目内同时保留 `.puml` 源文件、导出的 PNG 和 ProcessOn UML 画板截图用于展示建模过程。
 
 ### 8.1 用例图 `use_case.puml`
 
@@ -741,6 +1215,14 @@ release/chudadi-v1.3-release.aab
 - 应用图标：FreeIcons `Cards`，Public Domain / CC0。
 - 背景音乐：用户提供本地 OGG，项目内使用 0:00-1:33 片段循环。
 - 权限：蓝牙、附近设备、定位兼容旧系统、震动。
+
+GitHub 与开源许可检查：
+
+- 当前远程地址：`https://github.com/Mojieeee/uml_chudadi.git`。
+- 当前项目未在根目录加入 `LICENSE` 文件；如果需要公开开源，建议补充 MIT 或 Apache-2.0 许可证。
+- 代码仓库不应包含 `keystore.properties`、`.jks`、`local.properties`、`.gradle/`、`.kotlin/`、`build/`。
+- release 证书为自签名证书，所有者和发布者均为 `CN=Chudadi, OU=Game, O=Chudadi, L=Guangzhou, ST=Guangdong, C=CN`。
+- 后续 release 升级必须继续使用同一 `keystore/chudadi-release.jks` 和别名 `chudadi`。
 
 ## 12. 当前实现亮点
 
