@@ -602,14 +602,21 @@ AI 模块通过 `AiStrategy` 接口统一出牌决策入口。`GameController` �
 
 三档难度并不是三套彼此独立的旧规则策略，而是同一个神经网络模型的三种 profile。困难档 `NeuralAiProfile.Hard` 使用完整模型分数，`scoreNoise = 0.0`；普通档加入较小确定性扰动，`scoreNoise = 0.8`；简单档加入较大确定性扰动，`scoreNoise = 3.0`。扰动由当前局面和候选牌计算哈希得到，不依赖随机线程，因此同一状态下决策稳定，既能形成难度梯度，又不会破坏测试可复现性。
 
-参考来源方面，项目借鉴 RLCard/OpenSpiel 的“游戏状态 + 合法动作集合 + Agent 策略接口”组织方式，结合 DouZero 自对弈和 ISMCTS 局面评估思想，自建适合 Android 端运行的轻量 MLP；实现上不直接接入这些框架代码或预训练模型，而是保留 Kotlin 端侧推理和可复现 benchmark。
+本项目在设计神经网络 AI 时参考了若干棋牌博弈 AI 资料。参考的重点不是直接复用框架代码，而是吸收其对“牌局状态、合法动作集合、Agent/策略接口、自对弈样本、不完全信息评估”的组织方式，并结合 Android 端运行条件自建轻量 MLP。
+
+| 参考资料 | 资料信息 | 主要借鉴点 | 项目内落地方式 |
+| --- | --- | --- | --- |
+| RLCard | 面向纸牌游戏的强化学习工具包，支持 Blackjack、Leduc Hold'em、Texas Hold'em、UNO、Dou Dizhu、Mahjong 等环境；GitHub：`https://github.com/datamllab/rlcard`；论文：`https://arxiv.org/abs/1910.04376` | “游戏环境 + 合法动作集合 + Agent 策略接口”的组织方式 | AI 不直接生成牌，先由 `GameController.legalPlays()` 取得合法候选动作，再由 `AiStrategy.chooseMove()` 选择动作 |
+| OpenSpiel | Google DeepMind 开源的多智能体博弈研究框架，覆盖回合制/同步行动、完美/不完美信息、搜索和强化学习算法；GitHub：`https://github.com/google-deepmind/open_spiel` | 将游戏状态、当前玩家、合法动作、策略/Agent 解耦，便于多种算法共用同一游戏建模 | 项目中 `GameState`、`Move`、`AiStrategy` 和 `RuleSet` 分离，控制器只调用接口，不绑定某个具体 AI 实现 |
+| ISMCTS | Cowling、Powley、Whitehouse 关于 Information Set Monte Carlo Tree Search 的论文，研究隐藏信息和不确定性游戏中的搜索评估；论文页面：`https://pure.york.ac.uk/portal/en/publications/information-set-monte-carlo-tree-search/` | 不完全信息博弈中不能直接看见对手手牌，需要基于可见信息评估候选动作 | 特征设计中加入对手最少/最多手牌数、残局压力、是否正在压牌、是否回应强牌等可见局势信息，避免依赖不可见手牌 |
+| DouZero | 快手开源的斗地主 AI，论文题目为 “DouZero: Mastering DouDizhu with Self-Play Deep Reinforcement Learning”；GitHub：`https://github.com/kwai/DouZero`；论文：`https://arxiv.org/abs/2106.06135` | 自对弈样本、出牌类游戏的大动作空间处理、候选动作编码与评估思想 | `tools/train_neural_ai.py` 使用 32 局自对弈生成 4427 条训练样本，并把候选动作编码为 23 维特征后交给 MLP 评分 |
+
+因此，报告中“参考 RLCard/OpenSpiel/DouZero/ISMCTS”表示项目在建模思想和训练样本组织方式上借鉴这些资料；实际训练和部署仍然采用本项目自写的 `tools/train_neural_ai.py` 训练脚本、Kotlin `NeuralMoveModel` 权重数组和 Android 端本地推理。
 
 
 当前 benchmark 由 `tools/benchmark_neural_ai.py` 读取 Kotlin 生产权重后评估，避免只评估训练脚本内存模型。512 局对三名简单基线的评估结果为：简单档 `168/512`，胜率 `0.328125`；普通档 `189/512`，胜率 `0.369141`；困难档 `204/512`，胜率 `0.398438`；困难档完局率 `1.000000`。教师策略一致性评估中，300 个状态精确一致率为 `0.923333`，Top 3 一致率为 `0.996667`。
 
 为了防止报告、训练产物和 Kotlin 权重不一致，项目增加 `tools/verify_neural_ai_artifacts.py`。该脚本同时读取 `NeuralAiStrategy.kt`、`docs/ai/neural_ai_training_manifest.json` 和 `docs/ai/neural_ai_benchmark_report.json`，校验模型版本、权重 checksum、训练 seed、特征数、隐藏层规模、参数量、自对弈局数和 benchmark 阈值。当前 `artifact_check=passed`。
-
-参考资料仍包括 RLCard、OpenSpiel、ISMCTS 和 DouZero，但本项目没有直接接入这些框架的代码或预训练模型，而是借鉴“游戏状态 + 合法动作集合 + Agent/策略接口 + 自对弈样本”的组织方式，自建适合 Android 端运行的小模型。这样既满足课程对 AI 和建模说明的要求，又控制了移动端模型体积和推理成本。
 
 核心 Kotlin 接入片段如下：
 

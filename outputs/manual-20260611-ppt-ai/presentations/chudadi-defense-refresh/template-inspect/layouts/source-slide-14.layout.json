@@ -1,0 +1,4445 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/25kb6xkf",
+    "id": "25kb6xkf",
+    "slide": 15,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "fontScheme": {
+      "name": "Office",
+      "majorFont": {
+        "latinTypeface": "Calibri Light",
+        "eastAsianTypeface": "Calibri Light",
+        "complexScriptTypeface": "Calibri Light"
+      },
+      "minorFont": {
+        "latinTypeface": "Calibri",
+        "eastAsianTypeface": "Calibri",
+        "complexScriptTypeface": "Calibri"
+      }
+    },
+    "typefaces": [
+      "Calibri",
+      "Calibri Light",
+      "PingFang SC"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/crmhk3q5",
+      "id": "66",
+      "name": "矩形 65",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7F3E8",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kre1w7mp",
+      "id": "2",
+      "name": "矩形 1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        64
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#0F3F32",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dcbulwva",
+      "id": "3",
+      "name": "矩形 2",
+      "bbox": [
+        38,
+        16,
+        360,
+        28
+      ],
+      "geometry": "rect",
+      "text": "锄大地 Android 棋牌游戏",
+      "textPreview": "锄大地 Android 棋牌游戏",
+      "resolvedFontSize": 22.32,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.93,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "锄大地 Android 棋牌游戏"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "锄大地 Android 棋牌游戏",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "typeface": "PingFang SC",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "锄大地 Android 棋牌游戏",
+              "fontSize": 16,
+              "typeface": "PingFang SC",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2x4nap4r",
+      "id": "4",
+      "name": "矩形 3",
+      "bbox": [
+        760,
+        16,
+        420,
+        28
+      ],
+      "geometry": "rect",
+      "text": "5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction）",
+      "textPreview": "5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction）",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction）"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction）",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "PingFang SC",
+            "color": "#E8D08A",
+            "bold": true,
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction）",
+              "fontSize": 12,
+              "typeface": "PingFang SC",
+              "color": "#E8D08A",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vixczed8",
+      "id": "5",
+      "name": "矩形 4",
+      "bbox": [
+        1190,
+        674,
+        42,
+        22
+      ],
+      "geometry": "rect",
+      "text": "31",
+      "textPreview": "31",
+      "resolvedFontSize": 22.73,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.95,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "31"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "31",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 11,
+            "typeface": "PingFang SC",
+            "color": "#5B6D63",
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "31",
+              "fontSize": 11,
+              "typeface": "PingFang SC",
+              "color": "#5B6D63"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/k3q5o7qp",
+      "id": "6",
+      "name": "矩形 5",
+      "bbox": [
+        54,
+        82,
+        280,
+        22
+      ],
+      "geometry": "rect",
+      "text": "REPORT BLOCK",
+      "textPreview": "REPORT BLOCK",
+      "resolvedFontSize": 22.63,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.94,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "REPORT BLOCK"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "REPORT BLOCK",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "PingFang SC",
+            "color": "#D8A43A",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "REPORT BLOCK",
+              "fontSize": 12,
+              "typeface": "PingFang SC",
+              "color": "#D8A43A",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/donyd0z6",
+      "id": "7",
+      "name": "矩形 6",
+      "bbox": [
+        54,
+        106,
+        1125,
+        58
+      ],
+      "geometry": "rect",
+      "text": "4.3 MVC 分层设计",
+      "textPreview": "4.3 MVC 分层设计",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "4.3 MVC 分层设计"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "4.3 MVC 分层设计",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 29,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "4",
+              "fontSize": 29,
+              "typeface": "PingFang SC",
+              "color": "#17211D",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": ".3 MVC ",
+              "fontSize": 29,
+              "typeface": "PingFang SC",
+              "color": "#17211D",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "分层设计",
+              "fontSize": 29,
+              "typeface": "PingFang SC",
+              "color": "#17211D",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/29gr2p8n",
+      "id": "8",
+      "name": "矩形 7",
+      "bbox": [
+        54,
+        174,
+        1120,
+        1
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#D9DFD2",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vu9knih4",
+      "id": "9",
+      "name": "矩形 8",
+      "bbox": [
+        62,
+        200,
+        455,
+        424
+      ],
+      "geometry": "rect",
+      "text": "• 项目采用 MVC 思想组织代码：\n\n1. Model 层负责领域数据和规则，包括 Card、Deck、HandType、RuleSet、GameState、Player、RoomSeat、GameSnapshot 和 PlayerProfile。\n2. Controller 层负责业务逻辑，包括 GameController、PlayerActionPolicy、RoomController、NetworkMoveGuard 和 ProfileController。\n3. View 层使用 Jetpack Compose 实现界面展示，包括开屏、大厅、规则设置、人机难度选择、蓝牙房间、牌桌、结算和玩家中心。\n\n• 这种分层让 UI 不直接处理复杂规则，让规则、AI、蓝牙和测试能够独立演进。\n\n• 更细的实现边界如下：\n\n• 例如玩家点击 出牌 时，View 层只收集选中的 Card；PlayerActionPolicy 判断按钮是否可用；GameController 调用 RuleSet 校验是否合法；成功后生成新的 GameState；如果是蓝牙对局，房主再通过 GameSnapshot 广播给客户端。这个流程体现了 MVC 的分层和顺序图中的调用链。",
+      "textPreview": "• 项目采用 MVC 思想组织代码： |  | 1. Model 层负责领域数据和规则，包括 Card、Deck、HandType、RuleSet、GameState、Player、RoomSeat、GameSnapshot 和 PlayerProfile。 | 2. Co...",
+      "resolvedFontSize": 20.71,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.86,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 22,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• 项目采用 MVC 思想组织代码："
+          },
+          {
+            "index": 2,
+            "text": ""
+          },
+          {
+            "index": 3,
+            "text": "1. Model 层负责领域数据和规则，包括"
+          },
+          {
+            "index": 4,
+            "text": "Card、Deck、HandType、RuleSet、GameState、Player、RoomSea"
+          },
+          {
+            "index": 5,
+            "text": "t、GameSnapshot 和 PlayerProfile。"
+          },
+          {
+            "index": 6,
+            "text": "2. Controller 层负责业务逻辑，包括"
+          },
+          {
+            "index": 7,
+            "text": "GameController、PlayerActionPolicy、RoomController、NetworkM"
+          },
+          {
+            "index": 8,
+            "text": "oveGuard 和 ProfileController。"
+          },
+          {
+            "index": 9,
+            "text": "3. View 层使用 Jetpack Compose"
+          },
+          {
+            "index": 10,
+            "text": "实现界面展示，包括开屏、大厅、规则设置、人机难度选择、蓝牙房间"
+          },
+          {
+            "index": 11,
+            "text": "、牌桌、结算和玩家中心。"
+          },
+          {
+            "index": 12,
+            "text": ""
+          },
+          {
+            "index": 13,
+            "text": "• 这种分层让 UI"
+          },
+          {
+            "index": 14,
+            "text": "不直接处理复杂规则，让规则、AI、蓝牙和测试能够独立演进。"
+          },
+          {
+            "index": 15,
+            "text": ""
+          },
+          {
+            "index": 16,
+            "text": "• 更细的实现边界如下："
+          },
+          {
+            "index": 17,
+            "text": ""
+          },
+          {
+            "index": 18,
+            "text": "• 例如玩家点击 出牌 时，View 层只收集选中的"
+          },
+          {
+            "index": 19,
+            "text": "Card；PlayerActionPolicy 判断按钮是否可用；GameController 调用"
+          },
+          {
+            "index": 20,
+            "text": "RuleSet 校验是否合法；成功后生成新的"
+          },
+          {
+            "index": 21,
+            "text": "GameState；如果是蓝牙对局，房主再通过 GameSnapshot"
+          },
+          {
+            "index": 22,
+            "text": "广播给客户端。这个流程体现了 MVC 的分层和顺序图中的调用链。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• 项目采用 MVC 思想组织代码：",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 16.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "项目采用",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " MVC ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "思想组织代码",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": "：",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "1. Model 层负责领域数据和规则，包括 Card、Deck、HandType、RuleSet、GameState、Player、RoomSeat、GameSnapshot 和 PlayerProfile。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 16.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "1. Model ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "层负责领域数据和规则，包括",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " Card、Deck、HandType、RuleSet、GameState、Player、RoomSeat、GameSnapshot ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "和",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": " ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 6,
+              "text": "PlayerProfile",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 7,
+              "text": "。",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "2. Controller 层负责业务逻辑，包括 GameController、PlayerActionPolicy、RoomController、NetworkMoveGuard 和 ProfileController。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 16.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "2. Controller ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "层负责业务逻辑，包括",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " GameController、PlayerActionPolicy、RoomController、NetworkMoveGuard ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "和",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": " ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 6,
+              "text": "ProfileController",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 7,
+              "text": "。",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "3. View 层使用 Jetpack Compose 实现界面展示，包括开屏、大厅、规则设置、人机难度选择、蓝牙房间、牌桌、结算和玩家中心。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 16.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "3. View ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "层使用",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " Jetpack Compose ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "实现界面展示，包括开屏、大厅、规则设置、人机难度选择、蓝牙房间、牌桌、结算和玩家中心",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": "。",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 7,
+          "text": "• 这种分层让 UI 不直接处理复杂规则，让规则、AI、蓝牙和测试能够独立演进。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 16.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "这种分层让",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " UI ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "不直接处理复杂规则，让规则、AI、蓝牙和测试能够独立演进",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": "。",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 9,
+          "text": "• 更细的实现边界如下：",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 16.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "更细的实现边界如下",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": "：",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 11,
+          "text": "• 例如玩家点击 出牌 时，View 层只收集选中的 Card；PlayerActionPolicy 判断按钮是否可用；GameController 调用 RuleSet 校验是否合法；成功后生成新的 GameState；如果是蓝牙对局，房主再通过 GameSnapshot 广播给客户端。这个流程体现了 MVC 的分层和顺序图中的调用链。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 16.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "例如玩家点击",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "出牌",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": " ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 6,
+              "text": "时，View",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 7,
+              "text": " ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 8,
+              "text": "层只收集选中的",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 9,
+              "text": " ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 10,
+              "text": "Card；PlayerActionPolicy",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 11,
+              "text": " ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 12,
+              "text": "判断",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 13,
+              "text": "按钮",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 14,
+              "text": "是否",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 15,
+              "text": "可用",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 16,
+              "text": "；",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 17,
+              "text": "GameController",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 18,
+              "text": " ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 19,
+              "text": "调用",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 20,
+              "text": " ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 21,
+              "text": "RuleSet",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 22,
+              "text": " ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 23,
+              "text": "校验是否合法；成功后生成新的",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 24,
+              "text": " ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 25,
+              "text": "GameState；如果是蓝牙对局，房主再通过",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 26,
+              "text": " ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 27,
+              "text": "GameSnapshot",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 28,
+              "text": " ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 29,
+              "text": "广播给客户端。这个流程体现了",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 30,
+              "text": " MVC ",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 31,
+              "text": "的分层和顺序图中的调用链",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 32,
+              "text": "。",
+              "fontSize": 16.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ylc7u54",
+      "id": "10",
+      "name": "矩形 9",
+      "bbox": [
+        545,
+        200,
+        158.98,
+        42
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#0F3F32",
+      "lineColor": "#FFFFFF",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/adsji5sn",
+      "id": "11",
+      "name": "矩形 10",
+      "bbox": [
+        550,
+        204,
+        148.98,
+        34
+      ],
+      "geometry": "rect",
+      "text": "层次",
+      "textPreview": "层次",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "层次"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "层次",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "typeface": "PingFang SC",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "层次",
+              "fontSize": 10.51,
+              "typeface": "PingFang SC",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h4byhgn2",
+      "id": "12",
+      "name": "矩形 11",
+      "bbox": [
+        703.98,
+        200,
+        170.34,
+        42
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#0F3F32",
+      "lineColor": "#FFFFFF",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sji5snel",
+      "id": "13",
+      "name": "矩形 12",
+      "bbox": [
+        708.98,
+        204,
+        160.34,
+        34
+      ],
+      "geometry": "rect",
+      "text": "代码位置",
+      "textPreview": "代码位置",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "代码位置"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "代码位置",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "typeface": "PingFang SC",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "代码位置",
+              "fontSize": 10.51,
+              "typeface": "PingFang SC",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3m94fu18",
+      "id": "14",
+      "name": "矩形 13",
+      "bbox": [
+        874.32,
+        200,
+        170.34,
+        42
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#0F3F32",
+      "lineColor": "#FFFFFF",
+      "lineWidth": 1
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a5gbq1or",
+      "id": "15",
+      "name": "矩形 14",
+      "bbox": [
+        879.32,
+        204,
+        160.34,
+        34
+      ],
+      "geometry": "rect",
+      "text": "主要类",
+      "textPreview": "主要类",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "主要类"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "主要类",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "typeface": "PingFang SC",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "主要类",
+              "fontSize": 10.51,
+              "typeface": "PingFang SC",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lszqtcj6",
+      "id": "16",
+      "name": "矩形 15",
+      "bbox": [
+        1044.66,
+        200,
+        170.34,
+        42
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#0F3F32",
+      "lineColor": "#FFFFFF",
+      "lineWidth": 1
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s72x4nap",
+      "id": "17",
+      "name": "矩形 16",
+      "bbox": [
+        1049.66,
+        204,
+        160.34,
+        34
+      ],
+      "geometry": "rect",
+      "text": "具体职责",
+      "textPreview": "具体职责",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "具体职责"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "具体职责",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 10.51,
+            "typeface": "PingFang SC",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "具体职责",
+              "fontSize": 10.51,
+              "typeface": "PingFang SC",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zidonyd0",
+      "id": "18",
+      "name": "矩形 17",
+      "bbox": [
+        545,
+        242,
+        158.98,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a1gvy90j",
+      "id": "19",
+      "name": "矩形 18",
+      "bbox": [
+        550,
+        245,
+        148.98,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "Model",
+      "textPreview": "Model",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Model"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Model",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Model",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ylc7u54z",
+      "id": "20",
+      "name": "矩形 19",
+      "bbox": [
+        703.98,
+        242,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r65wjudg",
+      "id": "21",
+      "name": "矩形 20",
+      "bbox": [
+        708.98,
+        245,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "app/src/main/java/com/example/uml_chudadi/model",
+      "textPreview": "app/src/main/java/com/example/uml_chudadi/model",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "app/src/main/java/com/example"
+          },
+          {
+            "index": 2,
+            "text": "/uml_chudadi/model"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "app/src/main/java/com/example/uml_chudadi/model",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "app/src/main/java/com/example/uml_chudadi/model",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gr2p8nqx",
+      "id": "22",
+      "name": "矩形 21",
+      "bbox": [
+        874.32,
+        242,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9cvixcze",
+      "id": "23",
+      "name": "矩形 22",
+      "bbox": [
+        879.32,
+        245,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "Card、Deck、HandType、GameState、RuleSet、Player",
+      "textPreview": "Card、Deck、HandType、GameState、RuleSet、Player",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Card、Deck、HandType、GameSt"
+          },
+          {
+            "index": 2,
+            "text": "ate、RuleSet、Player"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Card、Deck、HandType、GameState、RuleSet、Player",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Card、Deck、HandType、GameState、RuleSet、Player",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yxobm58z",
+      "id": "24",
+      "name": "矩形 23",
+      "bbox": [
+        1044.66,
+        242,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nih4byhg",
+      "id": "25",
+      "name": "矩形 24",
+      "bbox": [
+        1049.66,
+        245,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "表示牌、牌型、玩家、规则和牌局状态，不依赖 Android UI",
+      "textPreview": "表示牌、牌型、玩家、规则和牌局状态，不依赖 Android UI",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "表示牌、牌型、玩家、规则和牌局状"
+          },
+          {
+            "index": 2,
+            "text": "态，不依赖 Android UI"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "表示牌、牌型、玩家、规则和牌局状态，不依赖 Android UI",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "表示牌、牌型、玩家、规则和牌局状态，不依赖 Android UI",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g3ex0nux",
+      "id": "26",
+      "name": "矩形 25",
+      "bbox": [
+        545,
+        305.67,
+        158.98,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7FAF4",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5o7qpg3e",
+      "id": "27",
+      "name": "矩形 26",
+      "bbox": [
+        550,
+        308.67,
+        148.98,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "Controller",
+      "textPreview": "Controller",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Controller"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Controller",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Controller",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y1kre1w7",
+      "id": "28",
+      "name": "矩形 27",
+      "bbox": [
+        703.98,
+        305.67,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7FAF4",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rmhk3q5o",
+      "id": "29",
+      "name": "矩形 28",
+      "bbox": [
+        708.98,
+        308.67,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "app/src/main/java/com/example/uml_chudadi/controller",
+      "textPreview": "app/src/main/java/com/example/uml_chudadi/controller",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "app/src/main/java/com/example"
+          },
+          {
+            "index": 2,
+            "text": "/uml_chudadi/controller"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "app/src/main/java/com/example/uml_chudadi/controller",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "app/src/main/java/com/example/uml_chudadi/controller",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dsji5sne",
+      "id": "30",
+      "name": "矩形 29",
+      "bbox": [
+        874.32,
+        305.67,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7FAF4",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o7qpg3ex",
+      "id": "31",
+      "name": "矩形 30",
+      "bbox": [
+        879.32,
+        308.67,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "GameController、AiStrategy、PlayerActionPolicy、NetworkMoveGuard",
+      "textPreview": "GameController、AiStrategy、PlayerActionPolicy、NetworkMoveGuard",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "GameController、AiStrategy、Pla"
+          },
+          {
+            "index": 2,
+            "text": "yerActionPolicy、NetworkMoveGu"
+          },
+          {
+            "index": 3,
+            "text": "ard"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "GameController、AiStrategy、PlayerActionPolicy、NetworkMoveGuard",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "GameController、AiStrategy、PlayerActionPolicy、NetworkMoveGuard",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 32,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vmtwra5g",
+      "id": "32",
+      "name": "矩形 31",
+      "bbox": [
+        1044.66,
+        305.67,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7FAF4",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/61032lsz",
+      "id": "33",
+      "name": "矩形 32",
+      "bbox": [
+        1049.66,
+        308.67,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "处理发牌、出牌、过牌、AI 决策、按钮可用性和网络请求校验",
+      "textPreview": "处理发牌、出牌、过牌、AI 决策、按钮可用性和网络请求校验",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "处理发牌、出牌、过牌、AI"
+          },
+          {
+            "index": 2,
+            "text": "决策、按钮可用性和网络请求校验"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "处理发牌、出牌、过牌、AI 决策、按钮可用性和网络请求校验",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "处理发牌、出牌、过牌、AI 决策、按钮可用性和网络请求校验",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 34,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d4vmtwra",
+      "id": "34",
+      "name": "矩形 33",
+      "bbox": [
+        545,
+        369.33,
+        158.98,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 35,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/oj2t83it",
+      "id": "35",
+      "name": "矩形 34",
+      "bbox": [
+        550,
+        372.33,
+        148.98,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "Transport",
+      "textPreview": "Transport",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Transport"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Transport",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Transport",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 36,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vy90je9c",
+      "id": "36",
+      "name": "矩形 35",
+      "bbox": [
+        703.98,
+        369.33,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 37,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6dcbulwv",
+      "id": "37",
+      "name": "矩形 36",
+      "bbox": [
+        708.98,
+        372.33,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "app/src/main/java/com/example/uml_chudadi/transport",
+      "textPreview": "app/src/main/java/com/example/uml_chudadi/transport",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "app/src/main/java/com/example"
+          },
+          {
+            "index": 2,
+            "text": "/uml_chudadi/transport"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "app/src/main/java/com/example/uml_chudadi/transport",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "app/src/main/java/com/example/uml_chudadi/transport",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 38,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8v6psfi",
+      "id": "38",
+      "name": "矩形 37",
+      "bbox": [
+        874.32,
+        369.33,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 39,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/onyd0z61",
+      "id": "39",
+      "name": "矩形 38",
+      "bbox": [
+        879.32,
+        372.33,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "GameTransport、BluetoothHostTransport、BluetoothClientTransport、GameMessageCodec",
+      "textPreview": "GameTransport、BluetoothHostTransport、BluetoothClientTransport、GameMessageCodec",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitLineSpaceReduction": 10000,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "GameTransport、BluetoothHostTr"
+          },
+          {
+            "index": 2,
+            "text": "ansport、BluetoothClientTranspor"
+          },
+          {
+            "index": 3,
+            "text": "t、GameMessageCodec"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "GameTransport、BluetoothHostTransport、BluetoothClientTransport、GameMessageCodec",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "GameTransport、BluetoothHostTransport、BluetoothClientTransport、GameMessageCodec",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 40,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/szqtcj6t",
+      "id": "40",
+      "name": "矩形 39",
+      "bbox": [
+        1044.66,
+        369.33,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 41,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lkjm1cfa",
+      "id": "41",
+      "name": "矩形 40",
+      "bbox": [
+        1049.66,
+        372.33,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "隔离蓝牙 socket、消息编解码、快照同步和房间座位",
+      "textPreview": "隔离蓝牙 socket、消息编解码、快照同步和房间座位",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "隔离蓝牙"
+          },
+          {
+            "index": 2,
+            "text": "socket、消息编解码、快照同步和"
+          },
+          {
+            "index": 3,
+            "text": "房间座位"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "隔离蓝牙 socket、消息编解码、快照同步和房间座位",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "隔离蓝牙 socket、消息编解码、快照同步和房间座位",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 42,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/at47y1kr",
+      "id": "42",
+      "name": "矩形 41",
+      "bbox": [
+        545,
+        433,
+        158.98,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7FAF4",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 43,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ex0nuxc",
+      "id": "43",
+      "name": "矩形 42",
+      "bbox": [
+        550,
+        436,
+        148.98,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "Profile",
+      "textPreview": "Profile",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Profile"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Profile",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Profile",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 44,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sneloj2t",
+      "id": "44",
+      "name": "矩形 43",
+      "bbox": [
+        703.98,
+        433,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7FAF4",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 45,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l87ed8ba",
+      "id": "45",
+      "name": "矩形 44",
+      "bbox": [
+        708.98,
+        436,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "app/src/main/java/com/example/uml_chudadi/profile",
+      "textPreview": "app/src/main/java/com/example/uml_chudadi/profile",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "app/src/main/java/com/example"
+          },
+          {
+            "index": 2,
+            "text": "/uml_chudadi/profile"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "app/src/main/java/com/example/uml_chudadi/profile",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "app/src/main/java/com/example/uml_chudadi/profile",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 46,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ahoza1gv",
+      "id": "46",
+      "name": "矩形 45",
+      "bbox": [
+        874.32,
+        433,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7FAF4",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 47,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/32lszqtc",
+      "id": "47",
+      "name": "矩形 46",
+      "bbox": [
+        879.32,
+        436,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "PlayerProfile、ProfileController、ProfileStore",
+      "textPreview": "PlayerProfile、ProfileController、ProfileStore",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PlayerProfile、ProfileController、"
+          },
+          {
+            "index": 2,
+            "text": "ProfileStore"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PlayerProfile、ProfileController、ProfileStore",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PlayerProfile、ProfileController、ProfileStore",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 48,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "48",
+      "name": "矩形 47",
+      "bbox": [
+        1044.66,
+        433,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7FAF4",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 49,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwval87e",
+      "id": "49",
+      "name": "矩形 48",
+      "bbox": [
+        1049.66,
+        436,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "处理等级、金币、头像、战绩、成就、每日奖励和本地保存",
+      "textPreview": "处理等级、金币、头像、战绩、成就、每日奖励和本地保存",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "处理等级、金币、头像、战绩、成就"
+          },
+          {
+            "index": 2,
+            "text": "、每日奖励和本地保存"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "处理等级、金币、头像、战绩、成就、每日奖励和本地保存",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "处理等级、金币、头像、战绩、成就、每日奖励和本地保存",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 50,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bq1oryts",
+      "id": "50",
+      "name": "矩形 49",
+      "bbox": [
+        545,
+        496.67,
+        158.98,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 51,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m58z25kb",
+      "id": "51",
+      "name": "矩形 50",
+      "bbox": [
+        550,
+        499.67,
+        148.98,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "View",
+      "textPreview": "View",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "View"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "View",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "View",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 52,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/twra5gbq",
+      "id": "52",
+      "name": "矩形 51",
+      "bbox": [
+        703.98,
+        496.67,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 53,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4byhgn29",
+      "id": "53",
+      "name": "矩形 52",
+      "bbox": [
+        708.98,
+        499.67,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "app/src/main/java/com/example/uml_chudadi/view",
+      "textPreview": "app/src/main/java/com/example/uml_chudadi/view",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "app/src/main/java/com/example"
+          },
+          {
+            "index": 2,
+            "text": "/uml_chudadi/view"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "app/src/main/java/com/example/uml_chudadi/view",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "app/src/main/java/com/example/uml_chudadi/view",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 54,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b2hwfyxo",
+      "id": "54",
+      "name": "矩形 53",
+      "bbox": [
+        874.32,
+        496.67,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 55,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mhk3q5o7",
+      "id": "55",
+      "name": "矩形 54",
+      "bbox": [
+        879.32,
+        499.67,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "ChudadiApp、SplashScreen、LobbyScreen、GameScreen",
+      "textPreview": "ChudadiApp、SplashScreen、LobbyScreen、GameScreen",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ChudadiApp、SplashScreen、Lob"
+          },
+          {
+            "index": 2,
+            "text": "byScreen、GameScreen"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ChudadiApp、SplashScreen、LobbyScreen、GameScreen",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ChudadiApp、SplashScreen、LobbyScreen、GameScreen",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 56,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/t83itgfm",
+      "id": "56",
+      "name": "矩形 55",
+      "bbox": [
+        1044.66,
+        496.67,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 57,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4nap4r65",
+      "id": "57",
+      "name": "矩形 56",
+      "bbox": [
+        1049.66,
+        499.67,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "负责 Compose 页面、动画、弹窗和用户交互",
+      "textPreview": "负责 Compose 页面、动画、弹窗和用户交互",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "负责 Compose"
+          },
+          {
+            "index": 2,
+            "text": "页面、动画、弹窗和用户交互"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "负责 Compose 页面、动画、弹窗和用户交互",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "负责 Compose 页面、动画、弹窗和用户交互",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 58,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bat47y1k",
+      "id": "58",
+      "name": "矩形 57",
+      "bbox": [
+        545,
+        560.33,
+        158.98,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7FAF4",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 59,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mp0bi9s3",
+      "id": "59",
+      "name": "矩形 58",
+      "bbox": [
+        550,
+        563.33,
+        148.98,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "Audio",
+      "textPreview": "Audio",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Audio"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Audio",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Audio",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 60,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/uxc3ylc7",
+      "id": "60",
+      "name": "矩形 59",
+      "bbox": [
+        703.98,
+        560.33,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7FAF4",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 61,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ji5snelo",
+      "id": "61",
+      "name": "矩形 60",
+      "bbox": [
+        708.98,
+        563.33,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "app/src/main/java/com/example/uml_chudadi/audio",
+      "textPreview": "app/src/main/java/com/example/uml_chudadi/audio",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "app/src/main/java/com/example"
+          },
+          {
+            "index": 2,
+            "text": "/uml_chudadi/audio"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "app/src/main/java/com/example/uml_chudadi/audio",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "app/src/main/java/com/example/uml_chudadi/audio",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 62,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c3ylc7u5",
+      "id": "62",
+      "name": "矩形 61",
+      "bbox": [
+        874.32,
+        560.33,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7FAF4",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 63,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1kre1w7m",
+      "id": "63",
+      "name": "矩形 62",
+      "bbox": [
+        879.32,
+        563.33,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "CardRoomMusicPlayer、GameSoundEffects",
+      "textPreview": "CardRoomMusicPlayer、GameSoundEffects",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CardRoomMusicPlayer、GameSo"
+          },
+          {
+            "index": 2,
+            "text": "undEffects"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CardRoomMusicPlayer、GameSoundEffects",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "CardRoomMusicPlayer、GameSoundEffects",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 64,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ulwval87",
+      "id": "64",
+      "name": "矩形 63",
+      "bbox": [
+        1044.66,
+        560.33,
+        170.34,
+        63.67
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7FAF4",
+      "lineColor": "#D9DFD2",
+      "lineWidth": 1
+    },
+    {
+      "order": 65,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cfa9w3m",
+      "id": "67",
+      "name": "矩形 66",
+      "bbox": [
+        48,
+        117.33,
+        6,
+        61.33
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F4B740",
+      "lineWidth": 2
+    },
+    {
+      "order": 66,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qh0fepkz",
+      "id": "68",
+      "name": "矩形 67",
+      "bbox": [
+        48,
+        686.67,
+        1180,
+        1.6
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#C8D2C7",
+      "lineWidth": 2
+    },
+    {
+      "order": 67,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/j2t83itg",
+      "id": "69",
+      "name": "矩形 68",
+      "bbox": [
+        48,
+        686.67,
+        101.33,
+        3.47
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F4B740",
+      "lineWidth": 2
+    },
+    {
+      "order": 68,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/j6tovaho",
+      "id": "65",
+      "name": "矩形 64",
+      "bbox": [
+        1049.66,
+        563.33,
+        160.34,
+        57.67
+      ],
+      "geometry": "rect",
+      "text": "负责背景音乐、出牌音效和震动反馈",
+      "textPreview": "负责背景音乐、出牌音效和震动反馈",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "负责背景音乐、出牌音效和震动反馈"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "负责背景音乐、出牌音效和震动反馈",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 9.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "负责背景音乐、出牌音效和震动反馈",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

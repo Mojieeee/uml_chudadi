@@ -1,0 +1,1757 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/bq1oryts",
+    "id": "bq1oryts",
+    "slide": 25,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "fontScheme": {
+      "name": "Office",
+      "majorFont": {
+        "latinTypeface": "Calibri Light",
+        "eastAsianTypeface": "Calibri Light",
+        "complexScriptTypeface": "Calibri Light"
+      },
+      "minorFont": {
+        "latinTypeface": "Calibri",
+        "eastAsianTypeface": "Calibri",
+        "complexScriptTypeface": "Calibri"
+      }
+    },
+    "typefaces": [
+      "Calibri",
+      "Calibri Light",
+      "PingFang SC"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tovahoza",
+      "id": "10",
+      "name": "矩形 9",
+      "bbox": [
+        0,
+        31.73,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7F3E8",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y1kre1w7",
+      "id": "2",
+      "name": "矩形 1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        64
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#0F3F32",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rmhk3q5o",
+      "id": "3",
+      "name": "矩形 2",
+      "bbox": [
+        38,
+        16,
+        360,
+        28
+      ],
+      "geometry": "rect",
+      "text": "锄大地 Android 棋牌游戏",
+      "textPreview": "锄大地 Android 棋牌游戏",
+      "resolvedFontSize": 22.32,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.93,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "锄大地 Android 棋牌游戏"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "锄大地 Android 棋牌游戏",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "typeface": "PingFang SC",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "锄大地 Android 棋牌游戏",
+              "fontSize": 16,
+              "typeface": "PingFang SC",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gfmlkjm1",
+      "id": "4",
+      "name": "矩形 3",
+      "bbox": [
+        760,
+        16,
+        420,
+        28
+      ],
+      "geometry": "rect",
+      "text": "6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction）",
+      "textPreview": "6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction）",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction）"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction）",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "PingFang SC",
+            "color": "#E8D08A",
+            "bold": true,
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction）",
+              "fontSize": 12,
+              "typeface": "PingFang SC",
+              "color": "#E8D08A",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/90je9cvi",
+      "id": "5",
+      "name": "矩形 4",
+      "bbox": [
+        1190,
+        674,
+        42,
+        22
+      ],
+      "geometry": "rect",
+      "text": "46",
+      "textPreview": "46",
+      "resolvedFontSize": 22.73,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.95,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "46"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "46",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 11,
+            "typeface": "PingFang SC",
+            "color": "#5B6D63",
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "46",
+              "fontSize": 11,
+              "typeface": "PingFang SC",
+              "color": "#5B6D63"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yd0z6103",
+      "id": "6",
+      "name": "矩形 5",
+      "bbox": [
+        54,
+        82,
+        280,
+        22
+      ],
+      "geometry": "rect",
+      "text": "REPORT BLOCK",
+      "textPreview": "REPORT BLOCK",
+      "resolvedFontSize": 22.63,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.94,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "REPORT BLOCK"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "REPORT BLOCK",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "PingFang SC",
+            "color": "#D8A43A",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "REPORT BLOCK",
+              "fontSize": 12,
+              "typeface": "PingFang SC",
+              "color": "#D8A43A",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rytsvu9k",
+      "id": "7",
+      "name": "矩形 6",
+      "bbox": [
+        54,
+        106,
+        1125,
+        58
+      ],
+      "geometry": "rect",
+      "text": "5.3 蓝牙通信模块",
+      "textPreview": "5.3 蓝牙通信模块",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "5.3 蓝牙通信模块"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "5.3 蓝牙通信模块",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 29,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "5",
+              "fontSize": 29,
+              "typeface": "PingFang SC",
+              "color": "#17211D",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": ".3 ",
+              "fontSize": 29,
+              "typeface": "PingFang SC",
+              "color": "#17211D",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "蓝牙通信模块",
+              "fontSize": 29,
+              "typeface": "PingFang SC",
+              "color": "#17211D",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gr2p8nqx",
+      "id": "8",
+      "name": "矩形 7",
+      "bbox": [
+        54,
+        174,
+        1120,
+        1
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#D9DFD2",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/032lszqt",
+      "id": "11",
+      "name": "矩形 10",
+      "bbox": [
+        48,
+        117.33,
+        6,
+        61.33
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F4B740",
+      "lineWidth": 2
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bi9s36hc",
+      "id": "12",
+      "name": "矩形 11",
+      "bbox": [
+        48,
+        686.67,
+        1180,
+        1.6
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#C8D2C7",
+      "lineWidth": 2
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ixczed8v",
+      "id": "13",
+      "name": "矩形 12",
+      "bbox": [
+        48,
+        686.67,
+        101.33,
+        3.47
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F4B740",
+      "lineWidth": 2
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9cvixcze",
+      "id": "9",
+      "name": "矩形 8",
+      "bbox": [
+        72,
+        200,
+        1120,
+        424
+      ],
+      "geometry": "rect",
+      "text": "• 多人联机采用房主权威的 C/S 模式，而不是一对一蓝牙匹配。房主手机创建房间并监听连接，加入者手机作为客户端连接房主。房间固定四个座位，房主可以添加人机补位，满四座并准备后开始游戏。使用了适配器模式，GameTransport.kt 抽象传输接口，BluetoothHostTransport、BluetoothClientTransport、LocalRoomTransport 适配不同传输方式，UI 和房间逻辑不用直接依赖 BluetoothSocket，真实蓝牙和本地模拟可以共用一套调用方式。使用了观察者模式，GameTransport.observeEvents(listener) 通过回调监听 TransportEvent.Message、PeerConnected、PeerDisconnected、Error蓝牙连接、断开、消息到达时通知上层界面或房间控制逻辑，体现事件驱动\n\n• 蓝牙通信的核心流程：\n\n1. 房主创建房间，建立 BluetoothHostTransport，持续监听加入者连接。\n2. 加入者搜索附近或已配对设备，并通过 BluetoothClientTransport 连接房主。\n3. 加入者发送 HELLO，其中包含昵称和客户端标识等基础信息。\n4. 房主维护四座位 RoomSeat，记录 SeatConnectionState、clientId、设备地址和是否由 AI 托管。\n5. 房主广播 ROOM(roomId, hostEpoch, seats)，使所有客户端看到一致座位。\n6. 开局时房主生成 seed、同步规则并广播 START 消息。\n7. 客户端只发送 MOVE_REQUEST，不直接修改本地牌局。\n8. 房主使用 NetworkMoveGuard 判断是否为当前玩家的有效请求。\n9. 房主调用 GameController 校验和推进状态。\n10. 房主广播 MOVE_ACCEPTED 和 STATE_SNAPSHOT，所有客户端以房主快照为准刷新牌桌。\n11. 如果客户端断线，传输层发出 TransportEvent.PeerDisconnected，房主把对应座位标记为“断线，人机托管中”，并广播 DISCONNECT_NOTICE。\n12. 当前发布版没有实现自动断线重连；断线客户端需要重新进入蓝牙流程。\n13. 如果房主断线，客户端弹窗提示连接断开，关闭当前传输并退出房间，提示重新创建或重新加入。\n\n• 这种方式可以避免多台手机各自结算导致的状态分叉，也便于测试时用 LocalRoomTransport 和 SimulatedBluetoothHubTest 模拟多人房间。由于房主是权威端，当前版本对房主断线采用保守处理：直接提示并退出，而不尝试新房主迁移，避免恢复过程中出现多端状态不一致。",
+      "textPreview": "• 多人联机采用房主权威的 C/S 模式，而不是一对一蓝牙匹配。房主手机创建房间并监听连接，加入者手机作为客户端连接房主。房间固定四个座位，房主可以添加人机补位，满四座并准备后开始游戏。使用了适配器模式，GameTransport.kt 抽象传输接口，BluetoothHo...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 24,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• 多人联机采用房主权威的 C/S"
+          },
+          {
+            "index": 2,
+            "text": "模式，而不是一对一蓝牙匹配。房主手机创建房间并监听连接，加入者手机作为客户端连接房主。房间固定四个座位，房主可以添加人机补位，满四座并准备后开始游戏。"
+          },
+          {
+            "index": 3,
+            "text": "使用了适配器模式，GameTransport.kt 抽象传输接口，BluetoothHostTransport、BluetoothClientTransport、LocalRoomTransport 适配不同传输方式，UI 和房间逻辑不用直接依赖"
+          },
+          {
+            "index": 4,
+            "text": "BluetoothSocket，真实蓝牙和本地模拟可以共用一套调用方式。使用了观察者模式，GameTransport.observeEvents(listener) 通过回调监听"
+          },
+          {
+            "index": 5,
+            "text": "TransportEvent.Message、PeerConnected、PeerDisconnected、Error蓝牙连接、断开、消息到达时通知上层界面或房间控制逻辑，体现事件驱动"
+          },
+          {
+            "index": 6,
+            "text": ""
+          },
+          {
+            "index": 7,
+            "text": "• 蓝牙通信的核心流程："
+          },
+          {
+            "index": 8,
+            "text": ""
+          },
+          {
+            "index": 9,
+            "text": "1. 房主创建房间，建立 BluetoothHostTransport，持续监听加入者连接。"
+          },
+          {
+            "index": 10,
+            "text": "2. 加入者搜索附近或已配对设备，并通过 BluetoothClientTransport 连接房主。"
+          },
+          {
+            "index": 11,
+            "text": "3. 加入者发送 HELLO，其中包含昵称和客户端标识等基础信息。"
+          },
+          {
+            "index": 12,
+            "text": "4. 房主维护四座位 RoomSeat，记录 SeatConnectionState、clientId、设备地址和是否由 AI 托管。"
+          },
+          {
+            "index": 13,
+            "text": "5. 房主广播 ROOM(roomId, hostEpoch, seats)，使所有客户端看到一致座位。"
+          },
+          {
+            "index": 14,
+            "text": "6. 开局时房主生成 seed、同步规则并广播 START 消息。"
+          },
+          {
+            "index": 15,
+            "text": "7. 客户端只发送 MOVE_REQUEST，不直接修改本地牌局。"
+          },
+          {
+            "index": 16,
+            "text": "8. 房主使用 NetworkMoveGuard 判断是否为当前玩家的有效请求。"
+          },
+          {
+            "index": 17,
+            "text": "9. 房主调用 GameController 校验和推进状态。"
+          },
+          {
+            "index": 18,
+            "text": "10. 房主广播 MOVE_ACCEPTED 和 STATE_SNAPSHOT，所有客户端以房主快照为准刷新牌桌。"
+          },
+          {
+            "index": 19,
+            "text": "11. 如果客户端断线，传输层发出 TransportEvent.PeerDisconnected，房主把对应座位标记为“断线，人机托管中”，并广播 DISCONNECT_NOTICE。"
+          },
+          {
+            "index": 20,
+            "text": "12. 当前发布版没有实现自动断线重连；断线客户端需要重新进入蓝牙流程。"
+          },
+          {
+            "index": 21,
+            "text": "13. 如果房主断线，客户端弹窗提示连接断开，关闭当前传输并退出房间，提示重新创建或重新加入。"
+          },
+          {
+            "index": 22,
+            "text": ""
+          },
+          {
+            "index": 23,
+            "text": "• 这种方式可以避免多台手机各自结算导致的状态分叉，也便于测试时用 LocalRoomTransport 和 SimulatedBluetoothHubTest"
+          },
+          {
+            "index": 24,
+            "text": "模拟多人房间。由于房主是权威端，当前版本对房主断线采用保守处理：直接提示并退出，而不尝试新房主迁移，避免恢复过程中出现多端状态不一致。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• 多人联机采用房主权威的 C/S 模式，而不是一对一蓝牙匹配。房主手机创建房间并监听连接，加入者手机作为客户端连接房主。房间固定四个座位，房主可以添加人机补位，满四座并准备后开始游戏。使用了适配器模式，GameTransport.kt 抽象传输接口，BluetoothHostTransport、BluetoothClientTransport、LocalRoomTransport 适配不同传输方式，UI 和房间逻辑不用直接依赖 BluetoothSocket，真实蓝牙和本地模拟可以共用一套调用方式。使用了观察者模式，GameTransport.observeEvents(listener) 通过回调监听 TransportEvent.Message、PeerConnected、PeerDisconnected、Error蓝牙连接、断开、消息到达时通知上层界面或房间控制逻辑，体现事件驱动",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "多人联机采用房主权威的",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " C/S 模式，而不是一对一蓝牙匹配。房主手机创建房间并监听连接，加入者手机作为客户端连接房主。房间固定四个座位，房主可以添加人机补位，满四座并准备后开始游戏。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "使用了适配器模式，",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": "GameTransport.kt 抽象传输接口，BluetoothHostTransport、BluetoothClientTransport、LocalRoomTransport 适配不同传输方式",
+              "fontSize": 13.51
+            },
+            {
+              "index": 6,
+              "text": "，",
+              "fontSize": 13.51
+            },
+            {
+              "index": 7,
+              "text": "UI 和房间逻辑不用直接依赖 BluetoothSocket，真实蓝牙和本地模拟可以共用一套调用方式",
+              "fontSize": 13.51
+            },
+            {
+              "index": 8,
+              "text": "。使用了观察者模式，",
+              "fontSize": 13.51
+            },
+            {
+              "index": 9,
+              "text": "GameTransport.observeEvents(listener) 通过回调监听 TransportEvent.Message、PeerConnected、PeerDisconnected、Error蓝牙连接、断开、消息到达时通知上层界面或房间控制逻辑，体现事件驱动",
+              "fontSize": 13.51
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• 蓝牙通信的核心流程：",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "蓝牙通信的核心流程",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": "：",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "1. 房主创建房间，建立 BluetoothHostTransport，持续监听加入者连接。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "1. ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "房主创建房间，建立",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "BluetoothHostTransport，持续监听加入者连接",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": "。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 6,
+          "text": "2. 加入者搜索附近或已配对设备，并通过 BluetoothClientTransport 连接房主。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "2. ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "加入者搜索附近或已配对设备，并通过",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "BluetoothClientTransport",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 6,
+              "text": "连接房主",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 7,
+              "text": "。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 7,
+          "text": "3. 加入者发送 HELLO，其中包含昵称和客户端标识等基础信息。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "3. ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "加入者发送",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "HELLO，其中包含昵称和客户端标识等基础信息",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": "。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 8,
+          "text": "4. 房主维护四座位 RoomSeat，记录 SeatConnectionState、clientId、设备地址和是否由 AI 托管。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "4. ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "房主维护四座位",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "RoomSeat，记录",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 6,
+              "text": "SeatConnectionState、clientId、设备地址和是否由",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 7,
+              "text": " AI ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 8,
+              "text": "托管",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 9,
+              "text": "。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 9,
+          "text": "5. 房主广播 ROOM(roomId, hostEpoch, seats)，使所有客户端看到一致座位。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "5. ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "房主广播",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " ROOM(",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "roomId",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": ", ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 6,
+              "text": "hostEpoch",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 7,
+              "text": ", seats)，",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 8,
+              "text": "使所有客户端看到一致座位",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 9,
+              "text": "。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 10,
+          "text": "6. 开局时房主生成 seed、同步规则并广播 START 消息。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "6. ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "开局时房主生成",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "seed、同步规则并广播",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": " START ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 6,
+              "text": "消息",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 7,
+              "text": "。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 11,
+          "text": "7. 客户端只发送 MOVE_REQUEST，不直接修改本地牌局。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "7. ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "客户端只发送",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "MOVE_REQUEST，不直接修改本地牌局",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": "。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 12,
+          "text": "8. 房主使用 NetworkMoveGuard 判断是否为当前玩家的有效请求。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "8. ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "房主使用",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "NetworkMoveGuard",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 6,
+              "text": "判断是否为当前玩家的有效请求",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 7,
+              "text": "。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 13,
+          "text": "9. 房主调用 GameController 校验和推进状态。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "9. ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "房主调用",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "GameController",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 6,
+              "text": "校验和推进状态",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 7,
+              "text": "。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 14,
+          "text": "10. 房主广播 MOVE_ACCEPTED 和 STATE_SNAPSHOT，所有客户端以房主快照为准刷新牌桌。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "10. ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "房主广播",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " MOVE_ACCEPTED ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "和",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 6,
+              "text": "STATE_SNAPSHOT，所有客户端以房主快照为准刷新牌桌",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 7,
+              "text": "。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 15,
+          "text": "11. 如果客户端断线，传输层发出 TransportEvent.PeerDisconnected，房主把对应座位标记为“断线，人机托管中”，并广播 DISCONNECT_NOTICE。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "11. ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "如果客户端断线，传输层发出",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " TransportEvent.PeerDisconnected，房主把对应座位标记为“",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "断线，人机托管中",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": "”，",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 6,
+              "text": "并广播",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 7,
+              "text": " DISCONNECT_NOTICE。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 16,
+          "text": "12. 当前发布版没有实现自动断线重连；断线客户端需要重新进入蓝牙流程。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "12. ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "当前发布版没有实现自动断线重连；断线客户端需要重新进入蓝牙流程",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": "。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 17,
+          "text": "13. 如果房主断线，客户端弹窗提示连接断开，关闭当前传输并退出房间，提示重新创建或重新加入。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "13. ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "如果房主断线，客户端弹窗提示连接断开，关闭当前传输并退出房间，提示重新创建或重新加入",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": "。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 19,
+          "text": "• 这种方式可以避免多台手机各自结算导致的状态分叉，也便于测试时用 LocalRoomTransport 和 SimulatedBluetoothHubTest 模拟多人房间。由于房主是权威端，当前版本对房主断线采用保守处理：直接提示并退出，而不尝试新房主迁移，避免恢复过程中出现多端状态不一致。",
+          "lineSpacingPercent": 113000,
+          "resolvedTextStyle": {
+            "fontSize": 13.51,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 2,
+              "text": "这种方式可以避免多台手机各自结算导致的状态分叉，也便于测试时用",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 3,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 4,
+              "text": "LocalRoomTransport",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 5,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 6,
+              "text": "和",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 7,
+              "text": " ",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 8,
+              "text": "SimulatedBluetoothHubTest",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            },
+            {
+              "index": 9,
+              "text": " 模拟多人房间。由于房主是权威端，当前版本对房主断线采用保守处理：直接提示并退出，而不尝试新房主迁移，避免恢复过程中出现多端状态不一致。",
+              "fontSize": 13.51,
+              "typeface": "PingFang SC",
+              "color": "#17211D"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

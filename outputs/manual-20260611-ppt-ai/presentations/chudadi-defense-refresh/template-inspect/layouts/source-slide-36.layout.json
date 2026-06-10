@@ -1,0 +1,2780 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/i5sneloj",
+    "id": "i5sneloj",
+    "slide": 37,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "fontScheme": {
+      "name": "Office",
+      "majorFont": {
+        "latinTypeface": "Calibri Light",
+        "eastAsianTypeface": "Calibri Light",
+        "complexScriptTypeface": "Calibri Light"
+      },
+      "minorFont": {
+        "latinTypeface": "Calibri",
+        "eastAsianTypeface": "Calibri",
+        "complexScriptTypeface": "Calibri"
+      }
+    },
+    "typefaces": [
+      "Calibri",
+      "Calibri Light",
+      "PingFang SC"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/je9cvixc",
+      "id": "10",
+      "name": "矩形 9",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7F3E8",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/87ed8bat",
+      "id": "2",
+      "name": "矩形 1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        64
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#0F3F32",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xs72x4na",
+      "id": "3",
+      "name": "矩形 2",
+      "bbox": [
+        38,
+        16,
+        360,
+        28
+      ],
+      "geometry": "rect",
+      "text": "锄大地 Android 棋牌游戏",
+      "textPreview": "锄大地 Android 棋牌游戏",
+      "resolvedFontSize": 22.32,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.93,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "锄大地 Android 棋牌游戏"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "锄大地 Android 棋牌游戏",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "typeface": "PingFang SC",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "锄大地 Android 棋牌游戏",
+              "fontSize": 16,
+              "typeface": "PingFang SC",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qtcj6tov",
+      "id": "4",
+      "name": "矩形 3",
+      "bbox": [
+        760,
+        16,
+        420,
+        28
+      ],
+      "geometry": "rect",
+      "text": "7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction）",
+      "textPreview": "7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction）",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction）"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction）",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "PingFang SC",
+            "color": "#E8D08A",
+            "bold": true,
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction）",
+              "fontSize": 12,
+              "typeface": "PingFang SC",
+              "color": "#E8D08A",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/je9cvixc",
+      "id": "5",
+      "name": "矩形 4",
+      "bbox": [
+        1190,
+        674,
+        42,
+        22
+      ],
+      "geometry": "rect",
+      "text": "70",
+      "textPreview": "70",
+      "resolvedFontSize": 22.73,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.95,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "70"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "70",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 11,
+            "typeface": "PingFang SC",
+            "color": "#5B6D63",
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "70",
+              "fontSize": 11,
+              "typeface": "PingFang SC",
+              "color": "#5B6D63"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8z25kb6x",
+      "id": "6",
+      "name": "矩形 5",
+      "bbox": [
+        54,
+        82,
+        280,
+        22
+      ],
+      "geometry": "rect",
+      "text": "REPORT BLOCK",
+      "textPreview": "REPORT BLOCK",
+      "resolvedFontSize": 22.63,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.94,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "REPORT BLOCK"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "REPORT BLOCK",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "PingFang SC",
+            "color": "#D8A43A",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "REPORT BLOCK",
+              "fontSize": 12,
+              "typeface": "PingFang SC",
+              "color": "#D8A43A",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1gvy90je",
+      "id": "7",
+      "name": "矩形 6",
+      "bbox": [
+        54,
+        106,
+        1125,
+        58
+      ],
+      "geometry": "rect",
+      "text": "6.4 玩家成长系统完善",
+      "textPreview": "6.4 玩家成长系统完善",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "6.4 玩家成长系统完善"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "6.4 玩家成长系统完善",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 29,
+            "typeface": "PingFang SC",
+            "color": "#17211D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "6",
+              "fontSize": 29,
+              "typeface": "PingFang SC",
+              "color": "#17211D",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": ".4 ",
+              "fontSize": 29,
+              "typeface": "PingFang SC",
+              "color": "#17211D",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "玩家成长系统完善",
+              "fontSize": 29,
+              "typeface": "PingFang SC",
+              "color": "#17211D",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qpg3ex0n",
+      "id": "8",
+      "name": "矩形 7",
+      "bbox": [
+        54,
+        174,
+        1120,
+        1
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#D9DFD2",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qtcj6tov",
+      "id": "11",
+      "name": "合并说明",
+      "bbox": [
+        72,
+        197.33,
+        1136,
+        45.33
+      ],
+      "geometry": "rect",
+      "text": "• 玩家成长系统在本阶段完成，让大厅顶部头像、等级、金币、战绩入口从“静态展示”变成真实可用功能；统一由 ProfileController 处理结算奖励、经验、金币消耗与档案存储。",
+      "textPreview": "• 玩家成长系统在本阶段完成，让大厅顶部头像、等级、金币、战绩入口从“静态展示”变成真实可用功能；统一由 ProfileController 处理结算奖励、经验、金币消耗与档案存储。",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• 玩家成长系统在本阶段完成，让大厅顶部头像、等级、金币、战绩入口从“静态展示”变成真实可用功能；统一由 ProfileController 处理结算奖励、经验、金币消耗与档案存储。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• 玩家成长系统在本阶段完成，让大厅顶部头像、等级、金币、战绩入口从“静态展示”变成真实可用功能；统一由 ProfileController 处理结算奖励、经验、金币消耗与档案存储。",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• 玩家成长系统在本阶段完成，让大厅顶部头像、等级、金币、战绩入口从“静态展示”变成真实可用功能；统一由 ProfileController 处理结算奖励、经验、金币消耗与档案存储。",
+              "fontSize": 12.27,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1gvy90je",
+      "id": "12",
+      "name": "合并说明标题",
+      "bbox": [
+        72,
+        245.33,
+        1136,
+        24
+      ],
+      "geometry": "rect",
+      "text": "• 成长系统主要功能如下：",
+      "textPreview": "• 成长系统主要功能如下：",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• 成长系统主要功能如下："
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• 成长系统主要功能如下：",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• 成长系统主要功能如下：",
+              "fontSize": 12.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8z25kb6x",
+      "id": "13",
+      "name": "merged_growth_table_0_0",
+      "bbox": [
+        48,
+        274.67,
+        328,
+        32
+      ],
+      "geometry": "rect",
+      "text": "功能",
+      "textPreview": "功能",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "功能"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "功能",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "功能",
+              "fontSize": 11.07,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#0C4636",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fmlkjm1c",
+      "id": "14",
+      "name": "merged_growth_table_0_1",
+      "bbox": [
+        376,
+        274.67,
+        424,
+        32
+      ],
+      "geometry": "rect",
+      "text": "代码/数据",
+      "textPreview": "代码/数据",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "代码/数据"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "代码/数据",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "代码",
+              "fontSize": 11.07,
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "/",
+              "fontSize": 11.07,
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "数据",
+              "fontSize": 11.07,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#0C4636",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q1orytsv",
+      "id": "15",
+      "name": "merged_growth_table_0_2",
+      "bbox": [
+        800,
+        274.67,
+        472,
+        32
+      ],
+      "geometry": "rect",
+      "text": "实现说明",
+      "textPreview": "实现说明",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "实现说明"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "实现说明",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "实现说明",
+              "fontSize": 11.07,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#0C4636",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xs72x4na",
+      "id": "16",
+      "name": "merged_growth_table_1_0",
+      "bbox": [
+        48,
+        306.67,
+        328,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "玩家档案",
+      "textPreview": "玩家档案",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "玩家档案"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "玩家档案",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "玩家档案",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/87ed8bat",
+      "id": "17",
+      "name": "merged_growth_table_1_1",
+      "bbox": [
+        376,
+        306.67,
+        424,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "PlayerProfile",
+      "textPreview": "PlayerProfile",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PlayerProfile"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PlayerProfile",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PlayerProfile",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fyxobm58",
+      "id": "18",
+      "name": "merged_growth_table_1_2",
+      "bbox": [
+        800,
+        306.67,
+        472,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "保存昵称、头像、金币、经验、等级、称号、统计和成就",
+      "textPreview": "保存昵称、头像、金币、经验、等级、称号、统计和成就",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "保存昵称、头像、金币、经验、等级、称号、统计和成就"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "保存昵称、头像、金币、经验、等级、称号、统计和成就",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "保存昵称、头像、金币、经验、等级、称号、统计和成就",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qd4vmtwr",
+      "id": "19",
+      "name": "merged_growth_table_2_0",
+      "bbox": [
+        48,
+        342.93,
+        328,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "经验等级",
+      "textPreview": "经验等级",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "经验等级"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "经验等级",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "经验等级",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F3F6EF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yhgn29gr",
+      "id": "20",
+      "name": "merged_growth_table_2_1",
+      "bbox": [
+        376,
+        342.93,
+        424,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "ProfileController",
+      "textPreview": "ProfileController",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ProfileController"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ProfileController",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ProfileController",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F3F6EF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/n29gr2p8",
+      "id": "21",
+      "name": "merged_growth_table_2_2",
+      "bbox": [
+        800,
+        342.93,
+        472,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "每局根据名次和模式增加经验，经验达到阈值后升级",
+      "textPreview": "每局根据名次和模式增加经验，经验达到阈值后升级",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "每局根据名次和模式增加经验，经验达到阈值后升级"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "每局根据名次和模式增加经验，经验达到阈值后升级",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "每局根据名次和模式增加经验，经验达到阈值后升级",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F3F6EF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gn29gr2p",
+      "id": "22",
+      "name": "merged_growth_table_3_0",
+      "bbox": [
+        48,
+        379.2,
+        328,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "金币奖励",
+      "textPreview": "金币奖励",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "金币奖励"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "金币奖励",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "金币奖励",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/58z25kb6",
+      "id": "23",
+      "name": "merged_growth_table_3_1",
+      "bbox": [
+        376,
+        379.2,
+        424,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "ProfileController.settleMatch",
+      "textPreview": "ProfileController.settleMatch",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ProfileController.settleMatch"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ProfileController.settleMatch",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ProfileController.settleMatch",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y90je9cv",
+      "id": "24",
+      "name": "merged_growth_table_3_2",
+      "bbox": [
+        800,
+        379.2,
+        472,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "人机/蓝牙对局结束后根据名次发放金币",
+      "textPreview": "人机/蓝牙对局结束后根据名次发放金币",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "人机/蓝牙对局结束后根据名次发放金币"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "人机/蓝牙对局结束后根据名次发放金币",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "人机",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            },
+            {
+              "index": 2,
+              "text": "/",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            },
+            {
+              "index": 3,
+              "text": "蓝牙对局结束后根据名次发放金币",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nuxc3ylc",
+      "id": "25",
+      "name": "merged_growth_table_4_0",
+      "bbox": [
+        48,
+        415.47,
+        328,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "金币消费",
+      "textPreview": "金币消费",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "金币消费"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "金币消费",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "金币消费",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F3F6EF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gbq1oryt",
+      "id": "26",
+      "name": "merged_growth_table_4_1",
+      "bbox": [
+        376,
+        415.47,
+        424,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "renameWithCost、unlockAvatar、unlockCustomAvatar、resetStats",
+      "textPreview": "renameWithCost、unlockAvatar、unlockCustomAvatar、resetStats",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "renameWithCost、unlockAvatar、unlockCustomAvatar、resetStats"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "renameWithCost、unlockAvatar、unlockCustomAvatar、resetStats",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "renameWithCost",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            },
+            {
+              "index": 2,
+              "text": "、",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            },
+            {
+              "index": 3,
+              "text": "unlockAvatar",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            },
+            {
+              "index": 4,
+              "text": "、",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            },
+            {
+              "index": 5,
+              "text": "unlockCustomAvatar",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            },
+            {
+              "index": 6,
+              "text": "、",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            },
+            {
+              "index": 7,
+              "text": "resetStats",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F3F6EF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5wjudg7a",
+      "id": "27",
+      "name": "merged_growth_table_4_2",
+      "bbox": [
+        800,
+        415.47,
+        472,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "改名、头像解锁、自定义头像、重置战绩都需要金币并二次确认",
+      "textPreview": "改名、头像解锁、自定义头像、重置战绩都需要金币并二次确认",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "改名、头像解锁、自定义头像、重置战绩都需要金币并二次确认"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "改名、头像解锁、自定义头像、重置战绩都需要金币并二次确认",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "改名、头像解锁、自定义头像、重置战绩都需要金币并二次确认",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F3F6EF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u54zidon",
+      "id": "28",
+      "name": "merged_growth_table_5_0",
+      "bbox": [
+        48,
+        451.73,
+        328,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "头像商店",
+      "textPreview": "头像商店",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "头像商店"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "头像商店",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "头像商店",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nqxs72x4",
+      "id": "29",
+      "name": "merged_growth_table_5_1",
+      "bbox": [
+        376,
+        451.73,
+        424,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "BuiltInAvatar",
+      "textPreview": "BuiltInAvatar",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "BuiltInAvatar"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "BuiltInAvatar",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "BuiltInAvatar",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/donyd0z6",
+      "id": "30",
+      "name": "merged_growth_table_5_2",
+      "bbox": [
+        800,
+        451.73,
+        472,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "内置多个自然头像，按普通、稀有、传说设置不同价格和视觉样式",
+      "textPreview": "内置多个自然头像，按普通、稀有、传说设置不同价格和视觉样式",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "内置多个自然头像，按普通、稀有、传说设置不同价格和视觉样式"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "内置多个自然头像，按普通、稀有、传说设置不同价格和视觉样式",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "内置多个自然头像，按普通、稀有、传说设置不同价格和视觉样式",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/k3q5o7qp",
+      "id": "31",
+      "name": "merged_growth_table_6_0",
+      "bbox": [
+        48,
+        488,
+        328,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "自定义头像",
+      "textPreview": "自定义头像",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "自定义头像"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "自定义头像",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "自定义头像",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F3F6EF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vixczed8",
+      "id": "32",
+      "name": "merged_growth_table_6_1",
+      "bbox": [
+        376,
+        488,
+        424,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "相册选择 + 私有目录复制",
+      "textPreview": "相册选择 + 私有目录复制",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "相册选择 + 私有目录复制"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "相册选择 + 私有目录复制",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "相册选择 ",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            },
+            {
+              "index": 2,
+              "text": "+ ",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            },
+            {
+              "index": 3,
+              "text": "私有目录复制",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F3F6EF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2x4nap4r",
+      "id": "33",
+      "name": "merged_growth_table_6_2",
+      "bbox": [
+        800,
+        488,
+        472,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "未解锁时显示提示，解锁后可选择本地图片作为头像",
+      "textPreview": "未解锁时显示提示，解锁后可选择本地图片作为头像",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "未解锁时显示提示，解锁后可选择本地图片作为头像"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "未解锁时显示提示，解锁后可选择本地图片作为头像",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "未解锁时显示提示，解锁后可选择本地图片作为头像",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F3F6EF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 32,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dcbulwva",
+      "id": "34",
+      "name": "merged_growth_table_7_0",
+      "bbox": [
+        48,
+        524.27,
+        328,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "战绩",
+      "textPreview": "战绩",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "战绩"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "战绩",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "战绩",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kre1w7mp",
+      "id": "35",
+      "name": "merged_growth_table_7_1",
+      "bbox": [
+        376,
+        524.27,
+        424,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "MatchRecord、ProfileStats",
+      "textPreview": "MatchRecord、ProfileStats",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "MatchRecord、ProfileStats"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "MatchRecord、ProfileStats",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "MatchRecord",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            },
+            {
+              "index": 2,
+              "text": "、",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            },
+            {
+              "index": 3,
+              "text": "ProfileStats",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 34,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/val87ed8",
+      "id": "36",
+      "name": "merged_growth_table_7_2",
+      "bbox": [
+        800,
+        524.27,
+        472,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "记录最近50局、总局数、胜场、蓝牙局、困难胜场、连胜等统计",
+      "textPreview": "记录最近50局、总局数、胜场、蓝牙局、困难胜场、连胜等统计",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "记录最近50局、总局数、胜场、蓝牙局、困难胜场、连胜等统计"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "记录最近50局、总局数、胜场、蓝牙局、困难胜场、连胜等统计",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "记录最近",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            },
+            {
+              "index": 2,
+              "text": "50",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            },
+            {
+              "index": 3,
+              "text": "局、总局数、胜场、蓝牙局、困难胜场、连胜等统计",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 35,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6psfil0r",
+      "id": "37",
+      "name": "merged_growth_table_8_0",
+      "bbox": [
+        48,
+        560.53,
+        328,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "成就",
+      "textPreview": "成就",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "成就"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "成就",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "成就",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F3F6EF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 36,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8bat47y",
+      "id": "38",
+      "name": "merged_growth_table_8_1",
+      "bbox": [
+        376,
+        560.53,
+        424,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "Achievement",
+      "textPreview": "Achievement",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Achievement"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Achievement",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Achievement",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F3F6EF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 37,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/knih4byh",
+      "id": "39",
+      "name": "merged_growth_table_8_2",
+      "bbox": [
+        800,
+        560.53,
+        472,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "首胜、连胜、困难胜利、蓝牙对局等条件触发，只奖励一次",
+      "textPreview": "首胜、连胜、困难胜利、蓝牙对局等条件触发，只奖励一次",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "首胜、连胜、困难胜利、蓝牙对局等条件触发，只奖励一次"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "首胜、连胜、困难胜利、蓝牙对局等条件触发，只奖励一次",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "首胜、连胜、困难胜利、蓝牙对局等条件触发，只奖励一次",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F3F6EF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 38,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sfil0rqd",
+      "id": "40",
+      "name": "merged_growth_table_9_0",
+      "bbox": [
+        48,
+        596.8,
+        328,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "每日奖励",
+      "textPreview": "每日奖励",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "每日奖励"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "每日奖励",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "每日奖励",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 39,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h0fepkzu",
+      "id": "41",
+      "name": "merged_growth_table_9_1",
+      "bbox": [
+        376,
+        596.8,
+        424,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "ProfileController.claimDailyReward",
+      "textPreview": "ProfileController.claimDailyReward",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ProfileController.claimDailyReward"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ProfileController.claimDailyReward",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ProfileController.claimDailyReward",
+              "fontSize": 8.93,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 40,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zupwb2hw",
+      "id": "43",
+      "name": "矩形 42",
+      "bbox": [
+        48,
+        117.33,
+        6,
+        61.33
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F4B740",
+      "lineWidth": 2
+    },
+    {
+      "order": 41,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/orytsvu9",
+      "id": "44",
+      "name": "矩形 43",
+      "bbox": [
+        48,
+        686.67,
+        1180,
+        1.6
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#C8D2C7",
+      "lineWidth": 2
+    },
+    {
+      "order": 42,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hcrmhk3q",
+      "id": "45",
+      "name": "矩形 44",
+      "bbox": [
+        48,
+        686.67,
+        101.33,
+        3.47
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F4B740",
+      "lineWidth": 2
+    },
+    {
+      "order": 43,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a9w3m94f",
+      "id": "42",
+      "name": "merged_growth_table_9_2",
+      "bbox": [
+        800,
+        596.8,
+        472,
+        36.27
+      ],
+      "geometry": "rect",
+      "text": "同一天不可重复领取，跨天可再次领取",
+      "textPreview": "同一天不可重复领取，跨天可再次领取",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "同一天不可重复领取，跨天可再次领取"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "同一天不可重复领取，跨天可再次领取",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "同一天不可重复领取，跨天可再次领取",
+              "fontSize": 9.67,
+              "color": "#17201B"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D4D8C9",
+      "lineWidth": 0.67
+    }
+  ],
+  "composeRuns": []
+}

@@ -1,0 +1,350 @@
+--- slide 001 ---
+软件综合开发实训答辩 锄大地 Android 棋牌游戏 内容与实验报告保持一致；同一小节内容集中排版，适合答辩连续讲述 项目 说明 课程 软件综合开发实训 周期 5 周 UP 迭代开发 交付 源码、UML 七图、测试、Release 包、实验报告
+
+--- slide 002 ---
+锄大地 Android 棋牌游戏 软件综合开发实训实验报告 2 REPORT SECTION 1. 实验概述 • 课程名称：软件综合开发实训 • 实验名称：锄大地扑克牌游戏 • 项目名称：锄大地 Android 棋牌游戏 • 面向班级：2026 软件工程（中澳班） • 开发周期：5 周开发迭代。项目阶段按照《软件开发综合实训提交时间节点 V0.0.1.xlsx》划分为开始、三次细化/构造迭代和交付。 • 小组成员及主要职责： 成员 主要职责 Annakuliyev Sedar ProcessOn UML 7 大图绘制、图形布局调整、建模文档整理 莫均杰 Android 主体代码编写、规则模块、AI 模块、蓝牙模块、UI 页面、发布集成 郭铭涛 单元测试、蓝牙模拟测试、运行验收、测试报告、录屏验证
+
+--- slide 003 ---
+锄大地 Android 棋牌游戏 1. 实验概述 3 REPORT BLOCK 1.1 实验目的 • 本次实训围绕 Android 锄大地游戏完成软件开发全过程训练，主要目标包括： 1. 理解软件开发过程，结合 UP 迭代开发方法完成需求分析、面向对象分析、面向对象设计和实现。 2. 掌握 UML 建模方法，使用 ProcessOn UML 完成用例图、类图、顺序图、状态图、活动图、组件图和部署图。 3. 熟悉 Android Studio、Gradle、Kotlin 和 Jetpack Compose 的开发流程。 4. 实现完整的棋牌游戏功能，包括人机对局、多人蓝牙联机、南北玩法规则、AI 出牌策略、玩家成长、动画音效和发布包。 5. 在开发过程中实践 SCRUM 敏捷协作，并如实记录 Codex/GPT-5 在代码实现、UML 图绘制、测试和文档整理中的主要参与情况。
+
+--- slide 004 ---
+锄大地 Android 棋牌游戏 1. 实验概述 4 REPORT BLOCK 1.2 实验环境 类型 环境说明 硬件环境 Android 4.4 以上系统手机或 Android 模拟器，蓝牙联机验收需要多台手机 开发工具 Android Studio、Gradle、Git、GitHub 建模工具 ProcessOn UML、PlantUML 编程语言与框架 Kotlin、Jetpack Compose、Android SDK 测试工具 JUnit、Gradle Test、Android Instrumented Test、蓝牙模拟测试 AI 工具 OpenAI Codex / GPT-5，用于需求拆解、主要代码实现、UML 草图/更新、测试补全和文档同步
+
+--- slide 005 ---
+锄大地 Android 棋牌游戏 1. 实验概述 5 REPORT BLOCK 1.3 项目简介 • 本项目是一款 Kotlin + Jetpack Compose 实现的 Android 锄大地棋牌游戏。系统支持本地人机对局、好友蓝牙多人房间、客户端断线人机托管、房主断线弹窗退出、南北规则切换、三档 AI 策略、玩家成长系统、开屏和牌桌动画、背景音乐、出牌音效、Release 签名包和完整 UML/文档交付。 • 项目采用 MVC 思想分层：Model 层负责扑克牌、牌型、规则、状态和玩家档案；Controller 层负责回合推进、AI 决策、联机同步和成长结算；View 层使用 Jetpack Compose 实现开屏、大厅、规则、设置、教程、蓝牙房间、牌桌、结算和玩家中心等页面。
+
+--- slide 006 ---
+锄大地 Android 棋牌游戏 1. 实验概述 6 REPORT BLOCK 1.4 当前版本完整功能基线 • 本报告内容与 docs/complete_project_documentation.md 保持同一技术口径，只是章节顺序按照 Excel 中的开始、细化迭代 1、细化迭代 2、细化迭代 3、交付五个阶段重新组织。当前版本已经从课程展示型界面改造成接近发布测试版的本地棋牌游戏，功能基线如下： 1. 开屏页：使用修补后的 CC0 扑克牌素材作为背景，玩家必须点击 开始游戏 才进入大厅。 2. 应用图标：使用 FreeIcons 的 Cards CC0 成品素材作为主体，并做 Android 桌面图标适配。 3. 游戏大厅：显示玩家头像、昵称、等级、金币、战绩入口，以及人机对局、好友蓝牙对局、规则、设置、教程等入口。 4. 人机对局：支持简单、普通、困难三种 AI 难度；开局前先入桌，点击 开始游戏 后播放发牌动画。 5. 规则系统：支持北方规则与南方规则，保存后对后续人机和蓝牙对局生效。 6. 蓝牙房间：支持创建房间、加入对局、四座位房间、人机补位、房主权威同步、结算后回原房间再开局。 7. 蓝牙稳定性：支持客户端断线 AI 托管；房主断线时客户端弹窗提示并退出当前房间，需要重新创建或重新加入。当前版本没有实现自动断线重连。 8. 玩家成长：支持金币、经验、等级、称号、战绩、成就、每日奖励、头像商店、自定义头像、改名消费、战绩重置。 9. 动画与音效：包含开屏光效、大厅漂浮扑克牌、主视觉光效、按钮按压、牌桌发牌、手牌选中、出牌飞牌、结算动画、背景音乐、出牌音效与震动。 10. 发布与仓库：项目已配置 HTTPS 远程仓库、release 签名、runRelease 运行配置和敏感文件忽略规则；签名私钥只保存在本机，不上传 GitHub。 • 开屏背景素材来自 Wikimedia Commons 的 The Cloisters Playing Cards 图片，页面标注为 CC0，可自由复制、修改和分发。项目内对原图右上空位做了补牌修复，保留原素材质感，同时避免竖屏开屏出现右上角缺牌观感。应用图标使用 FreeIcons 的 Cards 成品素材作为主体，页面标注 Public Domain / CC0，项目对素材做了深绿牌桌底、金色边框和桌面小尺寸适配。
+
+--- slide 007 ---
+锄大地 Android 棋牌游戏 1. 实验概述 7 REPORT BLOCK 1.5 实训要求总映射（1/2） • 实训启动纲要中的 8 项要求在项目中的总体落点如下，后续各阶段会按 Excel 迭代顺序展开：
+
+--- slide 008 ---
+锄大地 Android 棋牌游戏 1. 实验概述 8 REPORT BLOCK 1.5 实训要求总映射（2/2） 实训要求 当前项目实现 ProcessOn UML 7 大图 使用 PlantUML 代码描述图结构，再导入或参照迁移到 ProcessOn UML，项目保留 .puml 与 .png 需求分析和面向对象设计 docs/requirements.md、docs/design.md、MVC 分层、领域模型、系统顺序和组件设计 设计模式 策略模式、MVC、接口隔离/适配器、主机权威同步、状态模式、命令对象、编解码器、仓储模式、事件驱动、托管恢复 UI 页面设计和切换 单 Activity + Compose，Screen 状态驱动开屏、大厅、人机、规则、蓝牙、牌桌、结算和玩家中心 多人蓝牙联机 Classic Bluetooth RFCOMM，房主 C/S 四座位房间，房主权威快照同步、客户端断线托管和房主断线退出提示 南北玩法 NorthRuleSet 与 SouthRuleSet，规则设置保存后作用于后续人机和蓝牙对局 AI 策略 GreedyAiStrategy、HeuristicAiStrategy、MonteCarloRolloutAiStrategy 三档策略 AI 工具使用 代码实现、UML 图草拟/更新、测试场景和文档整理等大部分工作由 OpenAI Codex / GPT-5 完成，开发者在 Android Studio、ProcessOn 和真机环境中运行、调整和确认
+
+--- slide 009 ---
+锄大地 Android 棋牌游戏 软件综合开发实训实验报告 9 REPORT SECTION 2. 阶段时间表 序号 项目阶段 项目开发内容 建模和规约文档内容 提交时间 汇报时间 1 开始（Inception） Android 开发框架、Java/Kotlin 开发、用例图 1、发牌/选牌/出牌用例 Use-Case Model、Vision、Supplementary Specification、Glossary、Iteration Plan 第 1 周周五晚 第 11 周 2 细化迭代 1（Elaboration）/ 构造（Construction） 用例图 1、用例实现 Domain Models、System Sequence Diagrams、Operation Contracts、UML Package Diagrams、UML Interaction Diagrams、UML Class Diagrams 第 2 周周五晚 第 12 周 3 细化迭代 2（Elaboration）/ 构造（Construction） 用例图 2、用例实现、出牌规则模块、蓝牙/WiFi 通信模块 Applying GoF Design Patterns 第 3 周周五晚 第 13 周 4 细化迭代 3（Elaboration）/ 构造（Construction） 用例图 3、用例实现、AI 算法模块 UML State Machine Diagrams and Modeling、refine the above models 第 4 周周五晚 第 14 周 5 交付（Transition） 系统集成 最后资料：文档和集成代码 第 5 周周五晚 第 15 周
+
+--- slide 010 ---
+锄大地 Android 棋牌游戏 3. 小组分工与协作方式 10 REPORT BLOCK 3.1 总体分工 成员 负责内容 主要交付物 答辩重点 Annakuliyev Sedar UML 建模、ProcessOn 绘图、图形布局和建模文档整理 用例图、类图、顺序图、状态图、活动图、组件图、部署图，UML 建模说明 UML 图含义、分析建模和设计建模关系、图与代码对应 莫均杰 主体代码、架构设计、游戏规则、AI、蓝牙、UI、Release 集成 Kotlin/Compose 项目代码、规则模块、AI 策略、蓝牙房间、玩家中心、Release APK/AAB MVC 分层、设计模式、南北规则、多人蓝牙、AI 策略、发布流程 郭铭涛 测试设计、自动化测试、模拟蓝牙测试、运行验收、测试报告和录屏验证 单元测试、模拟测试、测试报告、手动验收表、演示录屏 测试覆盖、测试方法、蓝牙风险、Release 验收、录屏展示
+
+--- slide 011 ---
+锄大地 Android 棋牌游戏 3. 小组分工与协作方式 11 REPORT BLOCK 3.2 阶段分工执行情况 阶段 Annakuliyev Sedar 莫均杰 郭铭涛 开始 整理核心参与者和初版用例图 搭建 Android 项目环境，确定 Kotlin + Compose 技术路线 协助确认用例边界和基础验收场景 细化迭代 1 绘制类图、顺序图、包图和交互关系 完成 MVC 分层设计，建立 Model、Controller、View 基础结构 准备牌型、首出、过牌等规则测试思路 细化迭代 2 更新蓝牙、规则相关 UML 元素 实现南北规则、牌型识别、蓝牙房间和消息协议 编写规则测试、消息编解码测试、房间座位测试 细化迭代 3 绘制状态图，补充 AI、玩家成长与牌局状态转换 实现三档 AI 策略、牌桌 UI 状态切换和玩家成长系统 测试 AI 合法动作、随机多局完成、玩家成长和动画 key 稳定性 交付 核对 UML 图与最终代码一致 集成音效动画、Release 签名包、GitHub 托管和最终文档 执行单元测试、构建测试、真机/模拟器验收
+
+--- slide 012 ---
+锄大地 Android 棋牌游戏 3. 小组分工与协作方式 12 REPORT BLOCK 3.3 SCRUM 协作说明（1/2） • 小组按照周迭代推进，每周确定一个 Sprint 目标，并在阶段提交前整理对应文档和代码成果。协作过程以“需求和建模先行、功能实现跟进、测试与文档同步补齐”为原则。遇到蓝牙真机数量不足、南北规则地区差异、动画性能和文档同步等风险时，采用模拟测试、规则封装、Compose 性能检查和最终检查表逐项核对的方式降低风险。
+
+--- slide 013 ---
+锄大地 Android 棋牌游戏 3. 小组分工与协作方式 13 REPORT BLOCK 3.3 SCRUM 协作说明（2/2） Sprint 目标 主要产出 Sprint 1 需求分析和 UML 建模 需求说明、用例图、类图、状态图 Sprint 2 核心规则和人机对局 牌型识别、南北规则、GameController、AI 策略 Sprint 3 蓝牙联机和房间 创建/加入房间、四座位、消息协议、房主权威同步 Sprint 4 发布版 UI 和动画 大厅、牌桌、结算、音乐、动效和设置 Sprint 5 测试、文档和交付 单元测试、模拟蓝牙测试、UML 更新、测试报告 Sprint 6 细化迭代 3：AI、玩家中心和体验完善 三档 AI、状态建模、成长系统、头像商店、金币消费确认 Sprint 7 发布收尾和蓝牙稳定性增强 TransportEvent、客户端断线 AI 托管、房主断线退出提示、Release 包、GitHub 上传准备
+
+--- slide 014 ---
+锄大地 Android 棋牌游戏 3. 小组分工与协作方式 14 REPORT BLOCK 3.4 UML 图与阶段产物总映射（1/3） • 本项目的 UML 图不是集中到最后一次性补画，而是按照 UP 迭代阶段逐步形成并在交付阶段统一校对。开发者先使用 PlantUML 文本描述图结构，便于在 Android Studio 中预览、版本管理和随代码修改；随后将 PlantUML 内容导入或参照迁移到 ProcessOn UML，调整布局后作为正式报告图。下表把项目内 7 类 UML 图对应到 Excel 阶段、阶段产物和代码验证点。
+
+--- slide 015 ---
+锄大地 Android 棋牌游戏 3. 小组分工与协作方式 15 REPORT BLOCK 3.4 UML 图与阶段产物总映射（2/3） UML 图 阶段归属 阶段产物定位 主要表达内容 对应代码/文档 用例图 use_case.png 阶段 1：开始 Use-Case Model、项目愿景和核心用例边界 玩家、房主、加入者、人机参与者，以及大厅、人机对局、好友蓝牙、规则设置、玩家中心、结算等用例 docs/requirements.md、view/ChudadiApp.kt 类图 class_diagram.png 阶段 2：细化迭代 1 Domain Model、Design Model、UML Class Diagram Card、GameState、RuleSet、GameController、AiStrategy、GameTransport、ProfileController 等类和接口关系 model/、controller/、transport/、profile/ 顺序图 sequence_game_turn.png 阶段 2 和阶段 3 System Sequence Diagram、Interaction Diagram 玩家出牌、Controller 校验、状态更新、蓝牙客户端请求、房主校验、广播快照、客户端断线托管和房主断线退出顺序 GameController.kt、GameMessage.kt、BluetoothTransports.kt 活动图 activity_play.png 阶段 3：细化迭代 2 用例实现流程、操作契约流程化表达 开局、发牌、选择牌、出牌/不出、非法出牌提示、蓝牙等待确认、结算和再来一局 PlayerActionPolicy.kt、ChudadiApp.kt 状态图 state_game.png 阶段 4：细化迭代 3 UML State Machine Diagram、状态建模 Splash、Lobby、Nearby、ReadyToStart、Dealing、Playing、Paused、Result、断线托管等状态转换 Screen、GameStartPhase、BluetoothEntryMode 组件图 component_diagram.png 阶段 2 和阶段 5 UML Package/Component Diagram、模块依赖说明 View、Controller、Model、Transport、Profile、Audio、Android Bluetooth API、SharedPreferences 等组件依赖 docs/design.md、源码包结构 部署图 deployment_diagram.png 阶段 3 和阶段 5 Deployment Model、联机和测试环境说明 房主手机、加入者手机、Classic Bluetooth RFCOMM、Android Studio、Gradle、真机/模拟器测试环境 BluetoothHostTransport、BluetoothClientTransport、release_testing.md
+
+--- slide 016 ---
+锄大地 Android 棋牌游戏 3. 小组分工与协作方式 16 REPORT BLOCK 3.4 UML 图与阶段产物总映射（3/3） • 阶段产物关系可以概括为：开始阶段先确定“要做什么”，用例图作为需求入口；细化迭代 1 把用例转成领域对象、类关系和交互流程；细化迭代 2 将规则和蓝牙通信落地，用顺序图、活动图和部署图解释多人联机；细化迭代 3 用状态图约束 AI、玩家成长、动画、暂停和结算状态；交付阶段用组件图、部署图和 ProcessOn 汇总图证明最终系统结构、运行环境和文档一致。
+
+--- slide 017 ---
+锄大地 Android 棋牌游戏 4. 阶段 1：开始（Inception） 17 REPORT BLOCK 4.1 阶段目标 • 开始阶段的目标是完成开发环境配置、明确项目愿景、确定核心用例和基础迭代计划。根据实训启动纲要，项目需要实现 Android 锄大地扑克牌游戏，并体现 UML 建模、Android 开发、多人蓝牙连接、南北规则、AI 策略和 AI 工具使用。
+
+--- slide 018 ---
+锄大地 Android 棋牌游戏 4. 阶段 1：开始（Inception） 18 REPORT BLOCK 4.2 开发内容 • 本阶段完成 Android Studio 和 Gradle 环境配置，建立 Kotlin + Jetpack Compose 项目基础，确认应用主入口、资源目录和构建脚本。项目入口为 app/src/main/java/com/example/uml_chudadi/MainActivity.kt，主界面集中在 app/src/main/java/com/example/uml_chudadi/view/ChudadiApp.kt。 • 需求分析时，将游戏拆分为以下核心用例： 1. 玩家启动 App 并进入大厅。 2. 玩家选择规则，包括北方规则和南方规则。 3. 玩家进入人机对局，选择简单、普通、困难 AI。 4. 玩家创建或加入好友蓝牙房间。 5. 房主添加人机补位并开始四人对局。 6. 玩家完成发牌、选牌、出牌、不出、提示、结算和再来一局。 7. 玩家进入玩家中心，查看等级、金币、战绩、成就和头像。 • 按照 Excel 中“Android 开发框架、Java 开发、用例图 1、发牌/选牌/出牌用例”的要求，本阶段没有直接堆叠大量界面，而是先确定项目边界和主流程： • 本阶段还确定“玩家界面”和“实训交付材料”分离：App 内展示正式棋牌游戏文案，不出现实训、评分、UML、MVC 等课程词汇；课程要求放在 docs/ 下，通过文档和 UML 体现。 分析项 具体结论 对应代码/文档 技术框架 采用 Android Studio + Gradle + Kotlin + Jetpack Compose；虽然 Excel 写有 Java 开发，但项目使用 Kotlin 作为 Android 官方推荐语言，仍运行在同一 Android/JVM 技术体系上 settings.gradle.kts、build.gradle.kts、MainActivity.kt 主入口 单 Activity 架构，MainActivity 只负责创建 Compose 内容，具体页面逻辑交给 ChudadiApp MainActivity.kt、view/ChudadiApp.kt 游戏对象 玩家、扑克牌、牌堆、牌型、规则、牌局状态、出牌动作、蓝牙房间、玩家档案 model/、transport/、profile/ 核心用例 开屏、进入大厅、选择规则、人机对局、蓝牙房间、发牌、选牌、出牌、不出、提示、结算、再来一局 docs/uml/use_case.puml 质量边界 不新增不必要第三方依赖，优先使用 Android/Compose/蓝牙原生 API，降低构建和答辩环境风险 docs/requirements.md
+
+--- slide 019 ---
+锄大地 Android 棋牌游戏 4. 阶段 1：开始（Inception） 19 REPORT BLOCK 4.3 建模与规约内容 • Excel 中列出的 Use-Case Model、Vision、Supplementary Specification、Glossary、Iteration Plan 是开始阶段需要覆盖的规约内容。本项目没有把这些内容拆成五个独立文件，而是整合在需求分析、设计说明、UML 图、本报告和阶段时间表中，具体对应关系如下： • 项目定位为“Android 锄大地棋牌游戏”，不是单纯演示界面。非功能要求包括 MVC 分层、可测试的规则模型、多人蓝牙 C/S 房间、AI 策略模式、发布包可安装、文档与 UML 可追踪。术语解释分散在完整项目文档和本报告中，保证答辩时“炸弹”“压牌”“房主权威”“快照同步”“托管”等词的解释一致。 规约项 本项目体现 对应材料 Use-Case Model 描述玩家、房主、加入者和人机参与者，以及开屏、大厅、人机、蓝牙、规则、牌局、结算等用例 docs/uml/use_case.puml、docs/uml/use_case.png Vision 明确项目定位为 Android 锄大地棋牌游戏，交付目标包括功能、UML、测试和 Release 包 docs/requirements.md、本报告第 1 章 Supplementary Specification 记录 MVC 分层、多人蓝牙、AI 策略、南北规则、测试覆盖和发布包等非功能要求 docs/requirements.md、docs/design.md Glossary 统一解释发牌、首出、压牌、过牌、南北规则、房主权威同步、玩家成长等术语 docs/complete_project_documentation.md、本报告相关章节 Iteration Plan 依据 Excel 时间节点规划开始、三次细化/构造迭代和交付阶段 本报告第 2 章“阶段时间表”、docs/scrum.md
+
+--- slide 020 ---
+锄大地 Android 棋牌游戏 4. 阶段 1：开始（Inception） 20 REPORT BLOCK 4.4 实现成果（1/4） • 项目完成 Android 工程搭建，确定了 Kotlin + Jetpack Compose 的实现路线，并在 docs/requirements.md 中形成需求分析和评分点映射。UML 建模从用例图开始，为后续领域模型、类图和状态图提供基础。 • 本阶段使用的设计模式和设计原则如下： 设计模式/原则 阶段作用 代码或文档落点 MVC 架构思想 在需求阶段先确定 Model、Controller、View 的边界，避免后续把规则和 UI 写在一起 docs/design.md、MainActivity.kt、ChudadiApp.kt 单一职责原则 将规则、AI、蓝牙、玩家成长、音频和界面拆成独立方向，方便后续迭代 model/、controller/、transport/、profile/、view/ 状态驱动页面 先确定 Screen 状态切换路线，为后续开屏、大厅、规则、蓝牙和牌桌页面切换做基础 Screen、用例图、状态图 • 阶段成果展示： 成果类型 展示内容 证据材料 代码成果 单 Activity + Compose 主入口，启动后加载 ChudadiApp() app/src/main/java/com/example/uml_chudadi/MainActivity.kt 文字成果 项目目标、功能需求、非功能需求和评分点映射 docs/requirements.md 图片成果 用例图展示玩家、房主、加入者、人机和主要用例 docs/uml/use_case.png 计划成果 Excel 时间节点被整理为本报告第 2 章阶段时间表，报告正文只保留开发与交付阶段 本报告第 2 章、docs/scrum.md • 主入口代码片段如下：
+
+--- slide 021 ---
+锄大地 Android 棋牌游戏 4. 阶段 1：开始（Inception） 21 REPORT BLOCK 4.4 实现成果（2/4） class MainActivity : ComponentActivity() { override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) enableEdgeToEdge() setContent { Uml_chudadiTheme { ChudadiApp() } } } }
+
+--- slide 022 ---
+锄大地 Android 棋牌游戏 4. 阶段 1：开始（Inception） 22 REPORT BLOCK 4.4 实现成果（3/4） • 阶段图片成果如下：
+
+--- slide 023 ---
+锄大地 Android 棋牌游戏 4. 阶段 1：开始（Inception） 23 REPORT BLOCK 4.4 实现成果（4/4） 阶段1用例图
+
+--- slide 024 ---
+锄大地 Android 棋牌游戏 4. 阶段 1：开始（Inception） 24 REPORT BLOCK 4.5 Codex/GPT 使用情况 使用位置 使用方式 Codex/GPT 产出 开发者确认与调整 实训要求梳理 由 Codex/GPT 阅读启动纲要和 Excel 时间节点并归纳评分点 提炼出 UML、需求设计、UI、蓝牙、南北规则、AI 策略、AI 使用说明等核心评分点 小组按老师原始要求逐项核对，保留开发阶段顺序 项目范围确定 主要由 Codex/GPT 完成项目范围分析和工程初始化建议 确定项目定位为 Android 锄大地棋牌游戏，而不是静态原型 莫均杰在 Android Studio 中建立并运行工程 用例拆分 主要由 Codex/GPT 完成玩法拆分和用例关系草图 形成用例图参与者、用例清单和 PlantUML 草图 Annakuliyev Sedar 在 ProcessOn 中校对布局并导出正式图 报告材料组织 主要由 Codex/GPT 完成规约内容整理和文档结构生成 将 Use-Case Model、Vision、Supplementary Specification、Glossary、Iteration Plan 对应到现有材料 开发者按实际文件和阶段要求核对
+
+--- slide 025 ---
+锄大地 Android 棋牌游戏 4. 阶段 1：开始（Inception） 25 REPORT BLOCK 4.6 评分标准对应 • 本阶段主要对应评分标准中的“需求分析和面向对象设计”“ProcessOn UML 7 大图建模”和“AI 工具使用说明”。需求分析将评分点提前映射到功能模块，避免后续只实现游戏界面而忽略课程要求。
+
+--- slide 026 ---
+锄大地 Android 棋牌游戏 4. 阶段 1：开始（Inception） 26 REPORT BLOCK 4.7 问题与解决 问题 解决方法 锄大地规则存在南北差异 在需求阶段将规则拆分为可配置的 RuleSet，后续由北方规则和南方规则分别实现 多人蓝牙可能复杂且真机环境有限 先确定房主 C/S 拓扑，并计划使用本地模拟传输补充测试 课程要求既包含代码又包含建模和文档 在阶段计划中将 UML、代码、测试和 AI 使用说明同时纳入交付
+
+--- slide 027 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 27 REPORT BLOCK 5.1 阶段目标 • 本阶段目标是完成面向对象分析和初步设计，建立项目的领域模型、系统顺序图、操作契约、包图、交互图和类图，并实现核心代码结构。
+
+--- slide 028 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 28 REPORT BLOCK 5.2 面向对象分析（1/3） • 锄大地游戏的核心对象包括扑克牌、牌堆、玩家、牌型、规则、牌局状态、玩家动作和联机消息。根据这些对象，项目将代码分为 Model、Controller、View、Transport、Profile 和 Audio 等模块。
+
+--- slide 029 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 29 REPORT BLOCK 5.2 面向对象分析（2/3） 模块 关键类 职责 牌与牌型 Card、Deck、HandClassifier、HandType 表示牌面、发牌、牌型识别和牌型比较基础 规则 RuleProfile、NorthRuleSet、SouthRuleSet 表示南北玩法、首出规则和压牌规则 回合控制 GameController、GameState、Move 处理出牌、不出、三家过牌重置和胜负结算 AI AiStrategy、GreedyAiStrategy、HeuristicAiStrategy、MonteCarloRolloutAiStrategy 表示不同难度的人机策略 联机 GameTransport、BluetoothHostTransport、BluetoothClientTransport、LocalRoomTransport 隔离真实蓝牙和本地模拟传输 玩家成长 PlayerProfile、ProfileController、ProfileStore 管理金币、等级、经验、战绩、头像和成就 UI 与反馈 ChudadiApp、CardRoomMusicPlayer、TableAnimationKeys 负责页面、动画、音乐、音效和交互反馈
+
+--- slide 030 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 30 REPORT BLOCK 5.2 面向对象分析（3/3） • 分析建模阶段重点把“现实牌局中的名词”转换为“可维护的领域对象”： 1. Card 表示单张牌，内部由 Suit 和 Rank 组成；Deck 负责生成 52 张牌、洗牌和按 seed 发牌。 2. HandClassifier 只负责识别牌型，不关心 UI 和蓝牙；这样规则、AI、测试都能复用同一套牌型判断。 3. RuleSet 负责规则差异，NorthRuleSet 和 SouthRuleSet 只改变首出牌、炸弹增强、同张数压制等规则点，不复制整套游戏流程。 4. GameState 是牌局唯一状态源，保存玩家手牌、当前回合、上一手、过牌次数、胜者、提示消息和规则。 5. Move.Play 与 Move.Pass 表示动作命令，玩家、AI、蓝牙客户端最终都转换成同一种动作模型。 6. RoomSeat 表示蓝牙房间座位，既能表达真人、房主、人机、空位，也能表达在线、断线、托管和准备状态。 7. PlayerProfile 表示本地玩家档案，包含昵称、金币、等级经验、头像、战绩和成就。 • 这些对象对应类图中的核心区域：model 是牌局领域模型，controller 是业务规则执行者，transport 是联机协议和传输，profile 是玩家成长数据，view/audio 是页面、动画和反馈。
+
+--- slide 031 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 31 REPORT BLOCK 5.3 MVC 分层设计 • 项目采用 MVC 思想组织代码： 1. Model 层负责领域数据和规则，包括 Card、Deck、HandType、RuleSet、GameState、Player、RoomSeat、GameSnapshot 和 PlayerProfile。 2. Controller 层负责业务逻辑，包括 GameController、PlayerActionPolicy、RoomController、NetworkMoveGuard 和 ProfileController。 3. View 层使用 Jetpack Compose 实现界面展示，包括开屏、大厅、规则设置、人机难度选择、蓝牙房间、牌桌、结算和玩家中心。 • 这种分层让 UI 不直接处理复杂规则，让规则、AI、蓝牙和测试能够独立演进。 • 更细的实现边界如下： • 例如玩家点击 出牌 时，View 层只收集选中的 Card；PlayerActionPolicy 判断按钮是否可用；GameController 调用 RuleSet 校验是否合法；成功后生成新的 GameState；如果是蓝牙对局，房主再通过 GameSnapshot 广播给客户端。这个流程体现了 MVC 的分层和顺序图中的调用链。 层次 代码位置 主要类 具体职责 Model app/src/main/java/com/example/uml_chudadi/model Card、Deck、HandType、GameState、RuleSet、Player 表示牌、牌型、玩家、规则和牌局状态，不依赖 Android UI Controller app/src/main/java/com/example/uml_chudadi/controller GameController、AiStrategy、PlayerActionPolicy、NetworkMoveGuard 处理发牌、出牌、过牌、AI 决策、按钮可用性和网络请求校验 Transport app/src/main/java/com/example/uml_chudadi/transport GameTransport、BluetoothHostTransport、BluetoothClientTransport、GameMessageCodec 隔离蓝牙 socket、消息编解码、快照同步和房间座位 Profile app/src/main/java/com/example/uml_chudadi/profile PlayerProfile、ProfileController、ProfileStore 处理等级、金币、头像、战绩、成就、每日奖励和本地保存 View app/src/main/java/com/example/uml_chudadi/view ChudadiApp、SplashScreen、LobbyScreen、GameScreen 负责 Compose 页面、动画、弹窗和用户交互 Audio app/src/main/java/com/example/uml_chudadi/audio CardRoomMusicPlayer、GameSoundEffects 负责背景音乐、出牌音效和震动反馈
+
+--- slide 032 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 32 REPORT BLOCK 5.4 建模成果（1/3） • 本阶段重点完成类图、顺序图、包图和交互图。类图展示 Model、Controller、Transport、Profile 和 View/Audio 的类关系；顺序图展示玩家一次本地出牌以及蓝牙房主权威同步的调用流程。 • UML 相关材料位于 docs/uml/：
+
+--- slide 033 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 33 REPORT BLOCK 5.4 建模成果（2/3） UML 图 文件 说明 用例图 docs/uml/use_case.png 玩家、房主、加入者和人机与核心用例 类图 docs/uml/class_diagram.png Model、Controller、Transport、View/Audio 类关系 顺序图 docs/uml/sequence_game_turn.png 本地出牌和蓝牙同步调用顺序 活动图 docs/uml/activity_play.png 开局、出牌、不出、结算和再开局流程 状态图 docs/uml/state_game.png 页面、房间、牌桌、暂停和结算状态 组件图 docs/uml/component_diagram.png UI、控制器、规则、消息、蓝牙和系统能力 部署图 docs/uml/deployment_diagram.png 房主手机、加入者手机、蓝牙栈和开发测试环境
+
+--- slide 034 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 34 REPORT BLOCK 5.4 建模成果（3/3） • 虽然 Excel 里写的是“UML Package Diagrams、UML Interaction Diagrams、UML Class Diagrams”，最终交付采用实训要求中的 UML 7 大图覆盖这些内容：组件图表达包/模块依赖，顺序图表达交互过程，类图表达静态结构，部署图表达手机和开发环境。项目内保留 .puml 文本是为了方便版本管理，正式答辩时说明为“PlantUML 代码导入或参照迁移到 ProcessOn UML 后绘制正式图”。
+
+--- slide 035 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 35 REPORT BLOCK 5.5 实现成果（1/6） • 本阶段完成了 MVC 工程结构和主要模型设计。Model 层负责 Card、Player、GameState、RuleSet、HandType 等领域数据和规则抽象；Controller 层负责 GameController、AiController、RoomController、PlayerActionPolicy 等业务流程；View 层通过 ChudadiApp 和 Compose 组件展示状态并收集用户意图。GameState 仍是牌桌状态源，但它属于 MVC 中的 Model，不直接处理界面和蓝牙线程。UML 类图、顺序图和组件图主要由 Codex/GPT 根据最新代码生成 PlantUML 草图，再在 ProcessOn/PlantUML 预览中校对和导出。 • 阶段成果展示： 成果类型 展示内容 证据材料 MVC 代码成果 Model 层保存牌、玩家、规则和牌局状态；Controller 层推进出牌、过牌、AI 和房间流程；View 层只展示状态和触发用户意图 model/、controller/、view/ChudadiApp.kt 设计成果 MVC 分层边界明确，Model、Controller、Transport、Profile、View、Audio 职责分离 docs/design.md 图片成果 类图展示 Model、Controller、Transport、Profile、View/Audio 的依赖关系 docs/uml/class_diagram.png 交互成果 顺序图展示本地出牌和蓝牙房主权威同步调用链 docs/uml/sequence_game_turn.png • 本阶段使用的设计模式和设计原则如下： 设计模式/原则 阶段作用 代码或文档落点 MVC 架构模式 将领域状态、业务控制和 Compose 界面分离，是整个项目最基础的结构模式 model/、controller/、view/ 策略模式雏形 先定义 AiStrategy 接口，为后续简单、普通、困难 AI 策略替换做准备 controller/AiStrategy.kt 命令对象思想 用 Move.Play、Move.Pass 表示玩家动作，使本地玩家、AI 和远端消息都能复用同一动作模型 model/Move.kt 单一状态源 用 GameState 保存牌桌核心状态，UI 由状态变化重组，减少多处变量不一致 model/GameState.kt • 核心状态模型代码片段如下：
+
+--- slide 036 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 36 REPORT BLOCK 5.5 实现成果（2/6） data class GameState( val players: List<Player>, val ruleSet: RuleSet, val currentPlayerId: Int, val lastPlayedHand: PlayedHand? = null, val passCount: Int = 0, val firstTurn: Boolean = true, val winnerId: Int? = null, val message: String = "准备开始" )
+
+--- slide 037 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 37 REPORT BLOCK 5.5 实现成果（3/6） • 阶段图片成果如下：
+
+--- slide 038 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 38 REPORT BLOCK 5.5 实现成果（4/6） 阶段2类图
+
+--- slide 039 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 39 REPORT BLOCK 5.5 实现成果（5/6） 阶段2顺序图
+
+--- slide 040 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 40 REPORT BLOCK 5.5 实现成果（6/6） 阶段2组件图
+
+--- slide 041 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 41 REPORT BLOCK 5.6 Codex/GPT 使用情况 使用位置 使用方式 Codex/GPT 产出 开发者确认与调整 领域对象识别 主要由 Codex/GPT 完成从锄大地流程中抽取 Card、Deck、Player、GameState、Move、RuleSet 等对象 形成面向对象分析对象清单 Codex 生成主要 Kotlin 数据类和接口，莫均杰在 Android Studio 中运行确认 MVC 分层设计 主要由 Codex/GPT 完成比较 UI 直接写规则与 MVC 分层的维护差异 确定 Model/Controller/View/Transport/Profile 的职责边界 通过 docs/design.md 和源码包结构核对 UML 草图整理 主要由 Codex/GPT 完成生成类图、顺序图、组件关系的初始元素 形成 PlantUML 草图和图中类名、消息名 Annakuliyev Sedar 在 ProcessOn 中校对布局并导出 操作契约说明 主要由 Codex/GPT 完成描述出牌、过牌、AI 行动和蓝牙同步的前置条件、后置状态 补充顺序图和报告中的交互说明 郭铭涛根据后续测试场景检查流程是否可验证
+
+--- slide 042 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 42 REPORT BLOCK 5.7 评分标准对应 • 本阶段主要对应“需求分析和面向对象设计”“分析建模和设计建模”“ProcessOn UML 7 大图建模”“UI 页面切换基础设计”。通过 MVC 分层、领域对象提取和 UML 图，项目具备了后续扩展规则、蓝牙和 AI 的结构基础。
+
+--- slide 043 ---
+锄大地 Android 棋牌游戏 5. 阶段 2：细化迭代 1 / 构造（Elaboration / Construction） 43 REPORT BLOCK 5.8 问题与解决 问题 解决方法 UI 直接处理规则会导致代码复杂 将规则判断下沉到 RuleSet 和 GameController，Compose 只收集用户意图 牌型识别需要被规则、AI、测试复用 独立设计 HandClassifier，避免在多个模块重复实现 UML 容易与代码不同步 先用 PlantUML 文本记录结构，再迁移到 ProcessOn 并按最终代码校对
+
+--- slide 044 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 44 REPORT BLOCK 6.1 阶段目标 • 本阶段目标是完成出牌规则模块和多人通信模块，并把与规则、蓝牙和协议相关的设计模式落到代码中。设计模式不是只集中在本阶段，前一阶段已经形成 MVC 和命令对象基础，本阶段重点补充规则抽象、传输适配、房主权威和消息编解码。
+
+--- slide 045 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 45 REPORT BLOCK 6.2 出牌规则模块 • 项目使用 RuleSet 表示规则接口，并通过 NorthRuleSet 和 SouthRuleSet 适配南北玩法差异： • 牌型识别由 HandClassifier 完成，支持单张、对子、三张、顺子、同花、葫芦、四带一和同花顺。GameController 在玩家出牌时调用规则模块进行合法性校验，并根据三家过牌、上一手牌和当前玩家推进牌局状态。 • 规则模块的详细执行流程如下： 1. 玩家或 AI 选择若干张牌后，GameController.play() 首先判断是否轮到该玩家。 2. 控制器调用 state.ruleSet.classify(cards) 识别牌型；无法识别时返回非法提示。 3. 如果是首出，调用 state.ruleSet.canLead(cards, state.firstTurn) 检查是否包含规则指定首牌。 4. 如果是跟牌，调用 state.ruleSet.canBeat(previous, next) 判断是否可以压过上一手。 5. 合法出牌会从玩家手牌中移除对应牌，刷新 lastMove、currentPlayerId 和提示消息。 6. 三家连续不出后，上一手清空，下一位玩家获得自由出牌权。 7. 某玩家手牌为 0 时，winnerId 产生，进入结算。 • 南北规则的设计不是把整套流程复制两遍，而是把差异封装在 RuleProfile 和 RuleSet 内。这样 UI、AI、蓝牙都只依赖规则接口，不需要知道当前是北方还是南方玩法。蓝牙开局时，房主把规则名放入 START 消息，客户端用本地 ruleSetByIdOrName(ruleName) 转换为同一规则对象，保证多端比较结果一致。 规则项 北方规则 南方规则 首出牌 黑桃 3 首出 方块 3 首出 五张牌比较 四带一、同花顺可作为增强强牌跨牌型压制普通牌 五张牌之间按顺子、同花、葫芦、四带一、同花顺等级比较 压牌限制 根据北方增强牌规则判断 更强调同张数压制和五张牌等级 配置方式 通过规则设置保存到本机 通过规则设置保存到本机
+
+--- slide 046 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 46 REPORT BLOCK 6.3 蓝牙通信模块（1/4） • 多人联机采用房主权威的 C/S 模式，而不是一对一蓝牙匹配。房主手机创建房间并监听连接，加入者手机作为客户端连接房主。房间固定四个座位，房主可以添加人机补位，满四座并准备后开始游戏。 • 蓝牙通信的核心流程： 1. 房主创建房间，建立 BluetoothHostTransport，持续监听加入者连接。 2. 加入者搜索附近或已配对设备，并通过 BluetoothClientTransport 连接房主。 3. 加入者发送 HELLO，其中包含昵称和客户端标识等基础信息。 4. 房主维护四座位 RoomSeat，记录 SeatConnectionState、clientId、设备地址和是否由 AI 托管。 5. 房主广播 ROOM(roomId, hostEpoch, seats)，使所有客户端看到一致座位。 6. 开局时房主生成 seed、同步规则并广播 START 消息。 7. 客户端只发送 MOVE_REQUEST，不直接修改本地牌局。 8. 房主使用 NetworkMoveGuard 判断是否为当前玩家的有效请求。 9. 房主调用 GameController 校验和推进状态。 10. 房主广播 MOVE_ACCEPTED 和 STATE_SNAPSHOT，所有客户端以房主快照为准刷新牌桌。 11. 如果客户端断线，传输层发出 TransportEvent.PeerDisconnected，房主把对应座位标记为“断线，人机托管中”，并广播 DISCONNECT_NOTICE。 12. 当前发布版没有实现自动断线重连；断线客户端需要重新进入蓝牙流程。 13. 如果房主断线，客户端弹窗提示连接断开，关闭当前传输并退出房间，提示重新创建或重新加入。 • 这种方式可以避免多台手机各自结算导致的状态分叉，也便于测试时用 LocalRoomTransport 和 SimulatedBluetoothHubTest 模拟多人房间。由于房主是权威端，当前版本对房主断线采用保守处理：直接提示并退出，而不尝试新房主迁移，避免恢复过程中出现多端状态不一致。
+
+--- slide 047 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 47 REPORT BLOCK 6.3 蓝牙通信模块（2/4） • 传输层和协议层的最新实现细节：
+
+--- slide 048 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 48 REPORT BLOCK 6.3 蓝牙通信模块（3/4） 类型 代码落点 说明 传输事件 TransportEvent.Message、PeerConnected、PeerDisconnected、Error socket 线程不再只回调字符串，而是能区分收到消息、连接、断开和错误 定向发送 GameTransport.sendTo(peerKey, message) 房主可以只回复某个客户端，例如房满错误或同步快照 房间标识 roomId 区分不同房间和再开局，避免旧消息混入新房间 房主时代 hostEpoch 协议中保留的版本字段，用于过滤旧快照或后续扩展 客户端标识 clientId 用于标记加入者身份和座位信息，当前版本不承诺自动断线恢复 连接状态 SeatConnectionState 座位可显示在线、断线、空位等状态 AI 托管 takeoverByAi 真人断线时座位不删除，由房主 AI 继续托管
+
+--- slide 049 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 49 REPORT BLOCK 6.3 蓝牙通信模块（4/4） • 新增或扩展的消息包括： • 客户端断线时，房主通过 TransportEvent.PeerDisconnected(peerKey) 定位座位，调用 markHumanDisconnected(takeoverByAi = true) 保留座位。UI 显示“某玩家断线，已由人机托管”，如果轮到该座位，由房主运行普通难度 AI 出牌并继续广播快照。当前版本没有实现自动断线重连，断线客户端需要重新进入蓝牙流程。 • 房主断线时，客户端弹窗提示房主连接已断开，暂停并退出当前对局。因为房主端保存权威牌局状态，当前版本不做新房主迁移，恢复方式是重新创建房间或重新加入。 消息 用途 DISCONNECT_NOTICE 通知某座位断线并已进入 AI 托管 HEARTBEAT 协议预留的连接健康消息，当前主要依靠 socket 断开和错误事件提示 HOST_MIGRATION、REJOIN_REQUEST / REJOIN_ACCEPTED 协议模型中保留过扩展入口，但当前发布版不承诺自动房主迁移或断线重连 STATE_SNAPSHOT 完整牌局快照，包含 roomId、hostEpoch、玩家、手牌、桌面和提示
+
+--- slide 050 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 50 REPORT BLOCK 6.4 本阶段设计模式应用（1/2） 设计模式/原则 代码落点 解决的问题 策略模式 AiStrategy 及三种 AI 实现 不同 AI 算法可替换，控制器只依赖接口 接口隔离/适配器思想 GameTransport、真实蓝牙传输和本地模拟传输 UI 和房间逻辑不直接依赖 BluetoothSocket 主机权威同步模式 NetworkMoveGuard、GameSnapshot、GameMessageCodec 避免多端状态分叉，统一由房主校验并广播 事件驱动模式 TransportEvent.Message、PeerConnected、PeerDisconnected、Error 将蓝牙 socket 的消息、连接、断开和错误统一转换为业务事件 断线托管模式 takeoverByAi、DISCONNECT_NOTICE 客户端断线时保留座位并由 AI 接管；当前版本不实现自动重连恢复 命令对象思想 Move.Play、Move.Pass、MoveRequest 玩家、人机和远端动作统一表达 编码器/解码器模式 GameMessageCodec 联机协议集中管理，减少散落解析 仓储模式 ProfileStore 玩家数据和设置统一持久化 状态模式 Screen、BluetoothEntryMode、GameStartPhase 页面和牌局阶段由明确状态驱动 单一职责 规则、控制器、AI、蓝牙、UI、玩家成长拆分 降低模块耦合，方便测试和迭代
+
+--- slide 051 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 51 REPORT BLOCK 6.4 本阶段设计模式应用（2/2） • 这些设计模式对应的技术讲解点如下： 1. 策略模式是最核心的评分点之一。GameController 不知道具体 AI 算法，只接收 AiStrategy.chooseMove(...) 的结果；简单、普通、困难只是不同策略实现。 2. 适配器思想体现在 GameTransport，UI 和房间逻辑面对的是统一接口，真实蓝牙和模拟蓝牙都能接入。 3. 主机权威同步是联机稳定性的关键。客户端不直接修改牌局，只发 MOVE_REQUEST；房主过滤重复/过期/非当前玩家请求后再广播权威状态。 4. 编码器/解码器模式把所有文本协议集中在 GameMessageCodec，避免 UI 或 socket 线程散落解析逻辑。 5. 仓储模式让 ProfileStore 统一处理 SharedPreferences，昵称、金币、头像、战绩、成就不直接由页面拼字符串保存。 6. 事件驱动和断线托管是蓝牙稳定性改造的重点，让客户端断线和房主断线不再只是 socket 异常，而是可被 UI 弹窗、座位托管和退出流程处理的状态。
+
+--- slide 052 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 52 REPORT BLOCK 6.5 实现成果（1/8） • 本阶段完成南北规则模块、牌型识别、联机消息协议、四座位房间、房主广播同步、本地模拟传输，以及蓝牙断线处理机制。传输层通过 TransportEvent 上报连接和断开，客户端断线时房主保留座位并让 AI 托管，房主断线时客户端弹窗提示并退出房间。项目满足“多人蓝牙连接，而不是一对一蓝牙匹配”的核心要求，并且通过测试覆盖规则差异、消息编解码、房间座位、客户端断线托管和蓝牙模拟场景。 • 阶段成果展示： • 南北规则代码片段如下： 成果类型 展示内容 证据材料 代码成果 RuleSet、NorthRuleSet、SouthRuleSet 封装南北规则差异 app/src/main/java/com/example/uml_chudadi/model/RuleSet.kt 代码成果 GameTransport 与 TransportEvent 把蓝牙消息、连接、断开、错误统一为事件 app/src/main/java/com/example/uml_chudadi/transport/GameTransport.kt 协议成果 DISCONNECT_NOTICE、STATE_SNAPSHOT 等消息支持断线提示、托管和状态同步；迁移/重连消息仅作为后续扩展入口保留 app/src/main/java/com/example/uml_chudadi/transport/GameMessage.kt 图片成果 顺序图展示客户端发请求、房主校验、广播快照的权威同步流程 docs/uml/sequence_game_turn.png 测试成果 模拟蓝牙覆盖三人加入、房满拒绝、房主广播、移动请求和客户端断线托管 app/src/test/java/com/example/uml_chudadi/transport/SimulatedBluetoothHubTest.kt
+
+--- slide 053 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 53 REPORT BLOCK 6.5 实现成果（2/8） object NorthRuleSet : RuleSet { override val profile = RuleProfile( id = "north", title = "北方规则", firstCard = Card(Suit.Spades, Rank.Three), bombMode = BombMode.Enhanced, fiveCardRanking = true, sameSizeOnly = false ) } object SouthRuleSet : RuleSet { override val profile = RuleProfile( id = "south", title = "南方规则", firstCard = Card(Suit.Diamonds, Rank.Three), bombMode = BombMode.None, fiveCardRanking = true, sameSizeOnly = true ) }
+
+--- slide 054 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 54 REPORT BLOCK 6.5 实现成果（3/8） • 蓝牙传输抽象代码片段如下：
+
+--- slide 055 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 55 REPORT BLOCK 6.5 实现成果（4/8） sealed class TransportEvent { data class Message(val raw: String, val peerKey: String? = null) : TransportEvent() data class PeerConnected(val peerKey: String, val deviceName: String = "") : TransportEvent() data class PeerDisconnected(val peerKey: String, val reason: String = "连接已断开") : TransportEvent() data class Error(val reason: String, val peerKey: String? = null) : TransportEvent() }
+
+--- slide 056 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 56 REPORT BLOCK 6.5 实现成果（5/8） • 阶段图片成果如下：
+
+--- slide 057 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 57 REPORT BLOCK 6.5 实现成果（6/8） 阶段3顺序图
+
+--- slide 058 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 58 REPORT BLOCK 6.5 实现成果（7/8） 阶段3活动图
+
+--- slide 059 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 59 REPORT BLOCK 6.5 实现成果（8/8） 阶段3部署图
+
+--- slide 060 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 60 REPORT BLOCK 6.6 Codex/GPT 使用情况 使用位置 使用方式 Codex/GPT 产出 开发者确认与调整 南北规则比较 主要由 Codex/GPT 完成规则差异分析和 Kotlin 规则模块实现 形成 RuleProfile、NorthRuleSet、SouthRuleSet 和规则测试思路 开发者运行规则测试并按实际玩法修正 蓝牙拓扑选择 主要由 Codex/GPT 完成比较一对一匹配、网状连接和房主 C/S 方案 选择房主权威 C/S 模式，避免多端状态分叉 通过 GameTransport、GameMessageCodec 和模拟测试落地 断线处理方案 主要由 Codex/GPT 完成分析客户端断线、房主断线、重复请求和旧消息覆盖等风险 当前代码采用 takeoverByAi 客户端托管、房主断线弹窗退出的保守方案；clientId、hostEpoch 保留为协议扩展字段 通过 RoomSeatTest、SimulatedBluetoothHubTest 覆盖客户端断线托管和房间边界 设计模式说明 主要由 Codex/GPT 完成把接口隔离、主机权威、编解码器、事件驱动和托管恢复对应到代码点 形成报告第 6.4 节设计模式表 小组按实际源码文件逐项核对，避免空写模式名称
+
+--- slide 061 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 61 REPORT BLOCK 6.7 评分标准对应 • 本阶段对应评分标准： 1. 适配玩家自由选择南北规则的不同玩法。 2. 实现多人的蓝牙连接，提供多名玩家联机对战功能。 3. 详细设计时引入必要设计模式，优化设计。 4. 通过 UML 顺序图、组件图和部署图说明联机结构。
+
+--- slide 062 ---
+锄大地 Android 棋牌游戏 6. 阶段 3：细化迭代 2 / 构造（Elaboration / Construction） 62 REPORT BLOCK 6.8 问题与解决 问题 解决方法 蓝牙多机连接容易出现状态不一致 使用房主权威同步，客户端只提交请求，最终以房主快照为准 真机数量不足会影响联机测试 使用 SimulatedBluetoothHubTest 覆盖三人加入、房满拒绝、广播、移动请求和客户端断线托管 客户端断线会导致座位空缺和牌局中断 保留原座位并设置 takeoverByAi，房主用普通 AI 继续代打；当前版本不承诺自动重连恢复 房主断线会导致权威端丢失 当前版本弹窗提示后退出房间，要求重新创建或重新加入，避免无权威端时状态分叉 南北规则差异会影响首出和压牌 使用 RuleProfile、NorthRuleSet、SouthRuleSet 拆分规则 蓝牙协议容易散落在 UI 代码中 使用 GameMessageCodec 集中编码和解码
+
+--- slide 063 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 63 REPORT BLOCK 7.1 阶段目标 • 本阶段目标是完成 AI 算法模块，完善状态建模，并补齐玩家成长系统与牌桌体验。评分标准要求扑克牌博弈 AI 至少提供两种算法策略，并使用策略模式。本项目实现简单、普通、困难三档 AI，满足并超过该要求；同时把大厅顶部的头像、等级、金币、战绩入口从静态展示改成真实可用的本地成长系统。
+
+--- slide 064 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 64 REPORT BLOCK 7.2 AI 算法模块（1/3） • AI 模块通过 AiStrategy 接口统一不同算法： AI 难度 策略类 基本思路 简单 GreedyAiStrategy 优先选择当前能出的较小合法牌，逻辑简单，适合新手 普通 HeuristicAiStrategy 根据牌型价值、手牌保留和局面进行启发式选择 困难 MonteCarloRolloutAiStrategy 在合法动作中进行模拟评估，选择预期更优的出牌 • GameController 不直接依赖具体 AI 类，而是由 AI 控制逻辑根据难度选择对应 AiStrategy。这种策略模式使 AI 可以替换或扩展，例如后续可以加入更强的搜索算法或机器学习模型，而不需要修改牌局控制器的主体流程。 • 三种 AI 的参考来源和实现方式： AI 参考思路 项目内实现方式 简单 传统规则启发式和 RLCard/OpenSpiel 中“合法动作集合”概念 枚举 GameController.legalPlays()，选择最小可行牌；无法出牌则不出 普通 扑克游戏常见保牌、少拆组合、优先降低手牌数量的启发式 对候选动作评分，考虑牌型强度、拆牌损失、剩余手牌数量和是否能释放小牌 困难 ISMCTS 的有限信息模拟思想、OpenSpiel 的状态/动作解耦、DouZero 对出牌游戏候选动作评估的方向 不加载神经网络模型，而是在 Kotlin 中对合法候选做有限 rollout 和局面评分，优先考虑一手走完、对手压力、保留强牌和减少结构损失 • 参考资料包括：
+
+--- slide 065 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 65 REPORT BLOCK 7.2 AI 算法模块（2/3） 1. RLCard：面向纸牌游戏的强化学习工具包，支持 Blackjack、Leduc Hold'em、Texas Hold'em、UNO、Dou Dizhu、Mahjong 等环境。项目参考其“游戏环境 + Agent 策略接口 + 合法动作集合”的组织方式。 • GitHub：<https://github.com/datamllab/rlcard> • 论文：<https://arxiv.org/abs/1910.04376> 2. OpenSpiel：Google DeepMind 开源的多智能体博弈研究框架，支持完美/不完美信息、回合制/同步行动、搜索和强化学习算法。项目参考其“游戏状态、合法动作、策略/Agent 解耦”的通用博弈建模方式。 • GitHub：<https://github.com/google-deepmind/open_spiel> 3. ISMCTS：Cowling、Powley、Whitehouse 的 Information Set Monte Carlo Tree Search 论文，核心思想是把 Monte Carlo 搜索用于隐藏信息和不确定性游戏。项目困难 AI 没有完整实现树搜索，而是参考“对候选动作进行有限随机模拟和期望评分”的 rollout 思路。 • 论文页面：<https://pure.york.ac.uk/portal/en/publications/information-set-monte-carlo-tree-search/> 4. DouZero：快手开源的斗地主 AI，使用自博弈深度强化学习解决斗地主。项目没有使用 DouZero 的神经网络和训练模型，只参考其对斗地主类出牌游戏中动作候选、残局压力和多玩家不完美信息问题的处理方向。 • GitHub：<https://github.com/kwai/DouZero> • 论文：<https://arxiv.org/abs/2106.06135> • 项目没有把这些开源项目的模型或代码直接接入 Android。原因是锄大地没有现成可直接使用的移动端训练模型，RLCard/OpenSpiel/DouZero 更偏研究或 Python/C++ 生态；直接接入会带来模型体积、推理框架、训练数据和性能成本。当前实现属于“规则启发式 + 有限模拟”的博弈 AI，是真正能自主决策的 AI 策略模块，但不是深度学习大模型。 • AI 决策安全边界：
+
+--- slide 066 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 66 REPORT BLOCK 7.2 AI 算法模块（3/3） 1. AI 输出动作后仍由 GameController 和 RuleSet 校验，防止非法牌进入牌局。 2. 蓝牙对局中 AI 只由房主运行，客户端不各自运行 AI，避免不同设备随机模拟结果不一致。 3. 困难 AI 不直接把对手完整手牌当作上帝视角使用，而是基于公开状态和候选动作评分。 4. AI 思考期间 UI 显示思考状态，设置菜单打开时暂停 AI 行动，避免玩家打开菜单后 AI 继续出牌。 • 本阶段使用的设计模式和设计原则如下： 设计模式/原则 阶段作用 代码或文档落点 策略模式 三种 AI 都实现 AiStrategy，难度变化只替换策略对象，不改牌局控制器 GreedyAiStrategy、HeuristicAiStrategy、MonteCarloRolloutAiStrategy 模板化评估思想 困难 AI 将合法候选统一进入 rollout 评分流程，减少散落条件判断 MonteCarloRolloutAiStrategy 状态模式/状态机思想 Screen、GameStartPhase 和蓝牙状态共同约束页面与牌局阶段 Screen、GameStartPhase、state_game.puml 防御式校验 AI 只提出动作，最终仍由 GameController 和 RuleSet 校验，防止非法动作进入状态 GameController.play()、RuleSet.canBeat()
+
+--- slide 067 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 67 REPORT BLOCK 7.3 状态建模（1/3） • 项目通过状态图描述从启动到结算的主要状态转换： 1. Splash：开屏页，玩家点击开始游戏后进入大厅。 2. Lobby：大厅，进入人机、蓝牙、规则、设置、教程或玩家中心。 3. ReadyToStart：人机对局预备牌桌，玩家确认开始。 4. Dealing：发牌动画阶段。 5. Playing：正式对局阶段，玩家和 AI 按回合出牌。 6. Paused：设置、确认或临时暂停状态。 7. Result：结算页，展示胜负、金币、经验、升级和再来一局。 • 状态建模帮助 UI 避免多个布尔值交叉控制，页面切换和牌局阶段都由明确状态驱动。 • 状态图不仅描述页面，还描述关键业务保护：
+
+--- slide 068 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 68 REPORT BLOCK 7.3 状态建模（2/3） 状态 进入条件 禁用/允许内容 ReadyToStart 人机选择难度后进入牌桌预备页 不显示手牌，不启动倒计时，不触发 AI Dealing 点击开始游戏后播放发牌动画 禁用出牌/不出/提示/重选，倒计时暂停 Playing 发牌动画完成后 允许当前玩家按规则出牌，AI 可以行动 Paused 设置菜单、弹窗确认、断线提示等情况 暂停倒计时和 AI 自动行动 ClientTakeover 客户端断线 房主 AI 托管断线座位并广播快照 HostDisconnected 房主断线或连接丢失 弹窗提示并退出当前房间，要求重新创建或重新加入 Result 玩家手牌清空 展示结算、奖励、成就和再来一局
+
+--- slide 069 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 69 REPORT BLOCK 7.3 状态建模（3/3） • 这些状态对应 GameStartPhase、Screen、BluetoothEntryMode、网络状态字符串和座位连接状态，共同保证 UI、倒计时、AI 和蓝牙同步不会互相抢流程。
+
+--- slide 070 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 70 REPORT BLOCK 7.4 玩家成长系统完善（1/3） • 玩家成长系统在本阶段完成，用于让大厅顶部头像、等级、金币、战绩入口从“静态展示”变成真实可用功能。该模块放在 profile/ 包中，使用 ProfileController 统一处理结算奖励、等级经验、金币消费、头像解锁、成就和战绩，使用 ProfileStore 通过 SharedPreferences 保存本地档案。 • 成长系统的主要功能如下：
+
+--- slide 071 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 71 REPORT BLOCK 7.4 玩家成长系统完善（2/3） 功能 代码/数据 实现说明 玩家档案 PlayerProfile 保存昵称、头像、金币、经验、等级、称号、统计和成就 经验等级 ProfileController 每局根据名次和模式增加经验，经验达到阈值后升级 金币奖励 ProfileController.settleMatch 人机/蓝牙对局结束后根据名次发放金币 金币消费 renameWithCost、unlockAvatar、unlockCustomAvatar、resetStats 改名、头像解锁、自定义头像、重置战绩都需要金币并二次确认 头像商店 BuiltInAvatar 内置多个自绘头像，按普通、稀有、传说设置不同价格和视觉样式 自定义头像 相册选择 + 私有目录复制 未解锁时显示明显提示，解锁后可选择本地图片作为头像 战绩 MatchRecord、ProfileStats 记录最近 50 局，总局数、胜场、蓝牙局、困难胜场、连胜等统计 成就 Achievement 首胜、连胜、困难胜利、蓝牙对局等条件触发，只奖励一次 每日奖励 ProfileController.claimDailyReward 同一天不可重复领取，跨天可再次领取
+
+--- slide 072 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 72 REPORT BLOCK 7.4 玩家成长系统完善（3/3） • 玩家成长结算流程： 1. 对局结束后，结算页根据名次、模式、难度、规则和剩余牌数生成 MatchSettlement。 2. ProfileController.settleMatch(profile, settlement) 计算金币、经验、成就和历史记录。 3. 控制器返回 ProfileChange，其中包含更新后的 PlayerProfile、本局 MatchRecord 和提示信息。 4. ProfileStore.saveProfile() 写入 SharedPreferences。 5. 大厅、玩家中心和结算页读取同一份档案，显示最新金币、等级、头像和战绩。 • 金币消费采用确认弹窗保护：玩家点击改名、解锁头像、解锁自定义头像或重置战绩时，先显示消费说明和金币数量；确认后才调用 ProfileController，金币不足时不修改档案并弹窗提示失败原因。这样可以避免误扣金币，也方便答辩时说明本地数据的完整闭环。 • 本阶段为成长系统使用的设计模式如下： 设计模式/原则 代码落点 说明 仓储模式 ProfileStore 统一保存和读取玩家档案，UI 不直接处理序列化 门面/控制器模式 ProfileController 对外提供结算、改名、头像、战绩重置等统一入口 单一职责 PlayerProfile、ProfileStats、MatchRecord、Achievement 档案、统计、历史记录和成就各自独立 防御式校验 ProfileChange、金币不足判断 消费失败时不改状态、不扣金币、不写入存储
+
+--- slide 073 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 73 REPORT BLOCK 7.5 UI 与交互完善（1/3） • 本阶段继续完善 Compose 页面和动画体验：
+
+--- slide 074 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 74 REPORT BLOCK 7.5 UI 与交互完善（2/3） 页面 功能 开屏页 展示扑克牌背景和开始游戏入口 大厅 显示玩家头像、昵称、等级、金币和主要功能入口 人机难度页 选择简单、普通、困难 AI 规则页 切换北方和南方规则，并保存到本机 蓝牙房间 创建房间、加入对局、四座位、人机补位和准备状态 牌桌页 发牌、手牌选择、出牌、不出、提示、倒计时和 AI 思考 结算页 显示胜负、金币经验变化、成就和再来一局 玩家中心 昵称、头像、金币、等级、战绩、成就、每日奖励和头像商店
+
+--- slide 075 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 75 REPORT BLOCK 7.5 UI 与交互完善（3/3） • UI 技术实现细节： 1. 页面切换由 Screen 状态控制，不引入 Navigation 依赖，降低 Gradle 依赖风险。 2. AnimatedScreenHost 对页面切换做淡入、滑入和轻微缩放，避免硬切换。 3. 大厅使用漂浮扑克牌、主视觉光效、面板阴影和金色按钮，表现棋牌大厅氛围。 4. 人机开局采用“先入桌、再开始”的流程，玩家点击 开始游戏 后才发牌，和正式棋牌游戏流程更接近。 5. 发牌动画使用单个全局进度驱动中心牌堆向四个座位飞牌，避免 52 张牌各自启动独立动画导致卡顿。 6. 手牌选中时上浮、加阴影、轻微放大；出牌成功后播放飞向中央牌桌的动画。 7. 无可压牌时显示“手上没有可以大过人家的牌”，禁用出牌和提示，只保留不出。 8. 设置菜单打开时暂停倒计时和 AI 行动，菜单项统一为继续游戏、重新开始、返回大厅和退出确认。 9. 结算页展示金币、经验、升级、成就和再来一局；蓝牙对局再来一局回到原房间，不要求重新加入。
+
+--- slide 076 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 76 REPORT BLOCK 7.6 实现成果（1/4） • 本阶段完成三档 AI 策略、玩家成长系统、状态图细化、牌桌交互和用户体验增强。测试中覆盖 AI 合法动作、随机多局完成、玩家成长和动画 key 稳定性，减少 AI 出非法牌、成长数据丢失或 UI 动画重复播放的风险。 • 阶段成果展示： • AI 策略接口代码片段如下： 成果类型 展示内容 证据材料 代码成果 AiStrategy 统一简单、普通、困难三档 AI 算法接口 app/src/main/java/com/example/uml_chudadi/controller/AiStrategy.kt 代码成果 ProfileController 和 ProfileStore 管理金币、经验、头像、战绩和成就 app/src/main/java/com/example/uml_chudadi/profile/ 代码成果 Screen 和 GameStartPhase 管理页面切换、人机预备、发牌、游戏中、结算等状态 app/src/main/java/com/example/uml_chudadi/view/ChudadiApp.kt 图片成果 状态图展示开屏、大厅、房间、发牌、游戏中、暂停、断线提示和结算状态 docs/uml/state_game.png 测试成果 AI 合法动作、随机多局完成、玩家成长、动画 key 稳定性测试 GameControllerTest、ProfileControllerTest、TableAnimationKeysTest UI 成果 大厅、人机难度、规则、蓝牙房间、牌桌、结算、玩家中心等页面可切换 ChudadiApp.kt
+
+--- slide 077 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 77 REPORT BLOCK 7.6 实现成果（2/4） interface AiStrategy { val name: String fun chooseMove(state: GameState, playerId: Int): Move } class AiController( private val gameController: GameController, private val strategy: AiStrategy ) { fun playTurnIfNeeded(state: GameState): Move? { val player = state.currentPlayer if (player.kind.name != "LocalAi" || state.isFinished) return null return strategy.chooseMove(state, player.id) } }
+
+--- slide 078 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 78 REPORT BLOCK 7.6 实现成果（3/4） • 阶段图片成果如下：
+
+--- slide 079 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 79 REPORT BLOCK 7.6 实现成果（4/4） 阶段4状态图
+
+--- slide 080 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 80 REPORT BLOCK 7.7 Codex/GPT 使用情况 使用位置 使用方式 Codex/GPT 产出 开发者确认与调整 AI 策略设计 主要由 Codex/GPT 完成贪心、启发式、有限 rollout 三档策略代码实现 生成 AiStrategy.kt 中三种策略和对应测试场景 开发者运行 AI 合法动作测试并检查对局表现 策略模式说明 主要由 Codex/GPT 完成把 AI 难度选择与策略模式对应起来 形成“控制器依赖接口、难度替换策略”的技术解释 结合代码确认 GameController 不直接写死具体 AI 类 状态图细化 主要由 Codex/GPT 完成状态图节点、转换条件和 PlantUML 更新 补充状态图节点和本报告状态表 Annakuliyev Sedar 在 ProcessOn 中校对布局并导出 玩家成长实现 主要由 Codex/GPT 完成玩家档案、金币消费、头像商店、战绩和成就代码 形成 profile/ 包、玩家中心页面和成长测试场景 开发者在 App 中验证金币、头像、改名和战绩逻辑 UI 交互检查 主要由 Codex/GPT 完成排查发牌动画、AI 思考、设置暂停、无可压牌提示等交互边界 形成 UI 技术实现细节和测试关注点 郭铭涛通过手动验收和动画 key 测试确认
+
+--- slide 081 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 81 REPORT BLOCK 7.8 评分标准对应 • 本阶段对应评分标准： 1. 扑克牌博弈 AI 模块提供不同 AI 算法实现策略。 2. AI 模块使用策略模式。 3. 完成 UI 界面设计，实现不同页面切换。 4. 使用 UML 状态图描述系统状态转换。
+
+--- slide 082 ---
+锄大地 Android 棋牌游戏 7. 阶段 4：细化迭代 3 / 构造（Elaboration / Construction） 82 REPORT BLOCK 7.9 问题与解决 问题 解决方法 AI 可能选择非法牌 所有 AI 输出都经过 GameController 和 RuleSet 校验 AI 难度差异不明显 将简单、普通、困难拆分为不同策略实现 UI 状态复杂 使用 Screen、BluetoothEntryMode、GameStartPhase 管理页面和开局状态 成长数据容易分散在页面中 使用 ProfileController 和 ProfileStore 集中处理结算、消费和持久化 动画容易重复触发 使用 TableAnimationKeysTest 验证出牌动画 key 稳定
+
+--- slide 083 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 83 REPORT BLOCK 8.1 阶段目标 • 交付阶段目标是完成系统集成、测试验收、Release 包生成、GitHub 托管和最终文档整理，确保项目可以运行、可以展示、可以答辩。
+
+--- slide 084 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 84 REPORT BLOCK 8.2 系统整合（1/12） • 交付阶段首先进行系统整合，把前面三个细化迭代中分别完成的规则、AI、蓝牙、UI、玩家成长、音乐反馈和本地存储统一接入最终 App。整合顺序不是直接打包发布，而是先确认各模块之间的数据流、状态流和页面入口能够连成完整闭环。 • 最终项目整合了以下功能： 1. 开屏页、大厅、规则、设置、教程、玩家中心、人机对局、蓝牙房间、牌桌和结算页面。 2. 南北规则切换与本地保存。 3. 简单、普通、困难三档 AI。 4. 多人蓝牙房间、四座位、人机补位、房主权威同步、客户端断线 AI 托管，以及房主断线弹窗退出。 5. 玩家成长系统，包括等级、经验、金币、称号、战绩、成就、每日奖励、头像商店、自定义头像和改名消费。 6. 背景音乐、出牌音效、震动、开屏动画、发牌动画、出牌飞牌和结算动画。 7. Release APK 和 AAB 包。 • 整合时重点检查以下连接点： • 玩家成长系统已在细化迭代 3 完成，本交付阶段主要负责把它与结算页、大厅、玩家中心和测试报告统一集成，确认金币、经验、头像、战绩、成就和每日奖励在最终版本中可保存、可展示、可验收。 • 音乐与反馈系统也在交付阶段完成： 整合对象 整合方式 检查重点 规则模块 + 游戏控制器 GameController 每次出牌都调用当前 RuleSet 南北规则保存后是否影响后续人机和蓝牙对局 AI 模块 + 游戏流程 AiController 根据难度选择 AiStrategy AI 只在 Playing 阶段行动，暂停和发牌阶段不抢流程 蓝牙模块 + 游戏状态 房主广播 MOVE_ACCEPTED 和 STATE_SNAPSHOT 客户端只展示房主快照，不直接修改权威牌局 玩家成长 + 结算页 结算生成 MatchSettlement，交给 ProfileController 金币、经验、成就、战绩是否同步到大厅和玩家中心 音乐反馈 + 页面生命周期 CardRoomMusicPlayer 由页面状态控制 页面切换后音乐不重复创建，设置开关能生效 Release 配置 + 本地数据 debug/release 签名和敏感文件分离 私钥不上传 GitHub，release 包能独立安装运行
+
+--- slide 085 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 85 REPORT BLOCK 8.2 系统整合（2/12） 1. 背景音乐使用用户提供的 小旭音乐-欢乐斗地主背景音乐.ogg，并按 0:00 到 1:33 截取循环播放。 2. 主界面和对局中都能播放背景音乐，设置页可以开关。 3. 出牌时触发音效，震动开关打开时触发系统震动反馈。 4. CardRoomMusicPlayer 负责背景音乐生命周期，避免页面切换后重复创建播放器。 5. 音效和震动属于用户反馈，不参与牌局逻辑，因此与 GameController 分离。 • 交付阶段成果材料如下： • 阶段图片成果如下： 成果类型 展示内容 证据材料 集成成果 规则、AI、蓝牙、UI、玩家成长、音乐反馈统一接入最终 App app/src/main/java/com/example/uml_chudadi/ 测试成果 单元测试、模拟蓝牙测试、玩家成长测试、音乐资源测试、设备冒烟测试 docs/test_report.md、app/src/test/、app/src/androidTest/ 文档成果 完整项目说明、需求、设计、测试、AI 使用、Scrum、最终检查表 docs/complete_project_documentation.md、docs/final_checklist.md 图片成果 UML 导出图和 ProcessOn 汇总图 docs/uml/processon_uml_collection.png、docs/uml/processon_uml_board.png
+
+--- slide 086 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 86 REPORT BLOCK 8.2 系统整合（3/12） 交付UML汇总图
+
+--- slide 087 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 87 REPORT BLOCK 8.2 系统整合（4/12） ProcessOn UML 画板
+
+--- slide 088 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 88 REPORT BLOCK 8.2 系统整合（5/12） • 交付阶段还对 7 类 UML 图进行最终一致性检查。检查内容包括：图中的类名是否能在源码中找到，消息名是否与 GameMessage 保持一致，状态名是否与 Screen / GameStartPhase 对应，蓝牙部署结构是否符合当前 Classic Bluetooth 房主/客户端方案。最终 7 类图如下：
+
+--- slide 089 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 89 REPORT BLOCK 8.2 系统整合（6/12） 最终用例图
+
+--- slide 090 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 90 REPORT BLOCK 8.2 系统整合（7/12） 最终类图
+
+--- slide 091 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 91 REPORT BLOCK 8.2 系统整合（8/12） 最终顺序图
+
+--- slide 092 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 92 REPORT BLOCK 8.2 系统整合（9/12） 最终状态图
+
+--- slide 093 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 93 REPORT BLOCK 8.2 系统整合（10/12） 最终活动图
+
+--- slide 094 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 94 REPORT BLOCK 8.2 系统整合（11/12） 最终组件图
+
+--- slide 095 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 95 REPORT BLOCK 8.2 系统整合（12/12） 最终部署图
+
+--- slide 096 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 96 REPORT BLOCK 8.3 代码测试与验收（1/7） • 系统整合后第二步是测试代码，而不是立刻发布。测试分为本地单元测试、蓝牙模拟测试、构建测试、设备冒烟测试和手动验收五类，目标是尽量在发布 Release 前排除规则、状态、协议、成长数据和安装运行问题。 • 自动化测试覆盖如下：
+
+--- slide 097 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 97 REPORT BLOCK 8.3 代码测试与验收（2/7） 测试文件 覆盖内容 结论 HandClassifierTest 单张、对子、三张、顺子、同花、葫芦、四带一、同花顺、南北规则差异 覆盖核心牌型和规则差异 GameControllerTest 发牌、首出、过牌重置、AI 合法动作、固定 seed 随机多局完成 覆盖牌局主流程，防止死循环和非法状态 PlayerActionPolicyTest 无可压牌提示、按钮可用性、等待确认、发牌阶段锁定 覆盖玩家操作是否可点击、是否应提示 GameMessageCodecTest ROOM、START、MOVE、SNAPSHOT、DISCONNECT_NOTICE 等消息往返 覆盖联机协议编码/解码和中文昵称场景 RoomSeatTest 四座位、添加人机、准备、客户端断线托管、再开局重置 覆盖蓝牙房间座位逻辑 NetworkMoveGuardTest 当前远端玩家校验、重复/非法请求过滤 覆盖房主权威保护，避免重复点击污染牌局 SimulatedBluetoothHubTest 三人加入、房满拒绝、房主广播、移动请求和客户端断线托管 覆盖多人蓝牙核心逻辑的可重复模拟 ProfileControllerTest 经验升级、金币结算、头像解锁、改名消费、战绩重置、每日奖励 覆盖玩家成长系统和金币消费规则 TableAnimationKeysTest 出牌动画 key 和落桌动画 key 稳定性 覆盖动画重复触发风险 MusicAssetTest 背景音乐资源存在和循环配置 覆盖音乐资源和 0:00-1:33 循环要求 ChudadiDeviceSmokeTest 真机/模拟器启动和基础 UI 冒烟 覆盖设备启动验收
+
+--- slide 098 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 98 REPORT BLOCK 8.3 代码测试与验收（3/7） • 测试执行命令按以下顺序进行：
+
+--- slide 099 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 99 REPORT BLOCK 8.3 代码测试与验收（4/7） ./gradlew --stop ./gradlew test --no-daemon ./gradlew :app:assembleDebug --no-daemon ./gradlew :app:assembleRelease --no-daemon ./gradlew :app:bundleRelease --no-daemon
+
+--- slide 100 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 100 REPORT BLOCK 8.3 代码测试与验收（5/7） • 测试方法说明： 1. 规则类测试放在本地单元测试中，运行快、可重复，不依赖手机。 2. 蓝牙核心逻辑通过 SimulatedBluetoothHubTest 模拟，解决多台真机不足时无法复现并发加入、客户端断线托管等问题。 3. 构建测试分 Debug 和 Release 两条线，Debug 证明开发环境能编译运行，Release 证明发布包能生成。 4. 设备冒烟测试放在 androidTest，用于确认 App 可启动并显示主界面。 5. 手动验收用于覆盖真机权限弹窗、蓝牙系统行为、音乐播放、动画观感和玩家实际操作路径。 6. 文档和 UML 在测试后同步核对，避免答辩时“图、文、代码、运行效果”不一致。 • 手动验收重点如下：
+
+--- slide 101 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 101 REPORT BLOCK 8.3 代码测试与验收（6/7） 场景 预期结果 开屏进入大厅 点击开始游戏后进入大厅，UI 无明显错位 人机对局 简单、普通、困难均可开局并完成一局 南北规则 保存规则后影响后续人机和蓝牙对局 蓝牙房间 房主创建房间、加入者连接、四座位准备、人机补位、客户端断线托管、房主断线弹窗退出和开局 出牌流程 玩家可选牌、出牌、不出、提示，非法牌显示提示 无可压牌 显示“手上没有可以大过人家的牌”，只允许不出 结算 显示胜负、金币、经验、升级和再来一局 玩家中心 改名、头像、每日奖励、战绩和成就逻辑正常 音乐与反馈 背景音乐循环、出牌音效、震动开关生效
+
+--- slide 102 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 102 REPORT BLOCK 8.3 代码测试与验收（7/7） • 测试完成后，才进入 Release 发布和托管流程。 • 本阶段使用的设计模式和设计原则如下： 设计模式/原则 阶段作用 代码或文档落点 仓储模式 ProfileStore 集中处理 SharedPreferences，避免页面直接拼接和读取本地数据 profile/ProfileStore.kt 门面/控制器模式 ProfileController 统一处理结算奖励、金币消费、头像解锁、改名和战绩重置 profile/ProfileController.kt 观察者/事件驱动思想 蓝牙 TransportEvent 和 UI 状态提示把错误、连接、断线转为可展示事件 transport/GameTransport.kt、ChudadiApp.kt 构建配置隔离 Debug/Release、签名文件和敏感配置分离，降低发布与仓库托管风险 build.gradle.kts、.gitignore、release 文档
+
+--- slide 103 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 103 REPORT BLOCK 8.4 Release 发布与托管（1/3） • 测试通过后第三步才是发布 Release。Release 发布不是简单复制 APK，而是要确认签名、包路径、敏感文件、GitHub 托管和一键运行配置。
+
+--- slide 104 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 104 REPORT BLOCK 8.4 Release 发布与托管（2/3） 项目 当前交付 包名 com.example.uml_chudadi Release APK release/chudadi-v1.3-release.apk Release AAB release/chudadi-v1.3-release.aab GitHub 远程 https://github.com/Mojieeee/uml_chudadi.git 常用测试命令 ./gradlew test --no-daemon Debug 构建 ./gradlew :app:assembleDebug --no-daemon Release 构建 ./gradlew :app:assembleRelease --no-daemon Release Bundle ./gradlew :app:bundleRelease --no-daemon
+
+--- slide 105 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 105 REPORT BLOCK 8.4 Release 发布与托管（3/3） • Release 发布流程如下： 1. 确认 ./gradlew test --no-daemon、Debug 构建和 Release 构建已经通过。 2. 执行 ./gradlew :app:assembleRelease --no-daemon 生成 Release APK。 3. 执行 ./gradlew :app:bundleRelease --no-daemon 生成 AAB。 4. 使用 apksigner verify --verbose --print-certs app/build/outputs/apk/release/app-release.apk 检查签名。 5. 将 APK/AAB 复制或归档到 release/ 目录，作为测试分发包。 6. 使用 .idea/runConfigurations/runRelease.xml 在 Android Studio 中一键安装 Release 包到手机。 7. 使用 GitHub HTTPS 上传项目源码，确保 .jks 私钥和 keystore.properties 不进入仓库。 • Release 私钥、keystore.properties、local.properties、.gradle、build/ 等敏感或构建目录不上传 GitHub。 • Release 和 Debug 的差异可在答辩中从以下角度展开： 项目 Debug Release 用途 开发调试、Android Studio 运行 测试分发、正式发布 签名 默认 debug keystore 自建 release keystore 调试属性 可调试，便于 logcat 和断点 默认不可调试，更接近用户安装包 包体和优化 更偏调试便利 更偏发布稳定 升级要求 debug 包之间使用 debug 签名 release 包升级必须同一 release 证书
+
+--- slide 106 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 106 REPORT BLOCK 8.5 Codex/GPT 使用情况 使用位置 使用方式 Codex/GPT 产出 开发者确认与调整 测试清单整理 主要由 Codex/GPT 完成规则、AI、蓝牙、玩家成长、动画、音乐和设备启动测试场景设计 形成 docs/test_report.md 中的测试范围表 郭铭涛按实际测试文件和命令核对 Release 流程检查 主要由 Codex/GPT 完成梳理 debug/release 差异、签名证书、AAB/APK、runRelease 和敏感文件风险 形成 docs/release_testing.md 的发布流程说明 莫均杰按本机构建配置和 release 目录确认 文档一致性检查 主要由 Codex/GPT 完成检查需求、设计、UML、测试、AI 使用说明是否覆盖评分标准 形成 docs/final_checklist.md 和本报告评分映射 小组按实际文件路径和源码模块逐项核对 交付材料组织 主要由 Codex/GPT 完成代码、文档、UML 图、安装包和录屏材料归档说明 形成“成果类型/展示内容/证据材料”表 最终提交前按文件是否存在和截图材料进行确认
+
+--- slide 107 ---
+锄大地 Android 棋牌游戏 8. 阶段 5：交付（Transition） 107 REPORT BLOCK 8.6 问题与解决 问题 解决方法 真机蓝牙受品牌、权限、配对状态影响 自动化模拟测试覆盖协议和房间逻辑，答辩前再做真机复测 蓝牙断线场景难以稳定人工复现 使用模拟传输覆盖客户端断线托管；房主断线采用真机/手动验收确认弹窗退出 Debug 和 Release 签名不同 使用 runRelease 自动卸载旧包并安装 Release 文档与最终代码可能不同步 使用 docs/final_checklist.md 逐项核查 敏感文件不能上传 将签名私钥和本地配置排除在 GitHub 之外
+
+--- slide 108 ---
+锄大地 Android 棋牌游戏 软件综合开发实训实验报告 108 REPORT SECTION 9. 评分标准映射表（1/3） 评分标准 项目完成情况 证据材料 掌握 ProcessOn UML 工具进行 UML 7 大图建模 已完成用例图、类图、顺序图、状态图、活动图、组件图、部署图；PlantUML 内容导入或参照迁移到 ProcessOn 后整理正式图 docs/uml/，docs/uml/README.md 进行需求分析和面向对象设计，并进行分析建模和设计建模 完成需求说明、MVC 分层、领域模型、交互流程和设计说明 docs/requirements.md、docs/design.md 设计模式和优化设计 详细设计中使用策略模式、接口隔离、主机权威同步、状态快照、命令对象、编码器/解码器、仓储模式和状态模式 docs/design.md，controller/，transport/，profile/ 完成 UI 界面设计，实现不同页面切换 实现开屏、大厅、人机、规则、设置、教程、蓝牙房间、牌桌、结算和玩家中心 app/src/main/java/com/example/uml_chudadi/view/ChudadiApp.kt 实现多人的蓝牙连接，提供多名玩家联机对战功能 实现房主 C/S 房间、四座位、加入者连接、人机补位、房主广播、状态快照、客户端断线托管和房主断线弹窗退出 transport/，SimulatedBluetoothHubTest 适配玩家自由选择南北规则的不同玩法 实现北方规则和南方规则，支持本机保存并应用到后续对局 model/RuleSet.kt，HandClassifierTest 对扑克牌博弈 AI 模块提供不同 AI 算法策略，至少 2 种，使用策略模式 实现简单、普通、困难三档 AI，包括贪心、启发式和模拟评估策略 controller/AiStrategy.kt，GameControllerTest 关键软件工程阶段尽量使用大语言模型和 AI 工具支持，并详尽说明使用情况和效果评价 按需求、设计、UML、编码、测试、发布、文档阶段记录 AI 使用和开发者确认与调整 docs/ai_usage.md，本报告第 10 章
+
+--- slide 109 ---
+锄大地 Android 棋牌游戏 软件综合开发实训实验报告 109 REPORT SECTION 9. 评分标准映射表（2/3） • UML 图与评分标准的对应关系进一步细化如下：
+
+--- slide 110 ---
+锄大地 Android 棋牌游戏 软件综合开发实训实验报告 110 REPORT SECTION 9. 评分标准映射表（3/3） 评分点 UML 图证据 说明 ProcessOn UML 7 大图建模 用例图、类图、顺序图、状态图、活动图、组件图、部署图 覆盖实训要求中的 UML 7 大图，正式图通过 PlantUML 内容导入或参照迁移到 ProcessOn UML 绘制 需求分析和面向对象设计 用例图、类图、顺序图 用例图说明需求边界，类图说明领域对象和控制器，顺序图说明系统交互 设计模式和优化设计 类图、组件图、顺序图 策略模式、仓储模式、编码器/解码器、状态快照和传输抽象都能在图中追踪 UI 页面切换 状态图、活动图 状态图说明页面和牌局阶段，活动图说明玩家一次对局流程 多人蓝牙联机 顺序图、组件图、部署图 顺序图说明房主权威同步，组件图说明传输层，部署图说明多台手机和蓝牙栈关系 南北规则 类图、活动图 类图中的 RuleSet 和 RuleProfile 表达规则抽象，活动图体现出牌校验流程 AI 策略 类图、状态图 类图展示 AiStrategy 三种实现，状态图展示 AI 回合和牌局状态 AI 工具使用说明 UML 总映射表、ProcessOn 汇总图 说明 PlantUML 文本、ProcessOn UML 绘制和 Codex/GPT 参与建模之间的关系
+
+--- slide 111 ---
+锄大地 Android 棋牌游戏 10. AI 大语言模型与 AI 代码引擎使用说明 111 REPORT BLOCK 10.1 使用记录 阶段 使用工具 主要用途 产出 开发者确认与调整 开始 OpenAI Codex / GPT-5 阅读实训要求，提炼评分点和功能边界 需求拆解、阶段计划、评分点映射 小组确认最终项目范围并保留实际可运行版本 细化迭代 1 OpenAI Codex / GPT-5、PlantUML 生成 MVC 分层方案、领域模型代码和 UML 图草稿 类图、顺序图、组件关系草稿、核心 Model/Controller 代码 Sedar 在 ProcessOn 中校对正式图，莫均杰运行代码 细化迭代 2 OpenAI Codex / GPT-5 比较南北规则实现、蓝牙 C/S 拓扑、房主权威同步、客户端断线托管和房主断线退出方案 规则模块、蓝牙协议、断线处理、设计模式说明 Codex 完成主要代码实现，莫均杰在 Android Studio 中运行和修正 细化迭代 3 OpenAI Codex / GPT-5 完成三档 AI 策略、玩家成长系统、状态图更新和测试场景补全 三档 AI 策略、玩家中心、头像商店、状态建模、测试场景 开发者运行 AI 合法性、玩家成长和随机局测试 交付 OpenAI Codex / GPT-5 完成文档同步、Release 流程说明、测试清单整理和敏感文件风险检查 测试报告、发布说明、最终检查表、实验报告 小组按实际构建和运行结果确认
+
+--- slide 112 ---
+锄大地 Android 棋牌游戏 10. AI 大语言模型与 AI 代码引擎使用说明 112 REPORT BLOCK 10.2 使用效果评价 • Codex/GPT-5 在本项目中承担了主要实现工作，包括 Kotlin/Compose 代码生成、蓝牙协议和房间逻辑实现、AI 策略实现、玩家成长系统实现、PlantUML 草图更新、测试场景补全和实验报告整理。尤其在蓝牙联机和 AI 策略部分，Codex/GPT-5 给出了房主权威同步、传输接口隔离、策略模式、客户端断线托管、房主断线退出提示和模拟测试的完整实现方案。 • 但 AI 不能替代开发者确认与调整。锄大地规则细节、蓝牙真机稳定性、UI 实际显示效果、Release 包安装和 UML 最终图都需要开发者在 Android Studio、真机/模拟器和 ProcessOn 中确认。最终项目代码、测试结果和文档内容均以小组实际运行和检查结果为准。
+
+--- slide 113 ---
+锄大地 Android 棋牌游戏 10. AI 大语言模型与 AI 代码引擎使用说明 113 REPORT BLOCK 10.3 AI 使用边界 1. Codex/GPT-5 负责生成和修改大部分代码、UML 草图、测试用例和文档内容。 2. 开发者负责在 Android Studio 中编译、安装、运行和修正项目。 3. UML 最终图需要在 ProcessOn 或 PlantUML 预览中检查布局、文字和代码一致性。 4. 测试结论必须来自 Gradle 测试、模拟测试或真机/模拟器验收。 5. 报告中如实说明 AI 参与程度：大部分实现由 Codex 完成，最终交付由开发者运行确认。
+
+--- slide 114 ---
+锄大地 Android 棋牌游戏 11. 实验结果展示与录屏说明 114 REPORT BLOCK 11.1 功能展示内容 • 最终答辩录屏采用“完整流程 + 分段展示”的方式。完整流程用于展示项目可连贯运行，分段录屏用于突出评分标准。 • 项目材料：仓库已包含 UML 图片和 Release 包。App 运行截图、真机蓝牙截图和演示录屏在最终提交前归档，并在 PPT 中引用对应文件或截图。 录屏名称 推荐文件名 展示内容 对应评分点 验证结论 完整流程录屏 demo_full_flow.mp4 开屏、进入大厅、规则选择、人机对局、出牌、结算、玩家中心 UI、规则、AI、玩家成长 证明 App 主流程完整可运行 人机与 AI 录屏 demo_ai_match.mp4 简单/普通/困难难度选择，AI 自动出牌 多 AI 策略、策略模式 证明 AI 模块可替换并参与对局 蓝牙房间录屏 demo_bluetooth_room.mp4 创建房间、加入对局、四座位、人机补位、准备开局、客户端断线托管和房主断线提示 多人蓝牙连接 证明联机不是一对一匹配，并考虑断线处理 南北规则录屏 demo_rules.mp4 切换北方/南方规则并进入对局验证首出差异 南北规则 证明规则可自由选择并保存 玩家中心录屏 demo_profile.mp4 金币、等级、战绩、成就、每日奖励、头像和改名确认 UI、玩家成长、持久化 证明扩展体验和本地数据有效 测试构建录屏 demo_test_build.mp4 Gradle test、Debug 构建、Release 构建或签名检查 测试与交付 证明交付质量和发布包有效
+
+--- slide 115 ---
+锄大地 Android 棋牌游戏 11. 实验结果展示与录屏说明 115 REPORT BLOCK 11.2 截图材料 截图内容 目的 开屏页和大厅 展示发布版 UI 风格 规则选择页 展示南北规则自由选择 人机难度页 展示三档 AI 牌桌页 展示发牌、手牌、出牌、不出和提示 蓝牙房间页 展示多人房间和四座位 结算页 展示对局结果和玩家成长 玩家中心 展示金币、等级、战绩、成就和头像 Gradle 测试结果 展示测试通过证据 Release 包目录 展示最终交付物
+
+--- slide 116 ---
+锄大地 Android 棋牌游戏 软件综合开发实训实验报告 116 REPORT SECTION 12. 总结与收获 • 通过本次软件综合开发实训，小组完整经历了需求分析、UML 建模、面向对象设计、编码实现、测试验收和发布交付的过程。 • 在 UML 和软件工程方面，本小组理解并实践了 UP 迭代开发中“从用例到领域模型，再到设计模型和实现”的过程。通过用例图、类图、顺序图、状态图、活动图、组件图和部署图，项目从需求到代码具备可解释、可追踪的模型支撑。 • 在 Android 开发方面，本小组熟悉了 Android Studio、Gradle、Kotlin 和 Jetpack Compose。项目采用单 Activity + Compose 状态驱动页面切换的方式，实现了多个页面、动画、音效和本地数据保存。 • 在面向对象设计方面，项目通过 MVC 分层、策略模式、接口隔离、房主权威同步、仓储模式和状态模式降低了复杂度。规则、AI、蓝牙和玩家成长模块都可以被独立测试和维护。 • 在蓝牙和 AI 模块方面，项目实践表明多人联机游戏不仅需要连接成功，还需要解决状态同步、重复请求、当前玩家校验和断线恢复等问题。AI 模块也不仅是随机出牌，而是需要通过策略模式形成不同难度和可替换算法。 • 在测试和交付方面，项目通过单元测试、模拟蓝牙测试、构建测试、Release 签名包和手动验收表提高可信度。测试工作帮助小组发现并规避了规则、消息、座位、动画和玩家成长中的潜在问题。 • 在 AI 工具使用方面，本项目的大部分代码实现、UML 草图/更新、测试场景设计和文档整理均由 Codex/GPT-5 完成，开发者负责把生成内容放入 Android Studio、ProcessOn 和真机/模拟器环境中运行、校对、修改和确认。AI 工具显著提高了实现速度，但最终交付仍以本机可运行项目、测试结果和文档一致性为准。
+
+--- slide 117 ---
+锄大地 Android 棋牌游戏 软件综合开发实训实验报告 117 REPORT SECTION 13. 附录：主要材料清单 类型 文件或目录 说明 项目完整说明 docs/complete_project_documentation.md 覆盖代码结构、UML、设计模式、测试和发布说明 需求分析 docs/requirements.md 项目目标、功能需求、非功能需求和评分点映射 设计说明 docs/design.md MVC 分层、核心职责、设计模式、数据流和错误处理 测试报告 docs/test_report.md 自动化测试范围、验证命令、手动验收场景和风险 AI 使用说明 docs/ai_usage.md AI 工具使用阶段、效果评价和开发者确认与调整内容 SCRUM 记录 docs/scrum.md 迭代目标和风险处理 最终检查表 docs/final_checklist.md 评分点、交付物和提交前检查项 UML 图 docs/uml/ 7 类 UML 图的 PlantUML 源文件和 PNG 导出图 Release 包 release/ chudadi-v1.3-release.apk 和 chudadi-v1.3-release.aab Android 代码 app/src/main/java/com/example/uml_chudadi/ Kotlin/Compose 主体代码 测试代码 app/src/test/、app/src/androidTest/ 单元测试、模拟测试和设备冒烟测试
