@@ -18,3 +18,5 @@ local.properties
 keystore.properties
 keystore/*.jks
 keystore/*.keystore
+/outputs/
+~$*
