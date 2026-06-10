@@ -1,0 +1,22 @@
+{
+  "modelVersion": "mlp-selfplay-distilled-v3",
+  "artifactCheck": "passed",
+  "model": {
+    "version": "mlp-selfplay-distilled-v3",
+    "weightChecksum": "1445351bc0209981dc29104a4178dc0b49baf6fac47ab02a827b8675fd3726e6",
+    "computedWeightChecksum": "1445351bc0209981dc29104a4178dc0b49baf6fac47ab02a827b8675fd3726e6",
+    "trainingSeed": 20260610,
+    "selfPlayGames": 32,
+    "hiddenUnits": 16,
+    "featureCount": 23,
+    "hiddenWeightRows": 16,
+    "hiddenWeightColumns": 23,
+    "hiddenBiasSize": 16,
+    "outputWeightSize": 16,
+    "parameterCount": 401
+  },
+  "modelPath": "app/src/main/java/com/example/uml_chudadi/controller/NeuralAiStrategy.kt",
+  "trainingManifest": "docs/ai/neural_ai_training_manifest.json",
+  "benchmarkReport": "docs/ai/neural_ai_benchmark_report.json",
+  "failures": []
+}

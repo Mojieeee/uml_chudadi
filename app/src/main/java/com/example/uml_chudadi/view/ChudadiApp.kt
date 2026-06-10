@@ -112,9 +112,8 @@ import com.example.uml_chudadi.audio.MusicScene
 import com.example.uml_chudadi.controller.AiController
 import com.example.uml_chudadi.controller.AiStrategy
 import com.example.uml_chudadi.controller.GameController
-import com.example.uml_chudadi.controller.GreedyAiStrategy
-import com.example.uml_chudadi.controller.HeuristicAiStrategy
-import com.example.uml_chudadi.controller.MonteCarloRolloutAiStrategy
+import com.example.uml_chudadi.controller.NeuralAiProfile
+import com.example.uml_chudadi.controller.NeuralAiStrategy
 import com.example.uml_chudadi.controller.PlayerActionPolicy
 import com.example.uml_chudadi.model.AvailableRuleSets
 import com.example.uml_chudadi.model.Card
@@ -357,9 +356,9 @@ fun ChudadiApp() {
     }
 
     fun strategy(controller: GameController, level: Difficulty = difficulty): AiStrategy = when (level) {
-        Difficulty.Easy -> GreedyAiStrategy(controller)
-        Difficulty.Normal -> HeuristicAiStrategy(controller)
-        Difficulty.Hard -> MonteCarloRolloutAiStrategy(controller)
+        Difficulty.Easy -> NeuralAiStrategy(controller, NeuralAiProfile.Easy)
+        Difficulty.Normal -> NeuralAiStrategy(controller, NeuralAiProfile.Normal)
+        Difficulty.Hard -> NeuralAiStrategy(controller, NeuralAiProfile.Hard)
     }
 
     fun difficultyForPlayer(playerId: Int): Difficulty {
@@ -1667,8 +1666,8 @@ private fun DifficultySelectScreen(
                 Text(
                     when (level) {
                         Difficulty.Easy -> "适合热身"
-                        Difficulty.Normal -> "会保留组合和强牌"
-                        Difficulty.Hard -> "更会拆牌和控牌"
+                        Difficulty.Normal -> "神经网络均衡控牌"
+                        Difficulty.Hard -> "完整模型评分决策"
                     },
                     color = Gold
                 )

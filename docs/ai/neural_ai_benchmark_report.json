@@ -1,0 +1,53 @@
+{
+  "modelVersion": "mlp-selfplay-distilled-v3",
+  "seed": 20260610,
+  "neuralVsGreedy": {
+    "games": 512,
+    "wins": 204,
+    "winRate": 0.398438,
+    "completed": 512,
+    "completionRate": 1.0,
+    "averageTurns": 53.734,
+    "scoreNoise": 0.0
+  },
+  "difficultyProfiles": {
+    "Easy": {
+      "games": 512,
+      "wins": 168,
+      "winRate": 0.328125,
+      "completed": 512,
+      "completionRate": 1.0,
+      "averageTurns": 56.254,
+      "scoreNoise": 3.0
+    },
+    "Normal": {
+      "games": 512,
+      "wins": 189,
+      "winRate": 0.369141,
+      "completed": 512,
+      "completionRate": 1.0,
+      "averageTurns": 54.842,
+      "scoreNoise": 0.8
+    },
+    "Hard": {
+      "games": 512,
+      "wins": 204,
+      "winRate": 0.398438,
+      "completed": 512,
+      "completionRate": 1.0,
+      "averageTurns": 53.734,
+      "scoreNoise": 0.0
+    }
+  },
+  "teacherAgreement": {
+    "states": 300,
+    "exact": 277,
+    "exactRate": 0.923333,
+    "top3Rate": 0.996667
+  },
+  "thresholds": {
+    "minWinRate": 0.38,
+    "minCompletionRate": 1.0,
+    "minTop3Rate": 0.95
+  }
+}

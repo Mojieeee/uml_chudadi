@@ -35,18 +35,68 @@ class GameControllerTest {
     }
 
     @Test
-    fun greedyAndHardStrategiesReturnLegalMoves() {
+    fun strategiesReturnLegalMoves() {
         val controller = GameController(NorthRuleSet)
         val state = controller.newGame(seed = 12)
         val greedy = GreedyAiStrategy(controller)
         val normal = HeuristicAiStrategy(controller)
         val hard = MonteCarloRolloutAiStrategy(controller, rollouts = 8)
+        val neuralEasy = NeuralAiStrategy(controller, NeuralAiProfile.Easy)
+        val neuralNormal = NeuralAiStrategy(controller, NeuralAiProfile.Normal)
+        val neuralHard = NeuralAiStrategy(controller, NeuralAiProfile.Hard)
         val aiPlayer = state.players.first { it.id != state.currentPlayerId }
         val aiState = state.copy(currentPlayerId = aiPlayer.id, lastPlayedHand = null, firstTurn = false)
 
         assertTrue(greedy.chooseMove(aiState, aiPlayer.id) is Move.Play)
         assertTrue(normal.chooseMove(aiState, aiPlayer.id) is Move.Play)
         assertTrue(hard.chooseMove(aiState, aiPlayer.id) is Move.Play)
+        assertTrue(neuralEasy.chooseMove(aiState, aiPlayer.id) is Move.Play)
+        assertTrue(neuralNormal.chooseMove(aiState, aiPlayer.id) is Move.Play)
+        assertTrue(neuralHard.chooseMove(aiState, aiPlayer.id) is Move.Play)
+    }
+
+    @Test
+    fun neuralFeatureEncoderMatchesModelInputSize() {
+        val controller = GameController(NorthRuleSet)
+        val state = controller.newGame(seed = 12)
+        val aiPlayer = state.players.first { it.id != state.currentPlayerId }
+        val aiState = state.copy(currentPlayerId = aiPlayer.id, lastPlayedHand = null, firstTurn = false)
+        val play = controller.legalPlays(aiState, aiPlayer.id).first()
+
+        val features = NeuralMoveFeatures.encode(aiState, aiPlayer.id, play)
+
+        assertEquals(NeuralMoveFeatures.FEATURE_COUNT, features.size)
+        NeuralMoveModel.score(features)
+    }
+
+    @Test
+    fun neuralModelMetadataMatchesTrainingPipeline() {
+        assertEquals("mlp-selfplay-distilled-v3", NeuralMoveModel.VERSION)
+        assertEquals(20260610, NeuralMoveModel.TRAINING_SEED)
+        assertEquals(32, NeuralMoveModel.SELF_PLAY_GAMES)
+        assertEquals(NeuralMoveFeatures.FEATURE_COUNT, NeuralMoveModel.inputSize)
+        assertEquals(16, NeuralMoveModel.hiddenLayerSize)
+        assertEquals(401, NeuralMoveModel.parameterCount)
+        assertEquals(64, NeuralMoveModel.WEIGHT_CHECKSUM.length)
+        assertTrue(NeuralMoveModel.WEIGHT_CHECKSUM.all { it in '0'..'9' || it in 'a'..'f' })
+    }
+
+    @Test
+    fun neuralStrategyOnlyChoosesLegalPlayAcrossSeeds() {
+        repeat(80) { seed ->
+            val controller = GameController(NorthRuleSet)
+            val state = controller.newGame(seed = seed)
+            val playerId = state.currentPlayerId
+            val strategy = NeuralAiStrategy(controller)
+            val legal = controller.legalPlays(state, playerId).map { it.toSet() }.toSet()
+
+            val move = strategy.chooseMove(state, playerId)
+
+            when (move) {
+                is Move.Play -> assertTrue("seed $seed chose illegal play ${move.cards}", move.cards.toSet() in legal)
+                is Move.Pass -> assertTrue("seed $seed passed with legal plays available", legal.isEmpty())
+            }
+        }
     }
 
     @Test
@@ -68,6 +118,63 @@ class GameControllerTest {
         val move = MonteCarloRolloutAiStrategy(controller, rollouts = 8).chooseMove(state, 1)
 
         assertEquals(Move.Play(1, listOf(winningCard)), move)
+    }
+
+    @Test
+    fun neuralStrategyWinsImmediatelyWhenPossible() {
+        val controller = GameController(NorthRuleSet)
+        val winningCard = Card(Suit.Spades, Rank.Ace)
+        val state = GameState(
+            players = listOf(
+                Player(0, "你", PlayerKind.Human, listOf(Card(Suit.Diamonds, Rank.Four))),
+                Player(1, "小北", PlayerKind.LocalAi, listOf(winningCard)),
+                Player(2, "阿豪", PlayerKind.LocalAi, listOf(Card(Suit.Clubs, Rank.Five))),
+                Player(3, "星河", PlayerKind.LocalAi, listOf(Card(Suit.Hearts, Rank.Six)))
+            ),
+            ruleSet = NorthRuleSet,
+            currentPlayerId = 1,
+            firstTurn = false
+        )
+
+        val move = NeuralAiStrategy(controller).chooseMove(state, 1)
+
+        assertEquals(Move.Play(1, listOf(winningCard)), move)
+    }
+
+    @Test
+    fun neuralStrategyAvoidsUnnecessaryBombLead() {
+        val controller = GameController(NorthRuleSet)
+        val state = GameState(
+            players = listOf(
+                Player(0, "你", PlayerKind.Human, listOf(Card(Suit.Diamonds, Rank.Four))),
+                Player(
+                    1,
+                    "小北",
+                    PlayerKind.LocalAi,
+                    listOf(
+                        Card(Suit.Diamonds, Rank.Three),
+                        Card(Suit.Clubs, Rank.Three),
+                        Card(Suit.Hearts, Rank.Three),
+                        Card(Suit.Spades, Rank.Three),
+                        Card(Suit.Diamonds, Rank.Four),
+                        Card(Suit.Diamonds, Rank.Five),
+                        Card(Suit.Clubs, Rank.Six),
+                        Card(Suit.Hearts, Rank.Seven),
+                        Card(Suit.Spades, Rank.Eight)
+                    ).sorted()
+                ),
+                Player(2, "阿豪", PlayerKind.LocalAi, listOf(Card(Suit.Clubs, Rank.Five))),
+                Player(3, "星河", PlayerKind.LocalAi, listOf(Card(Suit.Hearts, Rank.Six)))
+            ),
+            ruleSet = NorthRuleSet,
+            currentPlayerId = 1,
+            firstTurn = false
+        )
+
+        val move = NeuralAiStrategy(controller, NeuralAiProfile.Hard).chooseMove(state, 1) as Move.Play
+        val category = NorthRuleSet.classify(move.cards)?.category
+
+        assertTrue(category != HandCategory.FourWithOne && category != HandCategory.StraightFlush)
     }
 
     @Test
@@ -132,6 +239,24 @@ class GameControllerTest {
                 state = controller.applyMove(state, move)
             }
             assertTrue("seed $seed did not finish", state.isFinished)
+        }
+    }
+
+    @Test
+    fun randomNeuralGamesAlwaysFinish() {
+        NeuralAiProfile.entries.forEach { profile ->
+            repeat(40) { seed ->
+                val controller = GameController(NorthRuleSet)
+                val strategy = NeuralAiStrategy(controller, profile)
+                var state = controller.newGame(seed = seed)
+                repeat(280) {
+                    if (state.isFinished) return@repeat
+                    val playerId = state.currentPlayerId
+                    val move = strategy.chooseMove(state, playerId)
+                    state = controller.applyMove(state, move)
+                }
+                assertTrue("${profile.name} seed $seed did not finish", state.isFinished)
+            }
         }
     }
 }

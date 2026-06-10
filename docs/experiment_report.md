@@ -76,7 +76,7 @@
 | UI 页面设计和切换 | 单 Activity + Compose，`Screen` 状态驱动开屏、大厅、人机、规则、蓝牙、牌桌、结算和玩家中心 |
 | 多人蓝牙联机 | Classic Bluetooth RFCOMM，房主 C/S 四座位房间，房主权威快照同步、客户端断线托管和房主断线退出提示 |
 | 南北玩法 | `NorthRuleSet` 与 `SouthRuleSet`，规则设置保存后作用于后续人机和蓝牙对局 |
-| AI 策略 | `GreedyAiStrategy`、`HeuristicAiStrategy`、`MonteCarloRolloutAiStrategy` 三档策略 |
+| AI 策略 | `NeuralAiStrategy`、`NeuralAiProfile`、`NeuralMoveModel` 支撑简单、普通、困难三档神经网络 AI |
 | AI 工具使用 | 代码实现、UML 图草拟/更新、测试场景和文档整理等大部分工作由 OpenAI Codex / GPT-5 完成，开发者在 Android Studio、ProcessOn 和真机环境中运行、调整和确认 |
 
 ## 2. 阶段时间表
@@ -262,7 +262,7 @@ class MainActivity : ComponentActivity() {
 | 牌与牌型 | `Card`、`Deck`、`HandClassifier`、`HandType` | 表示牌面、发牌、牌型识别和牌型比较基础 |
 | 规则 | `RuleProfile`、`NorthRuleSet`、`SouthRuleSet` | 表示南北玩法、首出规则和压牌规则 |
 | 回合控制 | `GameController`、`GameState`、`Move` | 处理出牌、不出、三家过牌重置和胜负结算 |
-| AI | `AiStrategy`、`GreedyAiStrategy`、`HeuristicAiStrategy`、`MonteCarloRolloutAiStrategy` | 表示不同难度的人机策略 |
+| AI | `AiStrategy`、`NeuralAiStrategy`、`NeuralAiProfile`、`NeuralMoveFeatures`、`NeuralMoveModel` | 表示三档神经网络人机策略、特征编码和端侧模型推理 |
 | 联机 | `GameTransport`、`BluetoothHostTransport`、`BluetoothClientTransport`、`LocalRoomTransport` | 隔离真实蓝牙和本地模拟传输 |
 | 玩家成长 | `PlayerProfile`、`ProfileController`、`ProfileStore` | 管理金币、等级、经验、战绩、头像和成就 |
 | UI 与反馈 | `ChudadiApp`、`CardRoomMusicPlayer`、`TableAnimationKeys` | 负责页面、动画、音乐、音效和交互反馈 |
@@ -580,58 +580,68 @@ sealed class TransportEvent {
 
 ### 7.1 阶段目标
 
-本阶段目标是完成 AI 算法模块，完善状态建模，并补齐玩家成长系统与牌桌体验。评分标准要求扑克牌博弈 AI 至少提供两种算法策略，并使用策略模式。本项目实现简单、普通、困难三档 AI，满足并超过该要求；同时把大厅顶部的头像、等级、金币、战绩入口从静态展示改成真实可用的本地成长系统。
+本阶段目标是完成基于神经网络的三档 AI 算法模块，完善状态建模，并补齐玩家成长系统与牌桌体验。评分标准要求扑克牌博弈 AI 至少提供两种可替换策略，并使用策略模式。本项目保留 `AiStrategy` 统一接口，在接口后接入端侧轻量 MLP 神经网络模型，使简单、普通、困难三档难度都能使用同一套模型能力；同时把大厅顶部的头像、等级、金币、战绩入口从静态展示改成真实可用的本地成长系统。
 
 ### 7.2 AI 算法模块
 
-AI 模块通过 `AiStrategy` 接口统一不同算法：
+AI 模块通过 `AiStrategy` 接口统一出牌决策入口。`GameController` 不直接依赖具体 AI 算法，只接收 `chooseMove(state, playerId)` 返回的 `Move.Play` 或 `Move.Pass`；`ChudadiApp.strategy` 根据 `Difficulty` 映射到 `NeuralAiProfile.Easy`、`NeuralAiProfile.Normal`、`NeuralAiProfile.Hard`。这种结构保留了 GoF 策略模式的可替换性，也把神经网络模型和牌局控制器隔离开。
 
-| AI 难度 | 策略类 | 基本思路 |
+| AI 难度 | 策略配置 | 基本思路 |
 | --- | --- | --- |
-| 简单 | `GreedyAiStrategy` | 优先选择当前能出的较小合法牌，逻辑简单，适合新手 |
-| 普通 | `HeuristicAiStrategy` | 根据牌型价值、手牌保留和局面进行启发式选择 |
-| 困难 | `MonteCarloRolloutAiStrategy` | 在合法动作中进行模拟评估，选择预期更优的出牌 |
+| 简单 | `NeuralAiProfile.Easy`（`scoreNoise = 3.0`） | 共用 v3 MLP 对合法候选出牌评分，在分数上加入较大确定性扰动，降低压制性，适合新手练习 |
+| 普通 | `NeuralAiProfile.Normal`（`scoreNoise = 0.8`） | 共用 v3 MLP，对模型判断做少量扰动，保持较稳定的控牌和出牌能力 |
+| 困难 | `NeuralAiProfile.Hard`（`scoreNoise = 0.0`） | 使用完整神经网络分数，无扰动，优先选择模型认为最优的合法动作 |
 
-`GameController` 不直接依赖具体 AI 类，而是由 AI 控制逻辑根据难度选择对应 `AiStrategy`。这种策略模式使 AI 可以替换或扩展，例如后续可以加入更强的搜索算法或机器学习模型，而不需要修改牌局控制器的主体流程。
+当前生产模型为 `mlp-selfplay-distilled-v3`，是一个端侧轻量 MLP：输入层 23 个特征，隐藏层 16 个 `tanh` 单元，输出 1 个候选动作分数，共 401 个参数。模型权重以 Kotlin `doubleArrayOf` 形式内置在 `NeuralMoveModel` 中，并记录 `WEIGHT_CHECKSUM`，Android 端不需要 TensorFlow Lite、PyTorch Mobile 或网络请求，运行时只做普通数组点乘和 `tanh` 推理。
 
-三种 AI 的参考来源和实现方式：
+候选动作仍由 `GameController.legalPlays()` 枚举，神经网络不直接生成牌、不绕过规则。AI 在有一手出完的合法动作时优先结束对局；其他情况下，`NeuralMoveFeatures.encode(...)` 将每个合法候选动作编码成 23 维特征，再由 `NeuralMoveModel.score(...)` 评分，最后按模型分数、出牌张数、牌型强度和最高牌进行稳定排序。
 
-| AI | 参考思路 | 项目内实现方式 |
-| --- | --- | --- |
-| 简单 | 传统规则启发式和 RLCard/OpenSpiel 中“合法动作集合”概念 | 枚举 `GameController.legalPlays()`，选择最小可行牌；无法出牌则不出 |
-| 普通 | 扑克游戏常见保牌、少拆组合、优先降低手牌数量的启发式 | 对候选动作评分，考虑牌型强度、拆牌损失、剩余手牌数量和是否能释放小牌 |
-| 困难 | ISMCTS 的有限信息模拟思想、OpenSpiel 的状态/动作解耦、DouZero 对出牌游戏候选动作评估的方向 | 不加载神经网络模型，而是在 Kotlin 中对合法候选做有限 rollout 和局面评分，优先考虑一手走完、对手压力、保留强牌和减少结构损失 |
+23 维特征覆盖了当前出牌张数、牌型强度、主牌点数、最高牌点数和花色、出牌后剩余手牌、当前手牌数量、对手最少/最多手牌数、残局压力、过牌轮次、是否首轮、是否正在压牌、是否炸弹或五张牌、拆牌代价、低牌/高牌占比、剩余牌组对子/三张/炸弹潜力、顺子潜力、南北规则炸弹增强开关、是否可以直接出完，以及是否正在回应强牌。这样模型输入既包含牌型信息，也包含局势压力和手牌结构。
 
-参考资料包括：
+训练脚本为 `tools/train_neural_ai.py`。离线训练使用固定 seed `20260610`，包含 1800 条随机合成样本、32 局自对弈生成的 4427 条训练样本，以及 1686 条验证样本；训练轮数为 140。训练目标结合教师评分、出牌后局面价值和自对弈胜负回报，使模型学习“哪些合法动作更有利于尽快出完并减少结构损失”。当前训练清单记录在 `docs/ai/neural_ai_training_manifest.json`，验证集 MSE 为 `0.105922`，MAE 为 `0.155211`。
 
-1. RLCard：面向纸牌游戏的强化学习工具包，支持 Blackjack、Leduc Hold'em、Texas Hold'em、UNO、Dou Dizhu、Mahjong 等环境。项目参考其“游戏环境 + Agent 策略接口 + 合法动作集合”的组织方式。
-   - GitHub：<https://github.com/datamllab/rlcard>
-   - 论文：<https://arxiv.org/abs/1910.04376>
-2. OpenSpiel：Google DeepMind 开源的多智能体博弈研究框架，支持完美/不完美信息、回合制/同步行动、搜索和强化学习算法。项目参考其“游戏状态、合法动作、策略/Agent 解耦”的通用博弈建模方式。
-   - GitHub：<https://github.com/google-deepmind/open_spiel>
-3. ISMCTS：Cowling、Powley、Whitehouse 的 Information Set Monte Carlo Tree Search 论文，核心思想是把 Monte Carlo 搜索用于隐藏信息和不确定性游戏。项目困难 AI 没有完整实现树搜索，而是参考“对候选动作进行有限随机模拟和期望评分”的 rollout 思路。
-   - 论文页面：<https://pure.york.ac.uk/portal/en/publications/information-set-monte-carlo-tree-search/>
-4. DouZero：快手开源的斗地主 AI，使用自博弈深度强化学习解决斗地主。项目没有使用 DouZero 的神经网络和训练模型，只参考其对斗地主类出牌游戏中动作候选、残局压力和多玩家不完美信息问题的处理方向。
-   - GitHub：<https://github.com/kwai/DouZero>
-   - 论文：<https://arxiv.org/abs/2106.06135>
+三档难度并不是三套彼此独立的旧规则策略，而是同一个神经网络模型的三种 profile。困难档 `NeuralAiProfile.Hard` 使用完整模型分数，`scoreNoise = 0.0`；普通档加入较小确定性扰动，`scoreNoise = 0.8`；简单档加入较大确定性扰动，`scoreNoise = 3.0`。扰动由当前局面和候选牌计算哈希得到，不依赖随机线程，因此同一状态下决策稳定，既能形成难度梯度，又不会破坏测试可复现性。
 
-项目没有把这些开源项目的模型或代码直接接入 Android。原因是锄大地没有现成可直接使用的移动端训练模型，RLCard/OpenSpiel/DouZero 更偏研究或 Python/C++ 生态；直接接入会带来模型体积、推理框架、训练数据和性能成本。当前实现属于“规则启发式 + 有限模拟”的博弈 AI，是真正能自主决策的 AI 策略模块，但不是深度学习大模型。
+参考来源方面，项目借鉴 RLCard/OpenSpiel 的“游戏状态 + 合法动作集合 + Agent 策略接口”组织方式，结合 DouZero 自对弈和 ISMCTS 局面评估思想，自建适合 Android 端运行的轻量 MLP；实现上不直接接入这些框架代码或预训练模型，而是保留 Kotlin 端侧推理和可复现 benchmark。
+
+
+当前 benchmark 由 `tools/benchmark_neural_ai.py` 读取 Kotlin 生产权重后评估，避免只评估训练脚本内存模型。512 局对三名简单基线的评估结果为：简单档 `168/512`，胜率 `0.328125`；普通档 `189/512`，胜率 `0.369141`；困难档 `204/512`，胜率 `0.398438`；困难档完局率 `1.000000`。教师策略一致性评估中，300 个状态精确一致率为 `0.923333`，Top 3 一致率为 `0.996667`。
+
+为了防止报告、训练产物和 Kotlin 权重不一致，项目增加 `tools/verify_neural_ai_artifacts.py`。该脚本同时读取 `NeuralAiStrategy.kt`、`docs/ai/neural_ai_training_manifest.json` 和 `docs/ai/neural_ai_benchmark_report.json`，校验模型版本、权重 checksum、训练 seed、特征数、隐藏层规模、参数量、自对弈局数和 benchmark 阈值。当前 `artifact_check=passed`。
+
+参考资料仍包括 RLCard、OpenSpiel、ISMCTS 和 DouZero，但本项目没有直接接入这些框架的代码或预训练模型，而是借鉴“游戏状态 + 合法动作集合 + Agent/策略接口 + 自对弈样本”的组织方式，自建适合 Android 端运行的小模型。这样既满足课程对 AI 和建模说明的要求，又控制了移动端模型体积和推理成本。
+
+核心 Kotlin 接入片段如下：
+
+```kotlin
+enum class NeuralAiProfile(val title: String, val scoreNoise: Double) {
+    Easy("简单", 3.0),
+    Normal("普通", 0.80),
+    Hard("困难", 0.0)
+}
+
+fun strategy(controller: GameController, level: Difficulty = difficulty): AiStrategy = when (level) {
+    Difficulty.Easy -> NeuralAiStrategy(controller, NeuralAiProfile.Easy)
+    Difficulty.Normal -> NeuralAiStrategy(controller, NeuralAiProfile.Normal)
+    Difficulty.Hard -> NeuralAiStrategy(controller, NeuralAiProfile.Hard)
+}
+```
 
 AI 决策安全边界：
 
-1. AI 输出动作后仍由 `GameController` 和 `RuleSet` 校验，防止非法牌进入牌局。
-2. 蓝牙对局中 AI 只由房主运行，客户端不各自运行 AI，避免不同设备随机模拟结果不一致。
-3. 困难 AI 不直接把对手完整手牌当作上帝视角使用，而是基于公开状态和候选动作评分。
+1. AI 只在 `GameController.legalPlays()` 返回的合法候选动作中选择，输出动作后仍由 `GameController` 和 `RuleSet` 校验，防止非法牌进入牌局。
+2. 蓝牙对局中 AI 仍只由房主端运行，客户端只接收房主快照，不各自运行模型，避免多设备决策分叉。
+3. 神经网络输入使用公开牌局状态、当前玩家手牌和合法候选动作特征，不新增蓝牙协议字段，也不改变 `RoomSeat.difficulty` 的传输格式。
 4. AI 思考期间 UI 显示思考状态，设置菜单打开时暂停 AI 行动，避免玩家打开菜单后 AI 继续出牌。
 
 本阶段使用的设计模式和设计原则如下：
 
 | 设计模式/原则 | 阶段作用 | 代码或文档落点 |
 | --- | --- | --- |
-| 策略模式 | 三种 AI 都实现 `AiStrategy`，难度变化只替换策略对象，不改牌局控制器 | `GreedyAiStrategy`、`HeuristicAiStrategy`、`MonteCarloRolloutAiStrategy` |
-| 模板化评估思想 | 困难 AI 将合法候选统一进入 rollout 评分流程，减少散落条件判断 | `MonteCarloRolloutAiStrategy` |
+| 策略模式 | 三档 AI 均通过 `AiStrategy.chooseMove` 执行，具体难度由 `NeuralAiProfile` 配置 | `NeuralAiStrategy`、`NeuralAiProfile`、`AiStrategy` |
+| GRASP 多态 | 简单、普通、困难 AI 通过同一 `chooseMove` 接口执行，调用处不需要关心神经网络内部结构 | `AiStrategy.chooseMove()`、`ChudadiApp.strategy()` |
 | 状态模式/状态机思想 | `Screen`、`GameStartPhase` 和蓝牙状态共同约束页面与牌局阶段 | `Screen`、`GameStartPhase`、`state_game.puml` |
-| 防御式校验 | AI 只提出动作，最终仍由 `GameController` 和 `RuleSet` 校验，防止非法动作进入状态 | `GameController.play()`、`RuleSet.canBeat()` |
+| GRASP 防变化 | AI 只对合法候选牌评分，最终仍由 `GameController` 和 `RuleSet` 校验，模型迭代不会破坏牌局规则 | `GameController.play()`、`RuleSet`、`NeuralMoveFeatures` |
 
 ### 7.3 状态建模
 
@@ -768,11 +778,11 @@ class AiController(
 
 | 使用位置 | 使用方式 | Codex/GPT 产出 | 开发者确认与调整 |
 | --- | --- | --- | --- |
-| AI 策略设计 | 主要由 Codex/GPT 完成贪心、启发式、有限 rollout 三档策略代码实现 | 生成 `AiStrategy.kt` 中三种策略和对应测试场景 | 开发者运行 AI 合法动作测试并检查对局表现 |
-| 策略模式说明 | 主要由 Codex/GPT 完成把 AI 难度选择与策略模式对应起来 | 形成“控制器依赖接口、难度替换策略”的技术解释 | 结合代码确认 `GameController` 不直接写死具体 AI 类 |
+| AI 策略设计 | 主要由 Codex/GPT 完成神经网络方案拆解、特征设计、训练脚本和 Kotlin 推理代码初稿 | 生成 `NeuralAiStrategy.kt`、训练/benchmark/校验脚本和对应测试场景 | 开发者运行模型评估、AI 合法动作测试并检查对局表现 |
+| 策略模式说明 | 主要由 Codex/GPT 完成把三档 NeuralAiProfile 与策略模式对应起来 | 形成“控制器依赖接口、难度配置模型 profile”的技术解释 | 结合代码确认 `GameController` 不直接写死具体 AI 类或模型细节 |
 | 状态图细化 | 主要由 Codex/GPT 完成状态图节点、转换条件和 PlantUML 更新 | 补充状态图节点和本报告状态表 | Annakuliyev Sedar 在 ProcessOn 中校对布局并导出 |
 | 玩家成长实现 | 主要由 Codex/GPT 完成玩家档案、金币消费、头像商店、战绩和成就代码 | 形成 `profile/` 包、玩家中心页面和成长测试场景 | 开发者在 App 中验证金币、头像、改名和战绩逻辑 |
-| UI 交互检查 | 主要由 Codex/GPT 完成排查发牌动画、AI 思考、设置暂停、无可压牌提示等交互边界 | 形成 UI 技术实现细节和测试关注点 | 郭铭涛通过手动验收和动画 key 测试确认 |
+| UI 交互检查 | 主要由 Codex/GPT 完成排查发牌动画、神经网络 AI 思考、设置暂停、无可压牌提示等交互边界 | 形成 UI 技术实现细节和测试关注点 | 郭铭涛通过手动验收和动画 key 测试确认 |
 
 ### 7.8 评分标准对应
 
@@ -788,7 +798,7 @@ class AiController(
 | 问题 | 解决方法 |
 | --- | --- |
 | AI 可能选择非法牌 | 所有 AI 输出都经过 `GameController` 和 `RuleSet` 校验 |
-| AI 难度差异不明显 | 将简单、普通、困难拆分为不同策略实现 |
+| AI 难度差异不明显 | 共用同一神经网络模型，但通过 Easy/Normal/Hard 三种 `NeuralAiProfile` 设置不同 `scoreNoise`，并用 benchmark 验证胜率梯度 |
 | UI 状态复杂 | 使用 `Screen`、`BluetoothEntryMode`、`GameStartPhase` 管理页面和开局状态 |
 | 成长数据容易分散在页面中 | 使用 `ProfileController` 和 `ProfileStore` 集中处理结算、消费和持久化 |
 | 动画容易重复触发 | 使用 `TableAnimationKeysTest` 验证出牌动画 key 稳定 |

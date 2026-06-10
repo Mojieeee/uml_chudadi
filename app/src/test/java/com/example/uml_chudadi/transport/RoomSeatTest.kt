@@ -29,6 +29,10 @@ class RoomSeatTest {
 
         seats = seats.toggleAiDifficulty(aiIndex)
         assertEquals(Difficulty.Normal, seats.first { it.index == aiIndex }.difficulty)
+        seats = seats.toggleAiDifficulty(aiIndex)
+        assertEquals(Difficulty.Hard, seats.first { it.index == aiIndex }.difficulty)
+        seats = seats.toggleAiDifficulty(aiIndex)
+        assertEquals(Difficulty.Easy, seats.first { it.index == aiIndex }.difficulty)
 
         seats = seats.removeAi(aiIndex)
         val removedSeat = seats.first { it.index == aiIndex }

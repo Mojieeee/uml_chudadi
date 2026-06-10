@@ -54,7 +54,7 @@ class GameMessageCodecTest {
                 RoomSeat(0, "房主", RoomSeatKind.Host, ready = true, connected = true),
                 RoomSeat(1, "", RoomSeatKind.Empty),
                 RoomSeat(2, "简单人机", RoomSeatKind.Ai, Difficulty.Easy, ready = true, connected = true),
-                RoomSeat(3, "好友|C", RoomSeatKind.Human, ready = false, connected = true)
+                RoomSeat(3, "困难人机", RoomSeatKind.Ai, Difficulty.Hard, ready = true, connected = true)
             ),
             ruleName = "北方规则"
         )

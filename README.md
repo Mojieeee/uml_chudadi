@@ -4,7 +4,7 @@ Kotlin + Jetpack Compose 实现的四人锄大地棋牌游戏，支持人机对�
 
 ## 功能概览
 
-- 人机对局：简单、普通、困难三档 AI。
+- 人机对局：简单、普通、困难三档 AI 均使用自对弈样本离线训练的轻量 MLP 端侧推理，并通过难度配置形成强度梯度。
 - 好友蓝牙：创建房间、加入对局、四座位、人机补位、房主权威同步。
 - 规则系统：北方规则与南方规则，可保存并应用到后续对局。
 - 玩家中心：昵称、头像、金币、等级、经验、战绩、成就、每日奖励。
@@ -18,6 +18,9 @@ Kotlin + Jetpack Compose 实现的四人锄大地棋牌游戏，支持人机对�
 ./gradlew :app:assembleDebug --no-daemon
 ./gradlew :app:assembleRelease --no-daemon
 ./gradlew :app:runRelease
+python3 tools/train_neural_ai.py
+python3 tools/benchmark_neural_ai.py --games 512 --states 300 --min-win-rate 0.38 --min-completion-rate 1.0 --min-top3-rate 0.95
+python3 tools/verify_neural_ai_artifacts.py --json-out docs/ai/neural_ai_artifact_check.json
 ```
 
 ## 入口文档
@@ -26,5 +29,5 @@ Kotlin + Jetpack Compose 实现的四人锄大地棋牌游戏，支持人机对�
 - 需求分析：`docs/requirements.md`
 - 设计说明：`docs/design.md`
 - 发布测试：`docs/release_testing.md`
+- 神经网络 AI 训练与评估：`docs/ai/neural_ai_pipeline.md`
 - UML：`docs/uml/`
-

@@ -61,6 +61,7 @@ class SimulatedBluetoothHubTest {
         host.send(GameMessageCodec.encode(GameMessage.MoveAccepted(1, 1, emptyList(), pass = true)))
 
         assertTrue(clientInbox.any { it is GameMessage.Start && it.seed == 42 && it.seats == seats })
+        assertTrue(clientInbox.any { it is GameMessage.Start && it.seats.any { seat -> seat.difficulty == Difficulty.Hard } })
         assertTrue(hostInbox.any { it is GameMessage.MoveRequest && it.playerId == 1 && it.pass })
         assertTrue(clientInbox.any { it is GameMessage.MoveAccepted && it.sequence == 1 })
     }

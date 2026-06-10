@@ -1,0 +1,29 @@
+{
+  "modelVersion": "mlp-selfplay-distilled-v3",
+  "weightChecksum": "1445351bc0209981dc29104a4178dc0b49baf6fac47ab02a827b8675fd3726e6",
+  "featureCount": 23,
+  "hiddenUnits": 16,
+  "parameterCount": 401,
+  "seed": 20260610,
+  "training": {
+    "syntheticTrain": 1800,
+    "selfPlayGames": 32,
+    "selfPlayTrain": 4427,
+    "totalTrain": 6227,
+    "epochs": 140,
+    "learningRate": 0.018,
+    "weightDecay": 0.0002
+  },
+  "validation": {
+    "syntheticValid": 500,
+    "selfPlayGames": 8,
+    "selfPlayValid": 1186,
+    "totalValid": 1686
+  },
+  "metrics": {
+    "initialMse": 1.670727,
+    "initialMae": 0.886652,
+    "finalMse": 0.105922,
+    "finalMae": 0.155211
+  }
+}
