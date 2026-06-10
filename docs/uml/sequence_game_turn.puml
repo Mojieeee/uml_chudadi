@@ -9,6 +9,7 @@ participant "HandClassifier" as Classifier
 participant "GameTransport" as Transport
 participant "房主端 ChudadiApp" as Host
 participant "NetworkMoveGuard" as Guard
+participant "断线处理状态" as NetState
 
 Player -> View: 选择难度并进入牌桌
 View -> Phase: ReadyToStart
@@ -50,5 +51,17 @@ else 蓝牙房主处理非法/重复请求
   Host -> Guard: canHostAcceptMove(...)
   Guard --> Host: false
   Host -> Transport: STATE_SNAPSHOT(current)
+else 客户端断线
+  Transport --> Host: TransportEvent.PeerDisconnected(peerKey)
+  Host -> NetState: peerKey 映射到 RoomSeat
+  Host -> Host: markHumanDisconnected(takeoverByAi=true)
+  Host -> Transport: DISCONNECT_NOTICE(playerId)
+  Host -> Transport: ROOM(seats) / STATE_SNAPSHOT
+  Host -> Controller: 若轮到断线座位，按普通 AI 托管出牌
+else 房主断线
+  Transport --> View: TransportEvent.PeerDisconnected(host)
+  View -> NetState: 弹窗提示“房主已断开”
+  View -> Transport: close()
+  View -> View: 退出对局并返回蓝牙入口/大厅
 end
 @enduml

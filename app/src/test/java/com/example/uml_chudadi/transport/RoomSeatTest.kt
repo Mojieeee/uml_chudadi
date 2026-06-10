@@ -92,4 +92,44 @@ class RoomSeatTest {
         assertFalse(seats.canStartRoom())
         assertFalse(seats.first { it.index == friendIndex }.ready)
     }
+
+    @Test
+    fun disconnectedHumanSeatIsKeptForAiTakeoverAndCanRejoin() {
+        var seats = defaultRoomSeats("房主")
+        val joined = requireNotNull(seats.addOrRejoinHuman("好友", clientId = "client-1", deviceAddress = "AA:BB"))
+        seats = joined.first
+        val friendIndex = joined.second
+
+        seats = seats.markHumanDisconnected(friendIndex, takeoverByAi = true)
+        val disconnected = seats.first { it.index == friendIndex }
+        assertEquals(RoomSeatKind.Human, disconnected.kind)
+        assertFalse(disconnected.connected)
+        assertTrue(disconnected.takeoverByAi)
+        assertTrue(disconnected.controlledByAi)
+
+        val rejoined = requireNotNull(seats.addOrRejoinHuman("好友", clientId = "client-1", deviceAddress = "AA:BB", preferredIndex = friendIndex))
+        seats = rejoined.first
+        val restored = seats.first { it.index == friendIndex }
+        assertTrue(restored.connected)
+        assertFalse(restored.takeoverByAi)
+        assertEquals(friendIndex, rejoined.second)
+    }
+
+    @Test
+    fun hostMigrationPromotesOnlineHumanAndTurnsOldHostIntoTakeoverSeat() {
+        var seats = defaultRoomSeats("房主")
+        seats = requireNotNull(seats.addOrRejoinHuman("好友1", clientId = "c1", deviceAddress = "AA")).first
+        seats = requireNotNull(seats.addOrRejoinHuman("好友2", clientId = "c2", deviceAddress = "BB")).first
+
+        val candidate = seats.firstMigrationCandidate()
+        assertEquals(1, candidate?.index)
+
+        val migrated = seats.promoteHost(newHostIndex = 1, oldHostIndex = 0)
+
+        assertEquals(RoomSeatKind.Human, migrated[0].kind)
+        assertTrue(migrated[0].takeoverByAi)
+        assertFalse(migrated[0].connected)
+        assertEquals(RoomSeatKind.Host, migrated[1].kind)
+        assertTrue(migrated[1].connected)
+    }
 }

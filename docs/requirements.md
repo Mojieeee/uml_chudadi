@@ -18,17 +18,18 @@
    - 北方规则：黑桃 3 首出，四带一和同花顺可作为增强强牌跨牌型压制普通牌。
    - 南方规则：方块 3 首出，同张数压制，五张牌之间按顺子、同花、葫芦、四带一、同花顺等级比较。
 10. 联机对局采用房主权威同步：客户端发送 `MOVE_REQUEST`，房主校验后广播 `MOVE_ACCEPTED` 和 `STATE_SNAPSHOT`。
-11. 玩家无可压牌时显示“手上没有可以大过人家的牌”，并只允许不出。
-12. 玩家成长系统支持等级、经验、金币、称号、历史战绩、成就、每日奖励、头像商店、自定义头像、改名消费和战绩重置。
-13. 消耗金币的操作必须弹出二次确认，包括改名、解锁头像、解锁自定义头像和重置战绩。
-14. 背景音乐、震动、音效、金币、战绩、头像、规则和默认设置保存到本机。
-15. 项目提供 debug 与 release 两类安装包；release 包使用本地证书签名，并提供 Android Studio 一键 `runRelease` 配置。
+11. 蓝牙连接支持断线提示与处理：客户端断线后房主端保留座位并由人机托管；房主断线后客户端弹窗提示连接已断开，当前对局退出，需要重新创建或重新加入房间。当前版本没有实现自动断线重连。
+12. 玩家无可压牌时显示“手上没有可以大过人家的牌”，并只允许不出。
+13. 玩家成长系统支持等级、经验、金币、称号、历史战绩、成就、每日奖励、头像商店、自定义头像、改名消费和战绩重置。
+14. 消耗金币的操作必须弹出二次确认，包括改名、解锁头像、解锁自定义头像和重置战绩。
+15. 背景音乐、震动、音效、金币、战绩、头像、规则和默认设置保存到本机。
+16. 项目提供 debug 与 release 两类安装包；release 包使用本地证书签名，并提供 Android Studio 一键 `runRelease` 配置。
 
 ## 非功能需求
 
 1. 代码按 MVC 思想分层：Model 保存领域对象和规则，Controller 处理回合、AI 和房间逻辑，View 只负责 Compose 展示和用户意图。
 2. AI 使用策略模式，`AiStrategy` 可替换为贪心、启发式和 Monte Carlo Rollout 策略。
-3. 蓝牙和本地模拟通过 `GameTransport` 抽象，便于真机联机和自动化模拟测试共用协议。
+3. 蓝牙和本地模拟通过 `GameTransport` 抽象，传输层使用 `TransportEvent` 区分消息、连接、断开和错误，便于真机联机和自动化模拟测试共用协议。
 4. UML 使用 PlantUML 代码描述图结构，再导入或参照迁移到 ProcessOn UML 完成正式绘制；项目内保留 `.puml` 和导出的 `.png` 作为版本管理和交付备份。
 5. 核心规则、消息协议、房间座位、玩家成长、动画 key 和蓝牙竞态逻辑必须有单元测试或模拟测试覆盖。
 
@@ -40,7 +41,7 @@
 | 需求分析和面向对象设计 | `docs/requirements.md`、`docs/design.md`、`docs/final_checklist.md` |
 | 设计模式 | AI 策略模式、`GameTransport` 接口隔离、房主权威同步、单一职责拆分 |
 | UI 和页面切换 | 大厅、难度、规则、设置、教程、蓝牙房间、牌桌、结算页 |
-| 多人蓝牙连接 | `BluetoothHostTransport`、`BluetoothClientTransport`、四座位房间、房主广播同步 |
+| 多人蓝牙连接 | `BluetoothHostTransport`、`BluetoothClientTransport`、四座位房间、房主广播同步、客户端断线托管和房主断线退出提示 |
 | 南北规则 | `NorthRuleSet`、`SouthRuleSet`、`RuleProfile`、规则回归测试 |
 | 多 AI 策略 | `GreedyAiStrategy`、`HeuristicAiStrategy`、`MonteCarloRolloutAiStrategy` |
 | AI 工具使用说明 | `docs/ai_usage.md` 记录 AI 在需求、设计、编码、测试和文档中的使用 |

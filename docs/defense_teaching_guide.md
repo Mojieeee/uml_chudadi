@@ -487,7 +487,7 @@ Result
 
 你可以答：
 
-> 项目采用 C/S 房间模型。一台手机作为房主，使用 BluetoothServerSocket 监听连接；其他手机作为客户端，通过 BluetoothSocket 连接房主。不是客户端两两互连，而是所有客户端都连房主，由房主广播 ROOM、START、MOVE_ACCEPTED、STATE_SNAPSHOT 等消息，实现多人同步。
+> 项目采用 C/S 房间模型。一台手机作为房主，使用 BluetoothServerSocket 监听连接；其他手机作为客户端，通过 BluetoothSocket 连接房主。不是客户端两两互连，而是所有客户端都连房主，由房主广播 ROOM、START、MOVE_ACCEPTED、STATE_SNAPSHOT 等消息，实现多人同步。当前版本加入了 TransportEvent 事件流和座位连接状态：客户端断线时由房主 AI 托管；房主断线时客户端弹窗提示并退出房间，需要重新创建或重新加入。当前版本没有实现自动断线重连。
 
 关键代码：
 
@@ -511,10 +511,17 @@ transport/NetworkMoveGuard.kt
 8. 四座位满且准备后，房主广播 `START`。
 9. 客户端出牌发送 `MOVE_REQUEST`。
 10. 房主校验后广播 `MOVE_ACCEPTED` 和 `STATE_SNAPSHOT`。
+11. 客户端断线时，房主保留座位并标记“人机托管中”。
+12. 当前版本不承诺自动断线重连，断线设备需要重新进入蓝牙流程。
+13. 房主断线时，客户端提示连接断开并退出房间，避免没有权威端时继续错误牌局。
 
 为什么要房主权威：
 
 > 如果每台手机都自己计算，可能因为 AI、延迟或重复点击导致状态不同。房主权威可以保证所有端以同一个快照为准。
+
+如果老师问“断线怎么办”：
+
+> 客户端断线时，房主端能通过 TransportEvent.PeerDisconnected 感知 socket 断开，并用 peerKey 找到座位；该座位不会被删除，而是设置为 takeoverByAi，由房主 AI 托管。当前版本没有做自动重连恢复，所以断线设备需要重新进入蓝牙流程。房主断线时，因为房主是权威端，客户端会弹窗提示连接断开并退出房间，用户重新创建或重新加入，避免多端状态不一致。
 
 ### 4.6 南北规则
 
@@ -684,7 +691,7 @@ docs/complete_project_documentation.md
 
 答：
 
-> 使用房主权威模型。客户端只发请求，房主校验并广播快照。所有设备以房主 `STATE_SNAPSHOT` 为准。
+> 使用房主权威模型。客户端只发请求，房主校验并广播快照。所有设备以房主 `STATE_SNAPSHOT` 为准。快照带有 `roomId` 等信息，用来区分房间和避免旧消息影响当前状态。当前版本房主断线后直接退出，不做新房主迁移。
 
 ### Q4：AI 是不是大模型？
 
@@ -892,4 +899,3 @@ app/src/androidTest/java/com/example/uml_chudadi/
 - 能展示 `docs/uml` 的 7 张图。
 - 能说出 `GameController`、`RuleSet`、`AiStrategy`、`GameTransport` 分别干什么。
 - 能解释 Codex / GPT-5 在项目中是辅助工具。
-

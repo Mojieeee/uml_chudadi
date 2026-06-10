@@ -113,7 +113,7 @@ private class SimulatedBluetoothHub {
     }
 
     private inner class Endpoint(private val isHost: Boolean) : GameTransport {
-        private var listener: ((String) -> Unit)? = null
+        private var listener: ((TransportEvent) -> Unit)? = null
         private var closed = false
 
         override fun start(role: TransportRole) {
@@ -125,15 +125,15 @@ private class SimulatedBluetoothHub {
         override fun send(message: String) {
             if (closed) return
             if (isHost) {
-                clients.filterNot { it.closed }.forEach { it.listener?.invoke(message) }
+                clients.filterNot { it.closed }.forEach { it.listener?.invoke(TransportEvent.Message(message, "host")) }
             } else {
                 if (::hostEndpoint.isInitialized && !hostEndpoint.closed) {
-                    hostEndpoint.listener?.invoke(message)
+                    hostEndpoint.listener?.invoke(TransportEvent.Message(message, "client-${hashCode()}"))
                 }
             }
         }
 
-        override fun observe(listener: (String) -> Unit) {
+        override fun observeEvents(listener: (TransportEvent) -> Unit) {
             this.listener = listener
         }
 

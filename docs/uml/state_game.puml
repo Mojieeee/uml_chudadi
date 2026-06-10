@@ -27,6 +27,7 @@ JoinSearch --> NearbyChoose : 连接失败/返回
 
 HostRoom --> HostRoom : 添加人机/移除人机/踢出好友/同步 ROOM
 JoinRoom --> JoinRoom : 准备/等待房主/接收 ROOM
+HostRoom --> HostRoom : 客户端断线/座位标记托管
 HostRoom --> Dealing : 满四座并开始
 JoinRoom --> Dealing : 接收 START
 
@@ -38,6 +39,10 @@ Paused --> Lobby : 返回大厅
 Paused --> NearbyChoose : 好友局返回房间
 
 Playing --> Playing : 合法出牌/不出/AI 行动
+Playing --> ClientTakeover : 客户端断线
+ClientTakeover --> Playing : 房主启用 AI 托管并广播快照
+Playing --> HostDisconnected : 房主断线/连接丢失
+HostDisconnected --> NearbyChoose : 弹窗提示并退出房间
 Playing --> LeadReset : 三家连续不出
 LeadReset --> Playing : 上一手玩家获得新先手
 Playing --> Result : 有玩家手牌为空

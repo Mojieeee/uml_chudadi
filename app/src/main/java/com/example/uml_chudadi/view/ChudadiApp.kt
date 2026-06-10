@@ -53,6 +53,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -149,8 +150,10 @@ import com.example.uml_chudadi.transport.NetworkMoveGuard
 import com.example.uml_chudadi.transport.RoomSeat
 import com.example.uml_chudadi.transport.RoomSeatKind
 import com.example.uml_chudadi.transport.SnapshotPlayer
+import com.example.uml_chudadi.transport.TransportEvent
 import com.example.uml_chudadi.transport.TransportRole
 import com.example.uml_chudadi.transport.addAiToFirstEmpty
+import com.example.uml_chudadi.transport.addOrRejoinHuman
 import com.example.uml_chudadi.transport.addHumanToFirstEmpty
 import com.example.uml_chudadi.transport.bluetoothDiscoverableIntent
 import com.example.uml_chudadi.transport.bondedBluetoothDevices
@@ -159,6 +162,8 @@ import com.example.uml_chudadi.transport.defaultRoomSeats
 import com.example.uml_chudadi.transport.discoverBluetoothDevices
 import com.example.uml_chudadi.transport.emptyRoomSeats
 import com.example.uml_chudadi.transport.hasBluetoothPermissions
+import com.example.uml_chudadi.transport.isBluetoothEnabled
+import com.example.uml_chudadi.transport.markHumanDisconnected
 import com.example.uml_chudadi.transport.normalizedSeats
 import com.example.uml_chudadi.transport.removeAi
 import com.example.uml_chudadi.transport.resetForRematch
@@ -172,6 +177,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.UUID
 
 private val Felt = Color(0xFF0A5A44)
 private val FeltDark = Color(0xFF063527)
@@ -258,6 +264,7 @@ private const val KEY_RULE = "rule"
 private const val KEY_DEFAULT_DIFFICULTY = "default_difficulty"
 private const val KEY_SOUND = "sound_enabled"
 private const val KEY_VIBRATION = "vibration_enabled"
+private const val KEY_BLUETOOTH_CLIENT_ID = "bluetooth_client_id"
 private const val KEY_COINS = "coins"
 private const val KEY_TOTAL_GAMES = "total_games"
 private const val KEY_WINS = "wins"
@@ -269,6 +276,7 @@ private const val DEFAULT_RULE_ID = "north"
 @Composable
 fun ChudadiApp() {
     val context = LocalContext.current
+    val localClientId = remember(context) { stableBluetoothClientId(context) }
     val settings = remember(context) {
         context.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
     }
@@ -307,13 +315,46 @@ fun ChudadiApp() {
     var networkSeats by remember { mutableStateOf(defaultRoomSeats(profile.nickname)) }
     var networkSeed by remember { mutableIntStateOf(0) }
     var networkSequence by remember { mutableIntStateOf(0) }
+    var networkRoomId by remember { mutableStateOf("") }
+    var networkHostEpoch by remember { mutableIntStateOf(0) }
+    var networkLastHostSignalAt by remember { mutableStateOf(System.currentTimeMillis()) }
+    var networkStatus by remember { mutableStateOf("") }
+    var latestNetworkSnapshot by remember { mutableStateOf<GameSnapshot?>(null) }
+    var networkMigrationInProgress by remember { mutableStateOf(false) }
     var waitingForNetworkMove by remember { mutableStateOf(false) }
+    var networkAlertMessage by remember { mutableStateOf<String?>(null) }
     var gameMode by remember { mutableStateOf(GameMode.HumanVsAi) }
     var gameStartPhase by remember { mutableStateOf(GameStartPhase.Playing) }
     CardRoomMusicEffect(
         enabled = soundEnabled,
         scene = if (screen == Screen.Game) MusicScene.Game else MusicScene.Lobby
     )
+    LaunchedEffect(networkTransport, networkIsHost, networkRoomId, networkHostEpoch, gameMode) {
+        val activeTransport = networkTransport ?: return@LaunchedEffect
+        if (gameMode != GameMode.BluetoothRoom || networkRoomId.isBlank()) return@LaunchedEffect
+        while (true) {
+            delay(3_000)
+            if (networkIsHost) {
+                activeTransport.send(GameMessageCodec.encode(GameMessage.Heartbeat(networkRoomId, networkHostEpoch, localPlayerId)))
+            } else if (System.currentTimeMillis() - networkLastHostSignalAt > 8_000 && !networkMigrationInProgress) {
+                networkAlertMessage = "自己的蓝牙连接已断开，已退出本局。请重新进入好友蓝牙对局。"
+                activeTransport.close()
+                networkTransport = null
+                networkIsHost = false
+                networkSeats = emptyRoomSeats()
+                networkSeed = 0
+                networkSequence = 0
+                networkRoomId = ""
+                networkHostEpoch = 0
+                networkStatus = networkAlertMessage.orEmpty()
+                latestNetworkSnapshot = null
+                networkMigrationInProgress = false
+                waitingForNetworkMove = false
+                gameMode = GameMode.HumanVsAi
+                screen = Screen.Lobby
+            }
+        }
+    }
 
     fun strategy(controller: GameController, level: Difficulty = difficulty): AiStrategy = when (level) {
         Difficulty.Easy -> GreedyAiStrategy(controller)
@@ -357,6 +398,47 @@ fun ChudadiApp() {
         }
     }
 
+    fun clearNetworkSession(message: String = "") {
+        networkTransport = null
+        networkIsHost = false
+        networkSeats = emptyRoomSeats()
+        networkSeed = 0
+        networkSequence = 0
+        networkRoomId = ""
+        networkHostEpoch = 0
+        networkStatus = message
+        latestNetworkSnapshot = null
+        networkMigrationInProgress = false
+        waitingForNetworkMove = false
+        gameMode = GameMode.HumanVsAi
+    }
+
+    fun showNetworkAlertAndExit(message: String) {
+        networkAlertMessage = message
+        networkTransport?.close()
+        clearNetworkSession(message)
+        screen = Screen.Lobby
+    }
+
+    fun leaveNetworkToLobby() {
+        if (gameMode == GameMode.BluetoothRoom) {
+            val message = if (networkIsHost) {
+                "房主已返回大厅，本局蓝牙对局已结束。"
+            } else {
+                "你已离开蓝牙对局。"
+            }
+            val outgoing = if (networkIsHost) {
+                GameMessage.Error(message)
+            } else {
+                GameMessage.Leave(localPlayerId)
+            }
+            networkTransport?.send(GameMessageCodec.encode(outgoing))
+            networkTransport?.close()
+            clearNetworkSession("")
+        }
+        screen = Screen.Lobby
+    }
+
     fun playerDisplayName(): String = profile.nickname.ifBlank { "你" }
 
     fun humanPreviewState(): GameState {
@@ -381,6 +463,11 @@ fun ChudadiApp() {
         networkSeats = defaultRoomSeats(playerDisplayName())
         networkSequence = 0
         networkSeed = 0
+        networkRoomId = ""
+        networkHostEpoch = 0
+        networkStatus = ""
+        latestNetworkSnapshot = null
+        networkMigrationInProgress = false
         waitingForNetworkMove = false
         gameMode = GameMode.HumanVsAi
         gameStartPhase = GameStartPhase.ReadyToStart
@@ -401,11 +488,16 @@ fun ChudadiApp() {
         screen = if (gameState?.isFinished == true) Screen.Result else Screen.Game
     }
 
-    fun buildNetworkGame(seed: Int, ruleSet: RuleSet, seats: List<RoomSeat>, playerId: Int, isHost: Boolean) {
+    fun buildNetworkGame(seed: Int, ruleSet: RuleSet, seats: List<RoomSeat>, playerId: Int, isHost: Boolean, roomId: String = networkRoomId, hostEpoch: Int = networkHostEpoch) {
         val roomSeats = seats.normalizedSeats()
         networkSeats = roomSeats
         networkSeed = seed
         networkSequence = 0
+        networkRoomId = roomId.ifBlank { networkRoomId.ifBlank { "room-${System.currentTimeMillis()}" } }
+        networkHostEpoch = hostEpoch
+        networkLastHostSignalAt = System.currentTimeMillis()
+        networkStatus = "蓝牙对局已连接"
+        networkMigrationInProgress = false
         waitingForNetworkMove = false
         localPlayerId = playerId
         gameMode = GameMode.BluetoothRoom
@@ -419,17 +511,34 @@ fun ChudadiApp() {
             aiNames = names.drop(1),
             seed = seed
         )
-        gameState = state.copy(
+        val createdState = state.copy(
             players = state.players.map { player ->
                 player.copy(
                     name = names[player.id],
                     kind = when {
                         player.id == playerId -> PlayerKind.Human
-                        isHost && roomSeats[player.id].kind == RoomSeatKind.Ai -> PlayerKind.LocalAi
+                        isHost && roomSeats[player.id].controlledByAi -> PlayerKind.LocalAi
                         else -> PlayerKind.Remote
-                    }
+                    },
+                    connected = roomSeats.getOrNull(player.id)?.connected ?: true
                 )
             }
+        )
+        gameState = createdState
+        latestNetworkSnapshot = GameSnapshot(
+            sequence = networkSequence,
+            seed = networkSeed,
+            ruleProfileId = createdState.ruleSet.profile.id,
+            players = createdState.players.map { player -> SnapshotPlayer(player.id, player.name, player.hand) },
+            currentPlayerId = createdState.currentPlayerId,
+            lastPlayerId = createdState.lastPlayedHand?.playerId,
+            lastCards = createdState.lastPlayedHand?.type?.cards.orEmpty(),
+            passCount = createdState.passCount,
+            firstTurn = createdState.firstTurn,
+            winnerId = createdState.winnerId,
+            message = createdState.message,
+            roomId = networkRoomId,
+            hostEpoch = networkHostEpoch
         )
         screen = Screen.Game
     }
@@ -439,11 +548,14 @@ fun ChudadiApp() {
         networkSeats = restoredSeats
         networkSeed = 0
         networkSequence = 0
+        networkStatus = "已回到原房间，等待房主再开一局"
+        latestNetworkSnapshot = null
+        networkMigrationInProgress = false
         waitingForNetworkMove = false
         gameStartPhase = GameStartPhase.Playing
         gameState = null
         if (networkIsHost) {
-            networkTransport?.send(GameMessageCodec.encode(GameMessage.Room(restoredSeats, selectedRule.name)))
+            networkTransport?.send(GameMessageCodec.encode(GameMessage.Room(restoredSeats, selectedRule.name, networkRoomId, networkHostEpoch)))
         }
         screen = Screen.Nearby
     }
@@ -484,7 +596,9 @@ fun ChudadiApp() {
             passCount = state.passCount,
             firstTurn = state.firstTurn,
             winnerId = state.winnerId,
-            message = state.message
+            message = state.message,
+            roomId = networkRoomId,
+            hostEpoch = networkHostEpoch
         )
     }
 
@@ -497,7 +611,7 @@ fun ChudadiApp() {
                 name = snapshotPlayer.name,
                 kind = when {
                     snapshotPlayer.id == localPlayerId -> PlayerKind.Human
-                    networkIsHost && seat?.kind == RoomSeatKind.Ai -> PlayerKind.LocalAi
+                    networkIsHost && seat?.controlledByAi == true -> PlayerKind.LocalAi
                     else -> PlayerKind.Remote
                 },
                 hand = snapshotPlayer.hand,
@@ -521,14 +635,17 @@ fun ChudadiApp() {
 
     fun sendAcceptedMove(playerId: Int, cards: List<Card>, pass: Boolean) {
         networkSequence += 1
-        networkTransport?.send(GameMessageCodec.encode(GameMessage.MoveAccepted(networkSequence, playerId, cards, pass)))
+        networkTransport?.send(GameMessageCodec.encode(GameMessage.MoveAccepted(networkSequence, playerId, cards, pass, networkRoomId, networkHostEpoch)))
         gameState?.let { current ->
-            networkTransport?.send(GameMessageCodec.encode(GameMessage.StateSnapshot(snapshotFromState(current))))
+            val snapshot = snapshotFromState(current)
+            latestNetworkSnapshot = snapshot
+            networkTransport?.send(GameMessageCodec.encode(GameMessage.StateSnapshot(snapshot)))
         }
     }
 
     fun applyAcceptedMove(message: GameMessage.MoveAccepted) {
         val current = gameState ?: return
+        if (message.hostEpoch != 0 && message.hostEpoch < networkHostEpoch) return
         if (message.sequence <= networkSequence && !networkIsHost) return
         if (!networkIsHost && message.playerId == localPlayerId) {
             waitingForNetworkMove = false
@@ -540,6 +657,7 @@ fun ChudadiApp() {
         } else {
             controller.play(current, message.playerId, message.cards)
         }
+        networkStatus = "蓝牙同步正常"
         publishState(current, next)
     }
 
@@ -560,7 +678,7 @@ fun ChudadiApp() {
             } else {
                 if (waitingForNetworkMove) return
                 waitingForNetworkMove = true
-                networkTransport?.send(GameMessageCodec.encode(GameMessage.MoveRequest(localPlayerId, cards, pass = false)))
+                networkTransport?.send(GameMessageCodec.encode(GameMessage.MoveRequest(localPlayerId, cards, pass = false, roomId = networkRoomId, hostEpoch = networkHostEpoch)))
             }
         } else {
             applyTableMove { GameController(it.ruleSet).play(it, localPlayerId, cards) }
@@ -579,7 +697,7 @@ fun ChudadiApp() {
             } else {
                 if (waitingForNetworkMove) return
                 waitingForNetworkMove = true
-                networkTransport?.send(GameMessageCodec.encode(GameMessage.MoveRequest(localPlayerId, emptyList(), pass = true)))
+                networkTransport?.send(GameMessageCodec.encode(GameMessage.MoveRequest(localPlayerId, emptyList(), pass = true, roomId = networkRoomId, hostEpoch = networkHostEpoch)))
             }
         } else {
             applyTableMove { GameController(it.ruleSet).pass(it, localPlayerId) }
@@ -717,27 +835,160 @@ fun ChudadiApp() {
                     restoredSeats = networkSeats,
                     restoredPlayerId = localPlayerId,
                     restoredIsHost = networkIsHost,
+                    restoredRoomId = networkRoomId,
+                    restoredHostEpoch = networkHostEpoch,
+                    restoredStatus = networkStatus,
                     onBack = {
                         networkTransport?.close()
                         networkTransport = null
+                        networkStatus = ""
                         screen = Screen.Lobby
                     },
-                    onStartNetworkGame = { transport, seed, ruleSet, seats, playerId, isHost ->
+                    onStartNetworkGame = { transport, seed, ruleSet, seats, playerId, isHost, roomId, hostEpoch ->
                         networkTransport = transport
                         networkIsHost = isHost
-                        buildNetworkGame(seed, ruleSet, seats, playerId, isHost)
+                        buildNetworkGame(seed, ruleSet, seats, playerId, isHost, roomId, hostEpoch)
                     },
                     onRoomUpdated = { seats, rule ->
                         networkSeats = seats.normalizedSeats()
                         selectedRule = rule
                     },
+                    onNetworkStatus = { message ->
+                        networkStatus = message
+                    },
+                    onRoomSessionChanged = { transport, isHost, seats, roomId, hostEpoch, message ->
+                        gameMode = GameMode.BluetoothRoom
+                        networkTransport = transport
+                        networkIsHost = isHost
+                        networkSeats = seats.normalizedSeats()
+                        networkRoomId = roomId
+                        networkHostEpoch = hostEpoch
+                        networkLastHostSignalAt = System.currentTimeMillis()
+                        networkMigrationInProgress = false
+                        networkStatus = message
+                    },
+                    onRoomSessionCleared = { message ->
+                        networkTransport = null
+                        networkIsHost = false
+                        networkSeats = emptyRoomSeats()
+                        networkRoomId = ""
+                        networkHostEpoch = 0
+                        networkStatus = message
+                        gameMode = GameMode.HumanVsAi
+                    },
                     onNetworkMessage = { message ->
+                        when (message) {
+                            is GameMessage.Heartbeat -> {
+                                if (message.hostEpoch >= networkHostEpoch) {
+                                    networkLastHostSignalAt = System.currentTimeMillis()
+                                    networkHostEpoch = maxOf(networkHostEpoch, message.hostEpoch)
+                                    networkRoomId = message.roomId.ifBlank { networkRoomId }
+                                    networkMigrationInProgress = false
+                                    networkStatus = "蓝牙连接正常"
+                                }
+                            }
+                            is GameMessage.StateSnapshot -> {
+                                if (message.snapshot.hostEpoch >= networkHostEpoch) {
+                                    networkLastHostSignalAt = System.currentTimeMillis()
+                                    networkHostEpoch = maxOf(networkHostEpoch, message.snapshot.hostEpoch)
+                                    networkRoomId = message.snapshot.roomId.ifBlank { networkRoomId }
+                                    latestNetworkSnapshot = message.snapshot
+                                }
+                            }
+                            else -> Unit
+                        }
                         val current = gameState
                         if (current != null) {
                             val controller = GameController(current.ruleSet)
                             when (message) {
+                                is GameMessage.Heartbeat -> {
+                                    if (message.hostEpoch >= networkHostEpoch) {
+                                        networkLastHostSignalAt = System.currentTimeMillis()
+                                        networkMigrationInProgress = false
+                                        networkStatus = "蓝牙连接正常"
+                                    }
+                                }
+                                is GameMessage.DisconnectNotice -> {
+                                    if (message.playerId == localPlayerId) {
+                                        showNetworkAlertAndExit("自己的蓝牙连接已断开，已退出本局。请重新进入好友蓝牙对局。")
+                                    } else {
+                                        networkSeats = networkSeats.markHumanDisconnected(message.playerId, takeoverByAi = true)
+                                        networkStatus = message.reason
+                                        waitingForNetworkMove = false
+                                        val next = current.copy(
+                                            players = current.players.map { player ->
+                                                if (player.id == message.playerId && networkIsHost) {
+                                                    player.copy(kind = PlayerKind.LocalAi, connected = false)
+                                                } else if (player.id == message.playerId) {
+                                                    player.copy(connected = false)
+                                                } else {
+                                                    player
+                                                }
+                                            },
+                                            message = message.reason
+                                        )
+                                        publishState(current, next)
+                                    }
+                                }
+                                is GameMessage.Leave -> {
+                                    if (networkIsHost) {
+                                        val leavingName = networkSeats.getOrNull(message.playerId)?.name?.ifBlank { "好友" } ?: "好友"
+                                        val noticeText = "$leavingName 已离开，座位已由人机托管"
+                                        networkSeats = networkSeats.markHumanDisconnected(message.playerId, takeoverByAi = true)
+                                        networkStatus = noticeText
+                                        waitingForNetworkMove = false
+                                        val next = current.copy(
+                                            players = current.players.map { player ->
+                                                if (player.id == message.playerId) {
+                                                    player.copy(kind = PlayerKind.LocalAi, connected = false)
+                                                } else {
+                                                    player
+                                                }
+                                            },
+                                            message = noticeText
+                                        )
+                                        publishState(current, next)
+                                        val notice = GameMessage.DisconnectNotice(message.playerId, noticeText)
+                                        networkTransport?.send(GameMessageCodec.encode(notice))
+                                        networkTransport?.send(GameMessageCodec.encode(GameMessage.StateSnapshot(snapshotFromState(next))))
+                                    } else if (message.playerId == 0) {
+                                        showNetworkAlertAndExit("房主已返回大厅，本局蓝牙对局已结束。")
+                                    }
+                                }
+                                is GameMessage.Error -> {
+                                    showNetworkAlertAndExit(message.reason.ifBlank { "蓝牙连接已断开，已退出本局。" })
+                                }
+                                is GameMessage.HostMigration -> {
+                                    if (message.hostEpoch >= networkHostEpoch) {
+                                        networkHostEpoch = message.hostEpoch
+                                        networkRoomId = message.roomId.ifBlank { networkRoomId }
+                                        networkSeats = message.seats.normalizedSeats()
+                                        networkIsHost = message.newHostPlayerId == localPlayerId
+                                        networkMigrationInProgress = false
+                                        waitingForNetworkMove = false
+                                        networkStatus = if (networkIsHost) "你已成为新房主，牌局继续" else "房主迁移完成，牌局继续"
+                                        val next = current.copy(
+                                            players = current.players.map { player ->
+                                                val seat = networkSeats.getOrNull(player.id)
+                                                player.copy(
+                                                    kind = when {
+                                                        player.id == localPlayerId -> PlayerKind.Human
+                                                        networkIsHost && seat?.controlledByAi == true -> PlayerKind.LocalAi
+                                                        else -> PlayerKind.Remote
+                                                    },
+                                                    connected = seat?.connected ?: player.connected
+                                                )
+                                            },
+                                            message = networkStatus
+                                        )
+                                        latestNetworkSnapshot = snapshotFromState(next)
+                                        publishState(current, next)
+                                    }
+                                }
                                 is GameMessage.MoveRequest -> {
-                                    if (networkIsHost && NetworkMoveGuard.canHostAcceptMove(current, message)) {
+                                    if (message.hostEpoch != 0 && message.hostEpoch < networkHostEpoch) {
+                                        Unit
+                                    } else if (networkIsHost && !networkMigrationInProgress && NetworkMoveGuard.canHostAcceptMove(current, message)) {
                                         val next = if (message.pass) {
                                             controller.pass(current, message.playerId)
                                         } else {
@@ -755,11 +1006,19 @@ fun ChudadiApp() {
                                 }
                                 is GameMessage.MoveAccepted -> applyAcceptedMove(message)
                                 is GameMessage.StateSnapshot -> {
-                                    if (!networkIsHost) {
-                                        waitingForNetworkMove = false
-                                        networkSequence = maxOf(networkSequence, message.snapshot.sequence)
-                                        val next = stateFromSnapshot(message.snapshot)
-                                        publishState(current, next)
+                                    if (message.snapshot.hostEpoch >= networkHostEpoch) {
+                                        latestNetworkSnapshot = message.snapshot
+                                        networkLastHostSignalAt = System.currentTimeMillis()
+                                        networkHostEpoch = maxOf(networkHostEpoch, message.snapshot.hostEpoch)
+                                        networkRoomId = message.snapshot.roomId.ifBlank { networkRoomId }
+                                        networkStatus = message.snapshot.message.ifBlank { "蓝牙状态已同步" }
+                                        networkMigrationInProgress = false
+                                        if (!networkIsHost) {
+                                            waitingForNetworkMove = false
+                                            networkSequence = maxOf(networkSequence, message.snapshot.sequence)
+                                            val next = stateFromSnapshot(message.snapshot)
+                                            publishState(current, next)
+                                        }
                                     }
                                 }
                                 is GameMessage.SyncRequest -> {
@@ -795,7 +1054,8 @@ fun ChudadiApp() {
                     vibrationEnabled = vibrationEnabled,
                     gameMode = gameMode,
                     localPlayerId = localPlayerId,
-                    inputLocked = waitingForNetworkMove,
+                    inputLocked = waitingForNetworkMove || networkMigrationInProgress,
+                    networkStatus = if (gameMode == GameMode.BluetoothRoom) networkStatus else "",
                     onCanPlay = { cards -> canPlayLocalCards(cards) },
                     onPlay = { cards -> playLocalCards(cards) },
                     onPass = { passLocalTurn() },
@@ -822,9 +1082,7 @@ fun ChudadiApp() {
                         }
                     },
                     onLobby = {
-                        networkTransport?.close()
-                        networkTransport = null
-                        screen = Screen.Lobby
+                        leaveNetworkToLobby()
                     }
                 )
                 Screen.Result -> ResultScreen(
@@ -836,12 +1094,22 @@ fun ChudadiApp() {
                         if (gameMode == GameMode.HumanVsAi) prepareHumanGame() else returnToNetworkRoomForRematch()
                     },
                     onLobby = {
-                        networkTransport?.close()
-                        networkTransport = null
-                        screen = Screen.Lobby
+                        leaveNetworkToLobby()
                     }
                 )
             }
+            }
+            networkAlertMessage?.let { message ->
+                AlertDialog(
+                    onDismissRequest = { networkAlertMessage = null },
+                    title = { Text("蓝牙连接提示") },
+                    text = { Text(message) },
+                    confirmButton = {
+                        Button(onClick = { networkAlertMessage = null }) {
+                            Text("知道了")
+                        }
+                    }
+                )
             }
         }
     }
@@ -2240,20 +2508,27 @@ private fun NearbyScreen(
     restoredSeats: List<RoomSeat>,
     restoredPlayerId: Int,
     restoredIsHost: Boolean,
+    restoredRoomId: String,
+    restoredHostEpoch: Int,
+    restoredStatus: String,
     onBack: () -> Unit,
-    onStartNetworkGame: (GameTransport, Int, RuleSet, List<RoomSeat>, Int, Boolean) -> Unit,
+    onStartNetworkGame: (GameTransport, Int, RuleSet, List<RoomSeat>, Int, Boolean, String, Int) -> Unit,
     onRoomUpdated: (List<RoomSeat>, RuleSet) -> Unit,
+    onNetworkStatus: (String) -> Unit,
+    onRoomSessionChanged: (GameTransport, Boolean, List<RoomSeat>, String, Int, String) -> Unit,
+    onRoomSessionCleared: (String) -> Unit,
     onNetworkMessage: (GameMessage) -> Unit
 ) {
     val context = LocalContext.current
-    val restoredRoomActive = restoredTransport != null && restoredSeats.any { it.occupied }
+    val localClientId = remember(context) { stableBluetoothClientId(context) }
+    val restoredRoomActive = restoredTransport != null
     val restoredLocalName = restoredSeats.normalizedSeats()
         .getOrNull(restoredPlayerId)
         ?.name
         ?.takeIf { it.isNotBlank() }
         ?: localProfileName
     var hasPermission by remember { mutableStateOf(hasBluetoothPermissions(context)) }
-    var entryMode by remember(restoredTransport, restoredRoomActive, restoredIsHost) {
+    var entryMode by remember {
         mutableStateOf(
             when {
                 !restoredRoomActive -> BluetoothEntryMode.Choose
@@ -2262,15 +2537,22 @@ private fun NearbyScreen(
             }
         )
     }
-    var status by remember(restoredTransport, restoredRoomActive) {
-        mutableStateOf(if (restoredRoomActive) "已回到原房间，等待再开一局" else "选择创建房间或加入对局")
+    var status by remember {
+        mutableStateOf(restoredStatus.ifBlank { if (restoredRoomActive) "已回到原房间，等待再开一局" else "选择创建房间或加入对局" })
     }
-    var roomRuleName by remember(ruleSet) { mutableStateOf(ruleSet.name) }
+    var roomRuleName by remember { mutableStateOf(ruleSet.name) }
+    var roomId by remember { mutableStateOf(restoredRoomId.ifBlank { "room-${System.currentTimeMillis()}" }) }
+    var hostEpoch by remember { mutableIntStateOf(restoredHostEpoch) }
+    var latestSnapshot by remember { mutableStateOf<GameSnapshot?>(null) }
+    var peerSeatKeys by remember { mutableStateOf<Map<String, Int>>(emptyMap()) }
     var devices by remember { mutableStateOf(emptyList<com.example.uml_chudadi.transport.BluetoothDeviceInfo>()) }
-    var transport by remember(restoredTransport) { mutableStateOf(restoredTransport) }
-    var hostMode by remember(restoredTransport, restoredIsHost) { mutableStateOf(restoredRoomActive && restoredIsHost) }
-    var playerName by remember(restoredTransport, restoredLocalName) { mutableStateOf(restoredLocalName) }
-    var roomSeats by remember(restoredTransport, restoredSeats) {
+    var transport by remember { mutableStateOf(restoredTransport) }
+    var hostMode by remember { mutableStateOf(restoredRoomActive && restoredIsHost) }
+    var playerName by remember { mutableStateOf(restoredLocalName) }
+    var bluetoothDialogMessage by remember { mutableStateOf<String?>(null) }
+    var suppressTransportErrorsUntil by remember { mutableStateOf(0L) }
+    var boundTransport by remember { mutableStateOf<GameTransport?>(null) }
+    var roomSeats by remember {
         mutableStateOf(if (restoredRoomActive) restoredSeats.normalizedSeats() else defaultRoomSeats(localProfileName))
     }
     var discoveryHandle by remember { mutableStateOf<AutoCloseable?>(null) }
@@ -2279,7 +2561,7 @@ private fun NearbyScreen(
         status = if (hasPermission) "可以创建房间或加入对局" else "需要权限才能发现附近好友"
     }
     val discoverableLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        status = if (result.resultCode > 0) {
+        status = if (result.resultCode == Activity.RESULT_OK) {
             "好友现在可以找到你的房间"
         } else {
             "房间已创建；若好友找不到，请先在系统蓝牙里完成配对"
@@ -2291,21 +2573,88 @@ private fun NearbyScreen(
         onDispose { activeDiscoveryHandle?.close() }
     }
 
+    fun localSeatByIdentity(): RoomSeat? {
+        return roomSeats.normalizedSeats().firstOrNull { seat ->
+            (seat.clientId.isNotBlank() && seat.clientId == localClientId) ||
+                (seat.clientId.isBlank() && seat.name.isNotBlank() && seat.name == playerName)
+        }
+    }
+
     fun leaveRoom() {
-        val localSeat = roomSeats.firstOrNull { it.name == playerName }
+        val localSeat = localSeatByIdentity()
         if (transport != null && localSeat != null) {
             transport?.send(GameMessageCodec.encode(GameMessage.Leave(localSeat.index)))
         }
+        suppressTransportErrorsUntil = System.currentTimeMillis() + 1_800
         discoveryHandle?.close()
         transport?.close()
+        boundTransport = null
+        onRoomSessionCleared("")
         onBack()
     }
 
-    fun broadcastRoom() {
-        transport?.send(GameMessageCodec.encode(GameMessage.Room(roomSeats, ruleSet.name)))
+    fun showBluetoothError(rawMessage: String, fallbackStatus: String = "选择创建房间或加入对局") {
+        bluetoothDialogMessage = playerFriendlyBluetoothError(rawMessage)
+        status = fallbackStatus
+    }
+
+    fun handleDiscoveryStatus(message: String) {
+        if (message.isBluetoothErrorLike()) {
+            showBluetoothError(message, fallbackStatus = "正在搜索附近房间")
+        } else {
+            status = message
+        }
+    }
+
+    fun disconnectClientAndReturnToJoin(rawMessage: String) {
+        val friendly = playerFriendlyBluetoothError(rawMessage)
+        bluetoothDialogMessage = friendly
+        onNetworkMessage(GameMessage.Error(friendly))
+        suppressTransportErrorsUntil = System.currentTimeMillis() + 1_800
+        discoveryHandle?.close()
+        discoveryHandle = null
+        transport?.close()
+        transport = null
+        hostMode = false
+        roomSeats = emptyRoomSeats()
+        latestSnapshot = null
+        peerSeatKeys = emptyMap()
+        boundTransport = null
+        entryMode = BluetoothEntryMode.JoinRoom
+        status = "连接已断开，请重新寻找房间"
+        onRoomSessionCleared(status)
+    }
+
+    fun broadcastRoom(seats: List<RoomSeat> = roomSeats, currentRule: RuleSet = ruleSet) {
+        val message = "房间状态已同步"
+        onNetworkStatus(message)
+        transport?.send(GameMessageCodec.encode(GameMessage.Room(seats.normalizedSeats(), currentRule.name, roomId, hostEpoch)))
+    }
+
+    fun localSeatIndex(): Int {
+        return roomSeats
+            .firstOrNull { it.name == playerName || (it.clientId.isNotBlank() && it.clientId == localClientId) }
+            ?.index
+            ?: restoredPlayerId
+    }
+
+    fun localJoinedSeatIndex(): Int? {
+        return roomSeats.normalizedSeats()
+            .firstOrNull { seat ->
+                seat.occupied &&
+                    (
+                        (seat.clientId.isNotBlank() && seat.clientId == localClientId) ||
+                            (seat.name.isNotBlank() && seat.name == playerName)
+                    )
+            }
+            ?.index
     }
 
     fun startDiscovery() {
+        localSeatByIdentity()?.let { localSeat ->
+            transport?.send(GameMessageCodec.encode(GameMessage.Leave(localSeat.index)))
+        }
+        suppressTransportErrorsUntil = System.currentTimeMillis() + 1_800
         discoveryHandle?.close()
         transport?.close()
         transport = null
@@ -2313,6 +2662,12 @@ private fun NearbyScreen(
         playerName = localProfileName
         roomSeats = emptyRoomSeats()
         roomRuleName = ruleSet.name
+        roomId = "room-${System.currentTimeMillis()}"
+        hostEpoch = 0
+        latestSnapshot = null
+        peerSeatKeys = emptyMap()
+        boundTransport = null
+        onRoomSessionCleared("正在搜索附近房间")
         val pairedDevices = runCatching { bondedBluetoothDevices(context) }.getOrDefault(emptyList())
         devices = pairedDevices.distinctBy { it.address }
         status = if (pairedDevices.isEmpty()) {
@@ -2326,7 +2681,7 @@ private fun NearbyScreen(
                 devices = (devices + found).distinctBy { it.address }
                 status = "找到 ${devices.size} 台设备，选择房主加入房间"
             },
-            onStatus = { message -> status = message }
+            onStatus = { message -> handleDiscoveryStatus(message) }
         )
     }
 
@@ -2336,45 +2691,164 @@ private fun NearbyScreen(
         localName: String,
         seatsOverride: List<RoomSeat>? = null
     ) {
+        if (boundTransport === newTransport) {
+            transport = newTransport
+            hostMode = isHost
+            playerName = localName
+            seatsOverride?.let { roomSeats = it.normalizedSeats() }
+            onRoomUpdated(roomSeats, ruleFromName(roomRuleName))
+            onRoomSessionChanged(newTransport, isHost, roomSeats, roomId, hostEpoch, status)
+            return
+        }
         if (transport != null && transport !== newTransport) {
+            suppressTransportErrorsUntil = System.currentTimeMillis() + 1_800
             transport?.close()
         }
         transport = newTransport
         hostMode = isHost
         playerName = localName
-        roomSeats = seatsOverride?.normalizedSeats() ?: if (isHost) defaultRoomSeats(localName) else emptyRoomSeats()
+        roomSeats = seatsOverride?.normalizedSeats() ?: if (isHost) {
+            defaultRoomSeats(localName).map { seat ->
+                if (seat.index == 0) seat.copy(clientId = localClientId) else seat
+            }.normalizedSeats()
+        } else {
+            emptyRoomSeats()
+        }
         onRoomUpdated(roomSeats, ruleFromName(roomRuleName))
-        newTransport.observe { raw ->
-            when (val message = GameMessageCodec.decode(raw)) {
+        onRoomSessionChanged(newTransport, isHost, roomSeats, roomId, hostEpoch, status)
+        boundTransport = newTransport
+        newTransport.observeEvents { event ->
+            when (event) {
+                is TransportEvent.PeerDisconnected -> {
+                    if (System.currentTimeMillis() < suppressTransportErrorsUntil) return@observeEvents
+                    if (!isBluetoothEnabled(context)) {
+                        val ownMessage = "自己的蓝牙已关闭，已退出当前蓝牙对局。"
+                        if (hostMode) {
+                            bluetoothDialogMessage = ownMessage
+                            onNetworkMessage(GameMessage.Error(ownMessage))
+                            onRoomSessionCleared(ownMessage)
+                            transport?.close()
+                            transport = null
+                            boundTransport = null
+                            entryMode = BluetoothEntryMode.Choose
+                            status = "选择创建房间或加入对局"
+                        } else {
+                            disconnectClientAndReturnToJoin(ownMessage)
+                        }
+                        return@observeEvents
+                    }
+                    if (hostMode) {
+                        val disconnectedSeat = peerSeatKeys[event.peerKey]
+                        if (disconnectedSeat != null) {
+                            val seatName = roomSeats.getOrNull(disconnectedSeat)?.name ?: "好友"
+                            roomSeats = roomSeats.markHumanDisconnected(disconnectedSeat, takeoverByAi = true)
+                            onRoomUpdated(roomSeats, ruleSet)
+                            status = "$seatName 断线，已由人机托管"
+                            onNetworkStatus(status)
+                            broadcastRoom()
+                            val notice = GameMessage.DisconnectNotice(disconnectedSeat, status)
+                            onNetworkMessage(notice)
+                            newTransport.send(GameMessageCodec.encode(notice))
+                            latestSnapshot?.let {
+                                newTransport.send(GameMessageCodec.encode(GameMessage.StateSnapshot(it.copy(message = status))))
+                            }
+                        } else {
+                            status = "有好友连接断开"
+                            onNetworkStatus(status)
+                        }
+                    } else {
+                        disconnectClientAndReturnToJoin("房主连接已断开，请重新寻找房间加入。")
+                    }
+                }
+                is TransportEvent.Error -> {
+                    if (System.currentTimeMillis() < suppressTransportErrorsUntil) return@observeEvents
+                    if (!isBluetoothEnabled(context)) {
+                        val ownMessage = "自己的蓝牙已关闭，已退出当前蓝牙对局。"
+                        if (hostMode) {
+                            bluetoothDialogMessage = ownMessage
+                            onNetworkMessage(GameMessage.Error(ownMessage))
+                            onRoomSessionCleared(ownMessage)
+                            transport?.close()
+                            transport = null
+                            boundTransport = null
+                            entryMode = BluetoothEntryMode.Choose
+                            status = "选择创建房间或加入对局"
+                        } else {
+                            disconnectClientAndReturnToJoin(ownMessage)
+                        }
+                        return@observeEvents
+                    }
+                    if (hostMode && event.reason.isBenignBluetoothReturnCode()) {
+                        status = "房间已创建，等待好友或添加人机"
+                        return@observeEvents
+                    }
+                    val message = if (entryMode == BluetoothEntryMode.JoinRoom && roomSeats.none { it.occupied }) {
+                        "加入失败：${event.reason}。请确认两台手机已配对、房主房间仍在等待，并重新选择房主。"
+                    } else {
+                        event.reason
+                    }
+                    if (hostMode) {
+                        showBluetoothError(message, fallbackStatus = "房间已创建，等待好友或添加人机")
+                    } else {
+                        showBluetoothError(message, fallbackStatus = if (entryMode == BluetoothEntryMode.JoinRoom) "正在寻找可加入的房间" else "选择创建房间或加入对局")
+                    }
+                }
+                is TransportEvent.PeerConnected -> {
+                    status = if (hostMode) "好友正在加入，等待座位同步" else "已连接房主，正在进入房间"
+                    onNetworkStatus(status)
+                }
+                is TransportEvent.Message -> when (val message = GameMessageCodec.decode(event.raw)) {
                 is GameMessage.Hello -> {
                     if (hostMode) {
                         val baseName = message.playerName.ifBlank { "好友" }
-                        val uniqueName = roomSeats.uniqueRoomPlayerName(baseName)
-                        val updatedSeats = roomSeats.addHumanToFirstEmpty(uniqueName)
-                        if (updatedSeats == null) {
+                        val resolvedClientId = message.clientId.ifBlank { event.peerKey?.let { "peer-$it" }.orEmpty() }
+                        val existingSeat = roomSeats.firstOrNull { it.clientId.isNotBlank() && it.clientId == resolvedClientId }
+                        val uniqueName = existingSeat?.name?.ifBlank { baseName } ?: roomSeats.uniqueRoomPlayerName(baseName)
+                        val joined = roomSeats.addOrRejoinHuman(
+                            name = uniqueName,
+                            clientId = resolvedClientId,
+                            deviceAddress = event.peerKey.orEmpty(),
+                            preferredIndex = message.rejoinSeatIndex
+                        )
+                        if (joined == null) {
                             status = "房间已满，无法加入更多好友"
-                            newTransport.send(GameMessageCodec.encode(GameMessage.Error("房间已满")))
+                            event.peerKey?.let { newTransport.sendTo(it, GameMessageCodec.encode(GameMessage.Error("房间已满"))) }
                         } else {
+                            val (updatedSeats, seatIndex) = joined
                             roomSeats = updatedSeats
-                            onRoomUpdated(roomSeats, ruleSet)
-                            status = "${uniqueName} 已加入（${roomSeats.count { it.occupied }}/4）"
-                            newTransport.send(GameMessageCodec.encode(GameMessage.Room(roomSeats, ruleSet.name)))
+                            if (event.peerKey != null) peerSeatKeys = peerSeatKeys + (event.peerKey to seatIndex)
+                            onRoomUpdated(updatedSeats, ruleSet)
+                            status = if (message.rejoinSeatIndex != null) {
+                                "${updatedSeats[seatIndex].name} 已重连，恢复座位 ${seatIndex + 1}"
+                            } else {
+                                "${updatedSeats[seatIndex].name} 已加入（${updatedSeats.count { it.occupied }}/4）"
+                            }
+                            onNetworkStatus(status)
+                            onRoomSessionChanged(newTransport, hostMode, updatedSeats, roomId, hostEpoch, status)
+                            event.peerKey?.let { key ->
+                                newTransport.sendTo(key, GameMessageCodec.encode(GameMessage.RejoinAccepted(seatIndex, updatedSeats, latestSnapshot)))
+                            }
+                            newTransport.send(GameMessageCodec.encode(GameMessage.Room(updatedSeats, ruleSet.name, roomId, hostEpoch)))
                         }
                     }
                 }
                 is GameMessage.Room -> {
                     roomSeats = message.seats.normalizedSeats()
                     roomRuleName = message.ruleName
+                    roomId = message.roomId.ifBlank { roomId }
+                    hostEpoch = maxOf(hostEpoch, message.hostEpoch)
                     onRoomUpdated(roomSeats, ruleFromName(message.ruleName))
                     status = "房间人数 ${roomSeats.count { it.occupied }}/4，等待房主开局"
+                    onNetworkStatus(status)
                     entryMode = if (hostMode) BluetoothEntryMode.HostRoom else BluetoothEntryMode.JoinRoom
+                    onRoomSessionChanged(newTransport, hostMode, roomSeats, roomId, hostEpoch, status)
                 }
                 is GameMessage.RoomReady -> {
                     if (hostMode) {
                         roomSeats = roomSeats.setReady(message.playerId, message.ready)
                         onRoomUpdated(roomSeats, ruleSet)
                         status = "${roomSeats.getOrNull(message.playerId)?.name ?: "好友"} ${if (message.ready) "已准备" else "取消准备"}"
-                        newTransport.send(GameMessageCodec.encode(GameMessage.Room(roomSeats, ruleSet.name)))
+                        newTransport.send(GameMessageCodec.encode(GameMessage.Room(roomSeats, ruleSet.name, roomId, hostEpoch)))
                     }
                 }
                 is GameMessage.Leave -> {
@@ -2382,55 +2856,118 @@ private fun NearbyScreen(
                         roomSeats = roomSeats.setConnected(message.playerId, false)
                         onRoomUpdated(roomSeats, ruleSet)
                         status = "${roomSeats.getOrNull(message.playerId)?.name ?: "好友"} 已离开"
-                        newTransport.send(GameMessageCodec.encode(GameMessage.Room(roomSeats, ruleSet.name)))
+                        onNetworkStatus(status)
+                        onNetworkMessage(message)
+                        newTransport.send(GameMessageCodec.encode(GameMessage.Room(roomSeats, ruleSet.name, roomId, hostEpoch)))
                     }
                 }
                 is GameMessage.Kick -> {
-                    val localSeatId = roomSeats.firstOrNull { it.name == playerName }?.index
+                    val localSeatId = localSeatByIdentity()?.index
                     if (!hostMode && localSeatId == message.playerId) {
-                        status = message.reason
+                        bluetoothDialogMessage = message.reason
+                        status = "已退出房间"
                         entryMode = BluetoothEntryMode.Choose
                         roomSeats = emptyRoomSeats()
                         newTransport.close()
+                        boundTransport = null
+                        onRoomSessionCleared(status)
                     }
                 }
                 is GameMessage.Start -> {
                     val seats = message.seats.normalizedSeats()
-                    val localId = seats.indexOfFirst { it.name == playerName }.takeIf { it >= 0 } ?: 0
+                    val localId = seats.indexOfFirst { it.clientId.isNotBlank() && it.clientId == localClientId }
+                        .takeIf { it >= 0 }
+                        ?: seats.indexOfFirst { it.name == playerName }.takeIf { it >= 0 }
+                        ?: 0
+                    roomId = message.roomId.ifBlank { roomId }
+                    hostEpoch = maxOf(hostEpoch, message.hostEpoch)
                     onStartNetworkGame(
                         newTransport,
                         message.seed,
                         ruleFromName(message.ruleName),
                         seats,
                         localId,
-                        hostMode
+                        hostMode,
+                        roomId,
+                        hostEpoch
                     )
+                }
+                is GameMessage.Heartbeat -> {
+                    onNetworkStatus("蓝牙连接正常")
+                    onNetworkMessage(message)
+                }
+                is GameMessage.DisconnectNotice -> {
+                    roomSeats = roomSeats.markHumanDisconnected(message.playerId, takeoverByAi = true)
+                    onRoomUpdated(roomSeats, ruleFromName(roomRuleName))
+                    status = message.reason
+                    onNetworkStatus(message.reason)
+                    onNetworkMessage(message)
+                }
+                is GameMessage.HostMigration -> {
+                    roomId = message.roomId.ifBlank { roomId }
+                    hostEpoch = maxOf(hostEpoch, message.hostEpoch)
+                    roomSeats = message.seats.normalizedSeats()
+                    val localSeat = roomSeats.indexOfFirst { seat ->
+                        (seat.clientId.isNotBlank() && seat.clientId == localClientId) ||
+                            (seat.name.isNotBlank() && seat.name == playerName)
+                    }.takeIf { it >= 0 } ?: restoredPlayerId
+                    hostMode = message.newHostPlayerId == localSeat
+                    onRoomUpdated(roomSeats, ruleFromName(roomRuleName))
+                    status = if (hostMode) "你已成为新房主" else "房主迁移完成，继续对局"
+                    onNetworkStatus(status)
+                    onRoomSessionChanged(newTransport, hostMode, roomSeats, roomId, hostEpoch, status)
+                }
+                is GameMessage.RejoinAccepted -> {
+                    roomSeats = message.seats.normalizedSeats()
+                    roomSeats.getOrNull(message.playerId)?.name?.takeIf { it.isNotBlank() }?.let { playerName = it }
+                    latestSnapshot = message.snapshot
+                    onRoomUpdated(roomSeats, ruleFromName(roomRuleName))
+                    status = "已恢复原座位"
+                    onNetworkStatus(status)
+                    onRoomSessionChanged(newTransport, hostMode, roomSeats, roomId, hostEpoch, status)
+                    message.snapshot?.let { onNetworkMessage(GameMessage.StateSnapshot(it)) }
+                }
+                is GameMessage.StateSnapshot -> {
+                    latestSnapshot = message.snapshot
+                    onNetworkMessage(message)
                 }
                 is GameMessage.Play,
                 is GameMessage.Pass,
                 is GameMessage.MoveRequest,
                 is GameMessage.MoveAccepted,
-                is GameMessage.StateSnapshot,
                 is GameMessage.SyncRequest -> onNetworkMessage(message)
-                is GameMessage.State -> status = message.summary
-                is GameMessage.Error -> status = message.reason
+                is GameMessage.State -> {
+                    status = message.summary
+                    onNetworkStatus(message.summary)
+                }
+                is GameMessage.Error -> {
+                    showBluetoothError(message.reason, fallbackStatus = status.takeUnless { it.isBluetoothErrorLike() }.orEmpty().ifBlank { "选择创建房间或加入对局" })
+                    onNetworkMessage(message)
+                }
                 else -> Unit
+            }
             }
         }
     }
 
     LaunchedEffect(restoredTransport, restoredRoomActive, restoredIsHost, restoredLocalName) {
         val existingTransport = restoredTransport ?: return@LaunchedEffect
-        if (restoredRoomActive) bindTransport(existingTransport, restoredIsHost, restoredLocalName, restoredSeats)
+        if (restoredRoomActive && boundTransport !== existingTransport) {
+            bindTransport(existingTransport, restoredIsHost, restoredLocalName, restoredSeats)
+        }
     }
 
     fun createRoom() {
         val localName = localBluetoothPlayerName(context)
+        roomId = "room-${System.currentTimeMillis()}"
+        hostEpoch = 1
         val hostTransport = BluetoothHostTransport(context)
         bindTransport(hostTransport, isHost = true, localName = localName)
-        hostTransport.start(TransportRole.Host(localName))
+        hostTransport.start(TransportRole.Host(localName, localClientId))
         entryMode = BluetoothEntryMode.HostRoom
         status = "房间已创建，等待好友或添加人机"
+        onNetworkStatus(status)
+        onRoomSessionChanged(hostTransport, true, roomSeats, roomId, hostEpoch, status)
         discoverableLauncher.launch(bluetoothDiscoverableIntent())
     }
 
@@ -2445,8 +2982,10 @@ private fun NearbyScreen(
         val localName = localBluetoothPlayerName(context)
         val clientTransport = BluetoothClientTransport(context, device.address)
         bindTransport(clientTransport, isHost = false, localName = localName)
-        clientTransport.start(TransportRole.Client(localName, device.address))
+        clientTransport.start(TransportRole.Client(localName, device.address, localClientId, null))
         status = "正在加入 ${device.name}"
+        onNetworkStatus(status)
+        onRoomSessionChanged(clientTransport, false, roomSeats, roomId, hostEpoch, status)
     }
 
     val guidePhase = connectionGuidePhase(
@@ -2467,7 +3006,10 @@ private fun NearbyScreen(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Text(status, color = Cream, fontWeight = FontWeight.SemiBold)
+            val visibleStatus = status.takeUnless { it.isBluetoothErrorLike() }.orEmpty()
+            if (visibleStatus.isNotBlank()) {
+                Text(visibleStatus, color = Cream, fontWeight = FontWeight.SemiBold)
+            }
             Text("房间规则：$roomRuleName", color = Gold, fontWeight = FontWeight.Bold)
             if (!hasPermission) {
                 GoldenButton(text = "开启附近对战", onClick = { launcher.launch(requiredBluetoothPermissions()) }, modifier = Modifier.fillMaxWidth())
@@ -2489,7 +3031,6 @@ private fun NearbyScreen(
                     }
                 }
             }
-            ConnectionGuidePanel(phase = guidePhase, steps = guideSteps)
             if (!hasPermission) {
                 Unit
             } else {
@@ -2500,22 +3041,24 @@ private fun NearbyScreen(
                             seats = roomSeats,
                             isHost = true,
                             localPlayerName = playerName,
+                            localClientId = localClientId,
                             onAddAi = { level ->
                                 val updated = roomSeats.addAiToFirstEmpty(level)
                                 if (updated == null) {
                                     status = "房间已满"
                                 } else {
                                     roomSeats = updated
-                                    onRoomUpdated(roomSeats, ruleSet)
-                                    status = "已添加${level.title}人机（${roomSeats.count { it.occupied }}/4）"
-                                    broadcastRoom()
+                                    onRoomUpdated(updated, ruleSet)
+                                    status = "已添加${level.title}人机（${updated.count { it.occupied }}/4）"
+                                    broadcastRoom(updated)
                                 }
                             },
                             onToggleAi = { index ->
-                                roomSeats = roomSeats.toggleAiDifficulty(index)
-                                onRoomUpdated(roomSeats, ruleSet)
+                                val updated = roomSeats.toggleAiDifficulty(index)
+                                roomSeats = updated
+                                onRoomUpdated(updated, ruleSet)
                                 status = "已切换人机难度"
-                                broadcastRoom()
+                                broadcastRoom(updated)
                             },
                             onRemoveAi = { index ->
                                 val removedSeat = roomSeats.getOrNull(index)
@@ -2523,10 +3066,11 @@ private fun NearbyScreen(
                                 if (removedSeat?.kind == RoomSeatKind.Human) {
                                     transport?.send(GameMessageCodec.encode(GameMessage.Kick(index, "房主已移出你的座位")))
                                 }
-                                roomSeats = roomSeats.removeAi(index)
-                                onRoomUpdated(roomSeats, ruleSet)
+                                val updated = roomSeats.removeAi(index)
+                                roomSeats = updated
+                                onRoomUpdated(updated, ruleSet)
                                 status = if (removedName.isBlank()) "已清空座位" else "已移出 $removedName"
-                                broadcastRoom()
+                                broadcastRoom(updated)
                             }
                         )
                         val missing = 4 - roomSeats.count { it.occupied }
@@ -2546,9 +3090,9 @@ private fun NearbyScreen(
                             onClick = {
                                 val seed = (System.currentTimeMillis() % Int.MAX_VALUE).toInt()
                                 val seats = roomSeats.normalizedSeats()
-                                val start = GameMessage.Start(seed, ruleSet.name, seats)
+                                val start = GameMessage.Start(seed, ruleSet.name, seats, roomId, hostEpoch)
                                 transport?.send(GameMessageCodec.encode(start))
-                                transport?.let { onStartNetworkGame(it, seed, ruleSet, seats, 0, true) }
+                                transport?.let { onStartNetworkGame(it, seed, ruleSet, seats, 0, true, roomId, hostEpoch) }
                             },
                             modifier = Modifier.fillMaxWidth()
                         )
@@ -2559,6 +3103,7 @@ private fun NearbyScreen(
                                 seats = roomSeats,
                                 isHost = false,
                                 localPlayerName = playerName,
+                                localClientId = localClientId,
                                 onReady = { playerId, ready ->
                                     roomSeats = roomSeats.setReady(playerId, ready)
                                     onRoomUpdated(roomSeats, ruleFromName(roomRuleName))
@@ -2578,8 +3123,21 @@ private fun NearbyScreen(
                     }
                 }
             }
+            ConnectionGuidePanel(phase = guidePhase, steps = guideSteps)
             BluetoothTroublePanel()
         }
+    }
+    bluetoothDialogMessage?.let { message ->
+        AlertDialog(
+            onDismissRequest = { bluetoothDialogMessage = null },
+            title = { Text("蓝牙连接提示") },
+            text = { Text(message) },
+            confirmButton = {
+                Button(onClick = { bluetoothDialogMessage = null }) {
+                    Text("知道了")
+                }
+            }
+        )
     }
 }
 
@@ -2643,6 +3201,7 @@ private fun RoomSeatsPanel(
     seats: List<RoomSeat>,
     isHost: Boolean,
     localPlayerName: String = "",
+    localClientId: String = "",
     onReady: (Int, Boolean) -> Unit = { _, _ -> },
     onAddAi: (Difficulty) -> Unit,
     onToggleAi: (Int) -> Unit,
@@ -2656,6 +3215,7 @@ private fun RoomSeatsPanel(
                     seat = seat,
                     isHost = isHost,
                     localPlayerName = localPlayerName,
+                    localClientId = localClientId,
                     onReady = { ready -> onReady(seat.index, ready) },
                     onAddAi = onAddAi,
                     onToggleAi = { onToggleAi(seat.index) },
@@ -2671,6 +3231,7 @@ private fun RoomSeatRow(
     seat: RoomSeat,
     isHost: Boolean,
     localPlayerName: String,
+    localClientId: String,
     onReady: (Boolean) -> Unit,
     onAddAi: (Difficulty) -> Unit,
     onToggleAi: () -> Unit,
@@ -2683,16 +3244,23 @@ private fun RoomSeatRow(
         animationSpec = infiniteRepeatable(tween(900), RepeatMode.Reverse),
         label = "emptySeatPulse"
     )
+    val isLocalSeat = (seat.clientId.isNotBlank() && seat.clientId == localClientId) ||
+        (seat.clientId.isBlank() && seat.name.isNotBlank() && seat.name == localPlayerName)
     val title = when (seat.kind) {
         RoomSeatKind.Empty -> "空位"
-        RoomSeatKind.Host -> if (seat.name == localPlayerName) "你（房主）" else "${seat.name.ifBlank { "房主" }}（房主）"
-        RoomSeatKind.Human -> if (seat.name == localPlayerName) "你" else seat.name.ifBlank { "好友" }
+        RoomSeatKind.Host -> if (isLocalSeat) "你（房主）" else "${seat.name.ifBlank { "房主" }}（房主）"
+        RoomSeatKind.Human -> if (isLocalSeat) "你" else seat.name.ifBlank { "好友" }
         RoomSeatKind.Ai -> "${seat.name.ifBlank { "人机" }} · ${seat.difficulty?.title ?: Difficulty.Easy.title}"
     }
     val subtitle = when (seat.kind) {
         RoomSeatKind.Empty -> if (isHost) "可添加人机或等待好友加入" else "等待房主安排"
-        RoomSeatKind.Host -> "创建房间"
-        RoomSeatKind.Human -> if (seat.ready) "好友已准备" else "等待准备"
+        RoomSeatKind.Host -> if (seat.takeoverByAi) "房主断线，人机托管中" else "创建房间"
+        RoomSeatKind.Human -> when {
+            seat.takeoverByAi -> "玩家断线，人机托管中"
+            !seat.connected -> "等待玩家重连"
+            seat.ready -> "好友已准备"
+            else -> "等待准备"
+        }
         RoomSeatKind.Ai -> "房主人机，自动准备"
     }
     Column(
@@ -2715,19 +3283,28 @@ private fun RoomSeatRow(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            Row(
+                modifier = Modifier.weight(1f),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
                 SeatAvatarFrame(name = if (seat.kind == RoomSeatKind.Empty) "${seat.index + 1}" else title, active = seat.ready || seat.kind == RoomSeatKind.Empty, size = 38)
-                Column {
+                Column(modifier = Modifier.weight(1f)) {
                     Text("座位 ${seat.index + 1}", color = Gold, fontWeight = FontWeight.Bold, fontSize = 12.sp)
-                    Text(title, color = Cream, fontWeight = FontWeight.Bold, fontSize = 15.sp)
-                    Text(subtitle, color = Color.White.copy(alpha = 0.62f), fontSize = 12.sp)
+                    Text(title, color = Cream, fontWeight = FontWeight.Bold, fontSize = 15.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text(subtitle, color = Color.White.copy(alpha = 0.62f), fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 }
             }
             Text(
+                modifier = Modifier.widthIn(min = 44.dp),
                 text = when (seat.kind) {
                     RoomSeatKind.Empty -> "待加入"
-                    RoomSeatKind.Host -> "房主"
-                    RoomSeatKind.Human -> if (seat.connected) "好友" else "断线"
+                    RoomSeatKind.Host -> if (seat.takeoverByAi) "托管" else "房主"
+                    RoomSeatKind.Human -> when {
+                        seat.takeoverByAi -> "托管"
+                        seat.connected -> "好友"
+                        else -> "断线"
+                    }
                     RoomSeatKind.Ai -> if (seat.ready) "已准备" else "人机"
                 },
                 color = when {
@@ -2736,10 +3313,12 @@ private fun RoomSeatRow(
                     else -> Gold
                 },
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 12.sp
+                fontSize = 12.sp,
+                maxLines = 1,
+                textAlign = TextAlign.Center
             )
         }
-        if (!isHost && seat.kind == RoomSeatKind.Human && seat.name == localPlayerName) {
+        if (!isHost && seat.kind == RoomSeatKind.Human && isLocalSeat) {
             OutlinedGameButton(
                 text = if (seat.ready) "取消准备" else "我已准备",
                 onClick = { onReady(!seat.ready) },
@@ -2885,6 +3464,57 @@ private fun BluetoothTroublePanel() {
     }
 }
 
+private fun String.isBluetoothErrorLike(): Boolean {
+    if (isBlank()) return false
+    val normalized = lowercase(Locale.ROOT)
+    return listOf(
+        "失败",
+        "断开",
+        "异常",
+        "错误",
+        "未启动",
+        "拒绝",
+        "无法",
+        "找不到",
+        "block",
+        "socket",
+        "connection",
+        "permission",
+        "read failed",
+        "bt "
+    ).any { key -> normalized.contains(key.lowercase(Locale.ROOT)) }
+}
+
+private fun playerFriendlyBluetoothError(rawMessage: String): String {
+    val normalized = rawMessage.lowercase(Locale.ROOT)
+    return when {
+        rawMessage.isBenignBluetoothReturnCode() -> "蓝牙房间已处理完成，请继续等待好友加入。"
+        rawMessage.contains("房间已满") -> "房间已满，暂时无法加入。"
+        rawMessage.contains("房主已移出") -> rawMessage
+        rawMessage.contains("需要权限") || normalized.contains("permission") ->
+            "需要允许附近设备/蓝牙权限后才能创建或加入房间。请授权后重新进入好友蓝牙对局。"
+        normalized.contains("block") || normalized.contains("bt ") ->
+            "蓝牙连接被系统拦截。请确认两台手机蓝牙已开启、已在系统蓝牙中配对，并重新寻找房间。"
+        normalized.contains("socket") || normalized.contains("connection") || rawMessage.contains("断开") ->
+            "蓝牙连接已断开。请返回好友蓝牙对局，重新寻找房间加入。"
+        rawMessage.contains("未启动") ->
+            "蓝牙搜索没有启动。请确认蓝牙已开启，并重新寻找房间。"
+        rawMessage.contains("找不到") || rawMessage.contains("无法加入") ->
+            "暂时没有找到可加入的房间。请让房主重新创建房间，并保持两台手机靠近。"
+        else -> rawMessage.ifBlank { "蓝牙连接出现异常，请重新创建或加入房间。" }
+    }
+}
+
+private fun String.isBenignBluetoothReturnCode(): Boolean {
+    val normalized = trim().lowercase(Locale.ROOT)
+    return normalized == "-1" ||
+        normalized == "error-1" ||
+        normalized == "error -1" ||
+        normalized == "result -1" ||
+        normalized.contains("error-1") ||
+        normalized.contains("error -1")
+}
+
 private fun ruleFromName(ruleName: String): RuleSet {
     return ruleSetByIdOrName(ruleName)
 }
@@ -2900,6 +3530,19 @@ private fun localBluetoothPlayerName(context: Context): String {
         .takeLast(4)
         .ifBlank { (System.nanoTime() % 10_000).toString().padStart(4, '0') }
     return "牌友$model$androidId"
+}
+
+private fun stableBluetoothClientId(context: Context): String {
+    val settings = context.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
+    val existing = settings.getString(KEY_BLUETOOTH_CLIENT_ID, null)
+    if (!existing.isNullOrBlank()) return existing
+    val androidId = Settings.Secure
+        .getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+        .orEmpty()
+        .ifBlank { UUID.randomUUID().toString() }
+    val generated = "bt-${androidId}-${UUID.randomUUID().toString().take(8)}"
+    settings.edit().putString(KEY_BLUETOOTH_CLIENT_ID, generated).apply()
+    return generated
 }
 
 @Suppress("DEPRECATION")
@@ -2927,6 +3570,7 @@ private fun GameScreen(
     gameMode: GameMode,
     localPlayerId: Int,
     inputLocked: Boolean,
+    networkStatus: String,
     onCanPlay: (List<Card>) -> Boolean,
     onPlay: (List<Card>) -> Unit,
     onPass: () -> Unit,
@@ -3039,6 +3683,7 @@ private fun GameScreen(
                 remainingSeconds = remainingSeconds,
                 localPlayerId = localPlayerId,
                 startPhase = startPhase,
+                networkStatus = networkStatus,
                 onMenu = { menuOpen = true }
             )
             OpponentArc(state, localPlayerId)
@@ -3516,6 +4161,7 @@ private fun TableTopBar(
     remainingSeconds: Int,
     localPlayerId: Int,
     startPhase: GameStartPhase,
+    networkStatus: String,
     onMenu: () -> Unit
 ) {
     Column(
@@ -3554,7 +4200,31 @@ private fun TableTopBar(
             remainingSeconds = if (startPhase == GameStartPhase.Playing) remainingSeconds else 20,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
+        if (networkStatus.isNotBlank()) {
+            NetworkStatusPill(
+                text = networkStatus,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+        }
     }
+}
+
+@Composable
+private fun NetworkStatusPill(text: String, modifier: Modifier = Modifier) {
+    val warning = listOf("断线", "迁移", "失败", "异常", "托管").any { text.contains(it) }
+    Text(
+        text = text,
+        color = if (warning) Color.White else Gold,
+        fontWeight = FontWeight.Bold,
+        fontSize = 12.sp,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+        modifier = modifier
+            .fillMaxWidth(0.9f)
+            .background(if (warning) Danger.copy(alpha = 0.82f) else Color.Black.copy(alpha = 0.26f), RoundedCornerShape(18.dp))
+            .border(1.dp, if (warning) Gold.copy(alpha = 0.5f) else Gold.copy(alpha = 0.28f), RoundedCornerShape(18.dp))
+            .padding(horizontal = 12.dp, vertical = 7.dp)
+    )
 }
 
 @Composable

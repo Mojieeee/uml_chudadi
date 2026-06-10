@@ -19,5 +19,7 @@ data class GameSnapshot(
     val passCount: Int,
     val firstTurn: Boolean,
     val winnerId: Int?,
-    val message: String
+    val message: String,
+    val roomId: String = "",
+    val hostEpoch: Int = 0
 )

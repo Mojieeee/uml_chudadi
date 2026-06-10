@@ -1,7 +1,7 @@
 @startuml
 skinparam componentStyle rectangle
 
-package "Android App" {
+package "App 模块" {
   [MainActivity]
   [Compose 发布版界面]
   [页面状态 Screen]
@@ -15,6 +15,8 @@ package "Android App" {
   [规则与模型]
   [消息编解码]
   [主机权威同步]
+  [连接健康与断线提示]
+  [TransportEvent 事件流]
   [蓝牙传输]
   [本地模拟传输]
   [SharedPreferences]
@@ -38,6 +40,7 @@ cloud "Android 系统能力" {
 [Compose 发布版界面] --> [玩家成长控制器]
 [Compose 发布版界面] --> [玩家档案仓储]
 [Compose 发布版界面] --> [消息编解码]
+[Compose 发布版界面] --> [连接健康与断线提示]
 [Compose 发布版界面] --> [音乐与反馈]
 [Compose 发布版界面] --> [SharedPreferences]
 
@@ -51,6 +54,11 @@ cloud "Android 系统能力" {
 [消息编解码] --> [规则与模型]
 [主机权威同步] --> [游戏控制器]
 [主机权威同步] --> [消息编解码]
+[连接健康与断线提示] --> [主机权威同步]
+[连接健康与断线提示] --> [消息编解码]
+[连接健康与断线提示] --> [蓝牙传输]
+[蓝牙传输] --> [TransportEvent 事件流]
+[TransportEvent 事件流] --> [连接健康与断线提示]
 [蓝牙传输] --> [Classic Bluetooth RFCOMM]
 [蓝牙传输] --> [Bluetooth Permissions]
 [本地模拟传输] --> [消息编解码]

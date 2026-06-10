@@ -732,7 +732,8 @@ View 层在 `view/ChudadiApp.kt` 中实现，主要职责是展示状态、播�
 - `TransportRole.Host`：创建房间。
 - `TransportRole.Client`：加入房间。
 - `TransportRole.Local`：本地模拟。
-- `GameTransport` 统一 `start`、`send`、`observe`、`close`。
+- `GameTransport` 统一 `start`、`send`、`sendTo`、`observe`、`observeEvents`、`close`。
+- `TransportEvent` 将底层蓝牙事件抽象为 `Message`、`PeerConnected`、`PeerDisconnected`、`Error`。
 
 这样 UI 和房间控制逻辑不直接绑定具体蓝牙 Socket，便于模拟测试。
 
@@ -742,6 +743,9 @@ View 层在 `view/ChudadiApp.kt` 中实现，主要职责是展示状态、播�
 
 - `BluetoothHostTransport` 使用 `BluetoothServerSocket` 等待客户端连接。
 - `BluetoothClientTransport` 使用设备地址创建 `BluetoothSocket` 加入房间。
+- 房主监听循环持续运行，不再只接受固定三次连接，支持房间内多个客户端加入。
+- 每个 socket 绑定 `peerKey`，读写失败时发出 `TransportEvent.PeerDisconnected`，房主可定位断线座位。
+- `sendTo(peerKey, message)` 支持房主定向回复房满、错误或同步消息，避免误广播。
 - 搜索前取消旧 discovery，连接后关闭 discovery，退出时关闭 socket 和线程。
 - 权限通过 `hasBluetoothPermissions` 和 `requiredBluetoothPermissions` 判断。
 - 设备列表优先显示已配对设备，再合并附近搜索结果。
@@ -754,22 +758,30 @@ View 层在 `view/ChudadiApp.kt` 中实现，主要职责是展示状态、播�
 - `Host`：房主。
 - `Human`：真实加入者。
 - `Ai`：房主添加的人机。
-- `RoomSeat` 保存座位号、昵称、类型、难度、准备状态、连接状态。
+- `SeatConnectionState` 表示 `Empty`、`Online`、`Disconnected` 等座位连接状态。
+- `RoomSeat` 保存座位号、昵称、类型、难度、准备状态、连接状态、`clientId`、设备地址、是否由 AI 托管。
 - `canStartRoom` 确保四个座位全部占满后才允许开始。
+- `markHumanDisconnected` 将断线真人座位保留并设为 `takeoverByAi=true`。
+- `addOrRejoinHuman` 用于加入者进入房间和按座位信息更新；当前发布版不承诺自动断线重连恢复。
+- 房主断线采用保守恢复：客户端提示断开并退出当前房间，不自动提升新房主。
 
 ### 4.4 消息协议
 
 `transport/GameMessage.kt`：
 
-- `HELLO`：客户端问候并提交昵称。
-- `ROOM`：房主广播房间座位快照。
-- `START`：房主广播 seed、规则、座位列表。
+- `HELLO`：客户端问候并提交昵称、`clientId` 等基础身份信息。
+- `ROOM`：房主广播房间座位快照，携带 `roomId` 和 `hostEpoch`。
+- `START`：房主广播 seed、规则、座位列表、`roomId` 和 `hostEpoch`。
 - `ROOM_READY`：准备状态。
-- `MOVE_REQUEST`：客户端请求出牌/不出。
-- `MOVE_ACCEPTED`：房主确认动作。
-- `STATE_SNAPSHOT`：完整状态快照同步。
+- `MOVE_REQUEST`：客户端请求出牌/不出，携带当前 `roomId/hostEpoch`。
+- `MOVE_ACCEPTED`：房主确认动作，携带 sequence 和 epoch。
+- `STATE_SNAPSHOT`：完整状态快照同步，包含 `roomId/hostEpoch`，用于客户端刷新和旧消息过滤。
 - `SYNC_REQUEST`：客户端请求重同步。
 - `LEAVE` / `KICK`：离开与移出。
+- `HEARTBEAT`：房主心跳。
+- `DISCONNECT_NOTICE`：通知某座位断线并已托管。
+- `HOST_MIGRATION`、`REJOIN_REQUEST` / `REJOIN_ACCEPTED`：协议模型中保留扩展入口，但当前发布版运行逻辑不承诺自动房主迁移或断线重连。
+- `PEER_LIST`：预留的已知 peer 列表消息。
 - `ERROR`：错误提示。
 
 编码使用 URL encode，能安全传输中文名和分隔符。
@@ -790,6 +802,23 @@ View 层在 `view/ChudadiApp.kt` 中实现，主要职责是展示状态、播�
 - 发送后进入等待确认状态，收到 `MOVE_ACCEPTED` 或 `STATE_SNAPSHOT` 后解锁。
 
 `transport/NetworkMoveGuard.kt` 用于防止重复、过期、非当前玩家的移动请求污染状态。
+
+### 4.6 断线托管与房主断线处理
+
+客户端断线：
+
+- 蓝牙读线程或发送失败时产生 `TransportEvent.PeerDisconnected(peerKey)`。
+- 房主根据 `peerKey` 查到座位，将该 `RoomSeat` 标记为 `Disconnected` 和 `takeoverByAi=true`。
+- UI 显示“某玩家断线，已由人机托管”，房间座位显示“托管”。
+- 如果轮到该玩家，房主端把该座位视为 `LocalAi`，按普通难度 AI 自动行动。
+- 当前版本未实现自动断线重连；断线设备需要重新进入蓝牙流程。
+
+房主断线：
+
+- 客户端通过 socket 断开或错误事件识别房主连接丢失。
+- 页面弹窗提示房主已断开，当前对局无法继续。
+- 客户端关闭当前传输并退出房间，用户需要重新创建或重新加入房间。
+- 由于房主是权威端，当前版本不自动迁移新房主，避免恢复过程造成多端牌局状态不一致。
 
 ## 5. 玩家成长系统
 
@@ -1144,7 +1173,7 @@ UML 文件位于 `docs/uml/`。开发者先用 PlantUML 代码描述 7 类图，
 - 消息协议：`GameMessageCodecTest`
 - 蓝牙模拟：`SimulatedBluetoothHubTest`
 - 移动请求去重：`NetworkMoveGuardTest`
-- 房间座位：`RoomSeatTest`
+- 房间座位：`RoomSeatTest`，覆盖四座位、添加人机、准备、客户端断线托管和再开局重置。
 - 成长系统：`ProfileControllerTest`
 - 音乐资源：`MusicAssetTest`
 - 动画 key：`TableAnimationKeysTest`
@@ -1164,7 +1193,8 @@ UML 文件位于 `docs/uml/`。开发者先用 PlantUML 代码描述 7 类图，
 
 - 至少一台手机测试安装、启动、开屏、玩家中心、人机完整对局。
 - 两台及以上手机测试蓝牙创建、加入、AI 补位、开局、出牌、结算、再来一局。
-- 权限拒绝、蓝牙关闭、找不到设备、房满、断开重连都需要覆盖。
+- 三台及以上手机测试客户端断线托管、房主断线退出提示和重新创建房间流程。
+- 权限拒绝、蓝牙关闭、找不到设备、房满、客户端断线和房主断线都需要覆盖。
 
 ## 11. 发布测试包说明
 
@@ -1229,6 +1259,7 @@ GitHub 与开源许可检查：
 - 使用 MVC 分层，核心规则与 UI 分离。
 - 使用策略模式实现三档 AI。
 - 使用主机权威模型增强蓝牙一致性。
+- 使用 `TransportEvent`、`clientId`、`hostEpoch` 等结构实现房主权威同步、客户端断线托管和房主断线提示退出。
 - 使用 URL 编码的文本协议降低网络消息解析风险。
 - 使用 SharedPreferences 完成本地档案、规则、设置持久化。
 - 使用 Compose 内置动画实现完整游戏体验，不新增第三方依赖。
@@ -1240,7 +1271,7 @@ GitHub 与开源许可检查：
 - 完善应用商店素材：隐私说明、截图、版本更新日志和测试账号说明。
 - 增加横屏适配。
 - 增加更完整的新手引导步骤。
-- 增加蓝牙断线重连和房间恢复。
+- 后续可将蓝牙断线恢复扩展为更商用的自动重连或房主迁移；当前版本采用保守策略，客户端断线由 AI 托管，房主断线则提示退出并重新建房。
 - 增加更多规则变体，但需要确保 UI 说明、测试和规则实现同步。
 - 增加截图回归测试，固定检查大厅、牌桌、玩家中心、结算页。
 - 若后续允许服务端，可扩展在线匹配、云战绩、排行榜。

@@ -22,6 +22,8 @@ rectangle "锄大地游戏" {
   usecase "管理四个座位" as UC_Seats
   usecase "添加/移除人机" as UC_AiSeat
   usecase "准备并满座开局" as UC_StartRoom
+  usecase "客户端断线提示与人机托管" as UC_Disconnect
+  usecase "房主断线提示并退出房间" as UC_HostDisconnect
   usecase "出牌/不出/提示/重选" as UC_Play
   usecase "查看无可压牌提示" as UC_NoBeat
   usecase "打开设置菜单暂停" as UC_Pause
@@ -49,9 +51,12 @@ Host --> UC_CreateRoom
 Host --> UC_Seats
 Host --> UC_AiSeat
 Host --> UC_StartRoom
+Host --> UC_Disconnect
+Host --> UC_HostDisconnect
 Client --> UC_JoinRoom
 Client --> UC_Search
 Client --> UC_StartRoom
+Client --> UC_HostDisconnect
 Ai --> UC_Play
 
 UC_HumanGame ..> UC_Difficulty : <<include>>
@@ -60,6 +65,8 @@ UC_Profile ..> UC_ProfileManage : <<include>>
 UC_CreateRoom ..> UC_Seats : <<include>>
 UC_JoinRoom ..> UC_Search : <<include>>
 UC_StartRoom ..> UC_Seats : <<include>>
+UC_Disconnect ..> UC_Seats : <<include>>
+UC_HostDisconnect ..> UC_Disconnect : <<extend>>
 UC_Play ..> UC_NoBeat : <<extend>>
 UC_Result ..> UC_Rematch : <<extend>>
 @enduml

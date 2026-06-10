@@ -1,10 +1,14 @@
 @startuml
+' 当前代码对应的 UML 类图。图中保留核心类和关键关系，
+' 具体 GameMessage 变体用分组类表达，避免正式报告中横向过宽。
 skinparam packageStyle rectangle
 skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam nodesep 35
+skinparam ranksep 35
+top to bottom direction
 
-package "model" {
-  enum Suit
-  enum Rank
+package "Model\n领域模型" as model {
   enum PlayerKind {
     Human
     LocalAi
@@ -35,7 +39,6 @@ package "model" {
     rank: Rank
     code: String
   }
-  object Deck
   class Player {
     id: Int
     name: String
@@ -85,7 +88,7 @@ package "model" {
   object HandClassifier
 }
 
-package "controller" {
+package "Controller\n控制器" as controller {
   class GameController {
     newGame(...)
     play(state, playerId, cards): GameState
@@ -101,21 +104,60 @@ package "controller" {
   class HeuristicAiStrategy
   class MonteCarloRolloutAiStrategy
   object PlayerActionPolicy
-  class LocalActionAvailability
   class RoomController
+  object NetworkMoveGuard
 }
 
-package "profile" {
-  enum GameModeLabel {
-    HumanVsAi
-    Bluetooth
+package "Transport\n蓝牙与消息" as transport {
+  interface GameTransport {
+    start(role)
+    send(message)
+    sendTo(peerKey, message)
+    observeEvents(listener)
+    close()
   }
-  enum AvatarRarity {
-    Free
-    Common
-    Rare
-    Legendary
+  abstract class SocketGameTransport
+  class BluetoothHostTransport
+  class BluetoothClientTransport
+  class LocalRoomTransport
+  abstract class TransportEvent <<sealed>>
+  class "Message/Connected/Disconnected/Error" as TransportEventVariants
+  abstract class GameMessage <<sealed>>
+  class "Room/Start/Move/Snapshot\nHeartbeat/Rejoin/Migration" as GameMessageVariants
+  object GameMessageCodec
+  class GameSnapshot {
+    sequence: Int
+    seed: Int
+    ruleProfileId: String
+    roomId: String
+    hostEpoch: Int
   }
+  class RoomSeat {
+    index: Int
+    name: String
+    kind: RoomSeatKind
+    difficulty: Difficulty?
+    ready: Boolean
+    connected: Boolean
+    clientId: String
+    connectionState: SeatConnectionState
+    takeoverByAi: Boolean
+  }
+  enum RoomSeatKind {
+    Empty
+    Host
+    Human
+    Ai
+  }
+  enum SeatConnectionState {
+    Empty
+    Online
+    Disconnected
+    Migrating
+  }
+}
+
+package "Profile\n玩家成长" as profile {
   class PlayerProfile {
     nickname: String
     coins: Int
@@ -136,8 +178,8 @@ package "profile" {
   class MatchRecord
   class MatchSettlement
   class ProfileChange
-  class BuiltInAvatar
   class AvatarProfile
+  class BuiltInAvatar
   class AchievementDefinition
   object AvatarCatalog
   object AchievementCatalog
@@ -152,58 +194,7 @@ package "profile" {
   class ProfileStore
 }
 
-package "transport" {
-  abstract class TransportRole <<sealed>>
-  class "TransportRole.Host" as TransportHost
-  class "TransportRole.Client" as TransportClient
-  class "TransportRole.Local" as TransportLocal
-  interface GameTransport {
-    start(role)
-    send(message)
-    observe(listener)
-    close()
-  }
-  abstract class SocketGameTransport
-  class BluetoothHostTransport
-  class BluetoothClientTransport
-  class LocalRoomTransport
-  enum RoomSeatKind {
-    Empty
-    Host
-    Human
-    Ai
-  }
-  class RoomSeat {
-    index: Int
-    name: String
-    kind: RoomSeatKind
-    difficulty: Difficulty?
-    ready: Boolean
-    connected: Boolean
-  }
-  abstract class GameMessage <<sealed>>
-  class "GameMessage.Hello" as MsgHello
-  class "GameMessage.Room" as MsgRoom
-  class "GameMessage.Start" as MsgStart
-  class "GameMessage.RoomReady" as MsgReady
-  class "GameMessage.MoveRequest" as MsgMoveRequest
-  class "GameMessage.MoveAccepted" as MsgMoveAccepted
-  class "GameMessage.StateSnapshot" as MsgSnapshot
-  class "GameMessage.SyncRequest" as MsgSync
-  class "GameMessage.Leave" as MsgLeave
-  class "GameMessage.Kick" as MsgKick
-  class "GameMessage.State" as MsgState
-  class "GameMessage.Play" as MsgPlay
-  class "GameMessage.Pass" as MsgPass
-  class "GameMessage.Result" as MsgResult
-  class "GameMessage.Error" as MsgError
-  object GameMessageCodec
-  class SnapshotPlayer
-  class GameSnapshot
-  object NetworkMoveGuard
-}
-
-package "view/audio" {
+package "View / Audio\nCompose 界面与音频" as view {
   class MainActivity
   class ChudadiApp
   enum Screen {
@@ -233,10 +224,6 @@ package "view/audio" {
     Playing
   }
   class CardRoomMusicPlayer
-  enum MusicScene {
-    Lobby
-    Game
-  }
 }
 
 Move <|-- MovePlay
@@ -250,9 +237,8 @@ GameTransport <|.. LocalRoomTransport
 GameTransport <|.. SocketGameTransport
 SocketGameTransport <|-- BluetoothHostTransport
 SocketGameTransport <|-- BluetoothClientTransport
-TransportRole <|-- TransportHost
-TransportRole <|-- TransportClient
-TransportRole <|-- TransportLocal
+TransportEvent <|-- TransportEventVariants
+GameMessage <|-- GameMessageVariants
 
 GameState "1" o-- "4" Player
 GameState --> RuleSet
@@ -263,52 +249,34 @@ PlayedHand --> HandType
 RuleSet --> RuleProfile
 RuleSet --> HandClassifier
 RuleProfile --> Card
+
 GameController --> GameState
 GameController --> RuleSet
 GameController --> Move
 AiController --> AiStrategy
 AiController --> GameController
-AiStrategy --> GameState
 PlayerActionPolicy --> GameState
+NetworkMoveGuard --> GameState
+NetworkMoveGuard --> GameMessage
+
+RoomSeat --> RoomSeatKind
+RoomSeat --> SeatConnectionState
+RoomSeat --> Difficulty
+GameSnapshot "1" o-- "*" Player
+GameMessageVariants --> RoomSeat
+GameMessageVariants --> GameSnapshot
+GameMessageCodec --> GameMessage
+
 ProfileController --> PlayerProfile
 ProfileController --> MatchSettlement
 ProfileController --> ProfileChange
-ProfileController --> AchievementCatalog
 ProfileStore --> PlayerProfile
 PlayerProfile --> ProfileStats
 PlayerProfile --> AvatarProfile
 PlayerProfile --> MatchRecord
 PlayerProfile --> AchievementDefinition
-BuiltInAvatar --> AvatarRarity
+BuiltInAvatar --> AvatarProfile
 
-RoomSeat --> RoomSeatKind
-RoomSeat --> Difficulty
-GameSnapshot "1" o-- "4" SnapshotPlayer
-SnapshotPlayer "1" o-- "*" Card
-GameMessage <|-- MsgHello
-GameMessage <|-- MsgRoom
-GameMessage <|-- MsgStart
-GameMessage <|-- MsgReady
-GameMessage <|-- MsgMoveRequest
-GameMessage <|-- MsgMoveAccepted
-GameMessage <|-- MsgSnapshot
-GameMessage <|-- MsgSync
-GameMessage <|-- MsgLeave
-GameMessage <|-- MsgKick
-GameMessage <|-- MsgState
-GameMessage <|-- MsgPlay
-GameMessage <|-- MsgPass
-GameMessage <|-- MsgResult
-GameMessage <|-- MsgError
-MsgRoom --> RoomSeat
-MsgStart --> RoomSeat
-MsgMoveRequest --> Card
-MsgMoveAccepted --> Card
-MsgPlay --> Card
-MsgSnapshot --> GameSnapshot
-GameMessageCodec --> GameMessage
-NetworkMoveGuard --> GameMessage
-NetworkMoveGuard --> GameState
 ChudadiApp --> GameController
 ChudadiApp --> AiController
 ChudadiApp --> GameTransport

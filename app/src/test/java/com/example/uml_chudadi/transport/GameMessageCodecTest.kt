@@ -96,4 +96,23 @@ class GameMessageCodecTest {
         val message = GameMessage.StateSnapshot(snapshot)
         assertEquals(message, GameMessageCodec.decode(GameMessageCodec.encode(message)))
     }
+
+    @Test
+    fun disconnectAndMigrationMessagesRoundTrip() {
+        val seats = listOf(
+            RoomSeat(0, "房主", RoomSeatKind.Host, ready = true, connected = true, clientId = "host-id"),
+            RoomSeat(1, "好友|A", RoomSeatKind.Human, ready = false, connected = false, clientId = "client|1", deviceAddress = "AA:BB", takeoverByAi = true),
+            RoomSeat(2, "好友,B", RoomSeatKind.Human, ready = true, connected = true, clientId = "client,2", deviceAddress = "CC:DD"),
+            RoomSeat(3, "人机", RoomSeatKind.Ai, Difficulty.Normal, ready = true, connected = true)
+        )
+        val heartbeat = GameMessage.Heartbeat(roomId = "room|1", hostEpoch = 3, fromPlayerId = 2)
+        val notice = GameMessage.DisconnectNotice(playerId = 1, reason = "好友|A 断线，已由人机托管")
+        val migration = GameMessage.HostMigration(roomId = "room|1", hostEpoch = 4, newHostPlayerId = 2, seats = seats)
+        val rejoin = GameMessage.RejoinRequest(playerName = "好友|A", clientId = "client|1", seatIndex = 1)
+
+        assertEquals(heartbeat, GameMessageCodec.decode(GameMessageCodec.encode(heartbeat)))
+        assertEquals(notice, GameMessageCodec.decode(GameMessageCodec.encode(notice)))
+        assertEquals(migration, GameMessageCodec.decode(GameMessageCodec.encode(migration)))
+        assertEquals(rejoin, GameMessageCodec.decode(GameMessageCodec.encode(rejoin)))
+    }
 }
